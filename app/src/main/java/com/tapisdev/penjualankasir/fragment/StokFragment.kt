@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.facebook.shimmer.ShimmerFrameLayout
+import com.tapisdev.penjualankasir.activity.TambahBarangActivity
 import com.tapisdev.penjualankasir.databinding.FragmentHomeBinding
 import com.tapisdev.penjualankasir.databinding.FragmentStokBinding
 
@@ -29,6 +30,11 @@ class StokFragment : Fragment() {
 
         _binding = FragmentStokBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        binding.btnTambahBarang.setOnClickListener {
+            val i = Intent(requireActivity(),TambahBarangActivity::class.java)
+            startActivity(i)
+        }
 
 
 

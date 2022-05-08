@@ -30,7 +30,7 @@
                 android:layout_gravity="left"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/cera_black"
-                android:text="Login Catatan Kasir"
+                android:text="@string/app_name"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />

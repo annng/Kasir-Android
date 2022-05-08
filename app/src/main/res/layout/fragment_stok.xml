@@ -60,6 +60,7 @@
                 android:layout_weight="1"
                 android:layout_marginHorizontal="5dp"
                 android:text="Tambah Barang"
+                android:id="@+id/btnTambahBarang"
                 android:fontFamily="@font/cera_medium"
                 android:textSize="15sp"
                 android:background="@color/colorPrimary"

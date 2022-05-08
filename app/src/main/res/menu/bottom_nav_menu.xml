@@ -18,12 +18,12 @@
 
     <item
         android:id="@+id/navigation_hutang"
-        android:icon="@drawable/ic_baseline_trending_down_24"
+        android:icon="@drawable/hutang"
         android:title="Hutang" />
 
     <item
         android:id="@+id/navigation_untung"
-        android:icon="@drawable/ic_baseline_trending_up_24"
+        android:icon="@drawable/untung"
         android:title="Untung" />
 
 

@@ -2,4 +2,12 @@
     <string name="app_name">Catatan Kasir</string>
     <string name="text_aggrement">Dengan menekan Masuk, anda telah menyetujui kebijakan privasi dan Syarat dan Ketentuan yang ada</string>
     <string name="title_activity_home">HomeActivity</string>
+    <string-array name="satuan">
+        <item>Pcs</item>
+        <item>Kg</item>
+        <item>Gram</item>
+        <item>Ons</item>
+        <item>Dus</item>
+        <item>Lusin</item>
+    </string-array>
 </resources>
