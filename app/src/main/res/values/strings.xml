@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Catatan Kasir</string>
+    <string name="text_aggrement">Dengan menekan Masuk, anda telah menyetujui kebijakan privasi dan Syarat dan Ketentuan yang ada</string>
+    <string name="title_activity_home">HomeActivity</string>
+</resources>

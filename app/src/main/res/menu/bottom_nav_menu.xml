@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/navigation_stok"
+        android:icon="@drawable/ic_baseline_storage_24"
+        android:title="Stok" />
+
+    <item
+        android:id="@+id/navigation_transaksi"
+        android:icon="@drawable/ic_baseline_monetization_on_24"
+        android:title="Transaksi" />
+
+    <item
+        android:id="@+id/navigation_hutang"
+        android:icon="@drawable/ic_baseline_trending_down_24"
+        android:title="Hutang" />
+
+    <item
+        android:id="@+id/navigation_untung"
+        android:icon="@drawable/ic_baseline_trending_up_24"
+        android:title="Untung" />
+
+
+
+</menu>
