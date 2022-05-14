@@ -12,6 +12,9 @@
         android:theme="@style/Theme.PenjualanKasir"
         tools:replace="android:icon">
         <activity
+            android:name=".activity.TambahPelangganActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.TambahBarangActivity"
             android:exported="true" />
         <activity
