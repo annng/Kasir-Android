@@ -80,6 +80,7 @@ open class BaseActivity : AppCompatActivity() {
         mUserPref.saveNIK("")
         mUserPref.saveEmail("")
         mUserPref.saveJenisUser("")
+        mUserPref.savePhone("")
         mUserPref.saveAvatar("")
         mUserPref.saveUsername("")
         mUserPref.saveToken("")

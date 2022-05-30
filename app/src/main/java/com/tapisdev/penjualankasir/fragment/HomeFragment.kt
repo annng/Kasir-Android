@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.facebook.shimmer.ShimmerFrameLayout
+import com.tapisdev.penjualankasir.MainActivity
+import com.tapisdev.penjualankasir.activity.ProfileActivity
 import com.tapisdev.penjualankasir.activity.TambahPelangganActivity
 import com.tapisdev.penjualankasir.databinding.FragmentHomeBinding
 
@@ -32,6 +34,10 @@ class HomeFragment : Fragment() {
 
         binding.btnTambahPelanggan.setOnClickListener {
             val i = Intent(requireActivity(),TambahPelangganActivity::class.java)
+            startActivity(i)
+        }
+        binding.ivProfil.setOnClickListener {
+            val i = Intent(requireContext(), ProfileActivity::class.java)
             startActivity(i)
         }
 

@@ -28,6 +28,13 @@
             android:textColor="@color/white"
             android:textSize="14sp" />
 
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/profil"
+            android:id="@+id/ivProfil"
+            android:layout_alignParentEnd="true"/>
+
     </RelativeLayout>
 
     <androidx.core.widget.NestedScrollView

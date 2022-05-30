@@ -11,6 +11,8 @@ class UserPreference(context: Context) {
     private val KEY_AVATAR = "avatar"
     private val KEY_NIK = "nik"
     private val KEY_TOKEN = "token"
+    private val KEY_ALAMAT = "alamat"
+    private val KEY_NAMA_UMKM = "nama_umkm"
     private val KEY_FCM_TOKEN = "fcm_token"
 
     var PREFS_NAME = "UserPref"
@@ -20,6 +22,18 @@ class UserPreference(context: Context) {
     fun saveName(text : String){
         val editor = preferences!!.edit()
         editor.putString(KEY_NAME,text)
+        editor.commit()
+    }
+
+    fun saveAlamat(text : String){
+        val editor = preferences!!.edit()
+        editor.putString(KEY_ALAMAT,text)
+        editor.commit()
+    }
+
+    fun saveNamaUmkm(text : String){
+        val editor = preferences!!.edit()
+        editor.putString(KEY_NAMA_UMKM,text)
         editor.commit()
     }
 
@@ -106,6 +120,14 @@ class UserPreference(context: Context) {
 
     fun getFCMToken() : String?{
         return preferences!!.getString(KEY_FCM_TOKEN,null)
+    }
+
+    fun getAlamat() : String?{
+        return preferences!!.getString(KEY_ALAMAT,null)
+    }
+
+    fun getNamaUmkm() : String?{
+        return preferences!!.getString(KEY_NAMA_UMKM,null)
     }
 
 

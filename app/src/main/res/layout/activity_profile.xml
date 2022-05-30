@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/grey_100"
+    android:layout_height="match_parent"
+    >
+
+    <RelativeLayout
+        android:id="@+id/relaToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:elevation="5dp"
+        android:padding="8dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:orientation="vertical"
+            android:paddingHorizontal="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/cera_black"
+                android:text="Profil Pengguna"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_below="@+id/relaToolbar"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="88dp"
+                android:layout_marginTop="11.7dp"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:paddingLeft="16.7dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/circle">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="17.3dp"
+                        android:fontFamily="sans-serif"
+                        android:text="G"
+                        android:id="@+id/tvInisial"
+                        android:textColor="@color/white"
+                        android:textSize="21.7sp"
+                        android:textStyle="normal" />
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:visibility="gone"
+                        android:id="@+id/ivAvatar"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="16.7dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/cera_medium"
+                        android:text="Glory"
+                        android:id="@+id/tvName"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8.3dp"
+                        android:id="@+id/tvEmail"
+                        android:fontFamily="@font/cera_medium"
+                        android:text="glory@lampungprov.go.id"
+                        android:textColor="@color/grey_800"
+                        android:textSize="11.7sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3.3dp"
+                        android:fontFamily="@font/cera_medium"
+                        android:text="089662240052"
+                        android:id="@+id/tvPhone"
+                        android:textColor="@color/grey_800"
+                        android:textSize="11.7sp"
+                        android:textStyle="normal" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16.7dp"
+                    android:layout_marginTop="16.7dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Edit"
+                    android:id="@+id/tvEditProfile"
+                    android:textColor="@color/grey_800"
+                    android:textSize="11.7sp"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="21dp"
+                android:background="@color/white"
+                android:id="@+id/lineLogout"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginTop="11.7dp"
+                android:layout_marginBottom="65.7dp"
+                android:paddingLeft="16.3dp"
+                android:paddingTop="21dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_baseline_power_settings_new_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="41.3dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Keluar Akun"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</RelativeLayout>
