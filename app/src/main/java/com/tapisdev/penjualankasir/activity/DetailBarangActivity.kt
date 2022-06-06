@@ -13,6 +13,7 @@ import com.tapisdev.penjualankasir.BuildConfig
 import com.tapisdev.penjualankasir.R
 import com.tapisdev.penjualankasir.databinding.ActivityDetailBarangBinding
 import com.tapisdev.penjualankasir.model.Barang
+import com.tapisdev.penjualankasir.model.UserPreference
 import com.tapisdev.penjualankasir.response.BarangResponse
 import com.tapisdev.penjualankasir.response.CommonResponse
 import com.tapisdev.penjualankasir.util.ApiMain
@@ -34,6 +35,7 @@ class DetailBarangActivity : BaseActivity() {
         binding = ActivityDetailBarangBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        mUserPref = UserPreference(this)
 
         i = intent
         barang = i.getParcelableExtra("barang")!!

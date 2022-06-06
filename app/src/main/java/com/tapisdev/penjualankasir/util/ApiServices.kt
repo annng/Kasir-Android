@@ -32,6 +32,9 @@ interface ApiServices {
     @GET("barang/data")
     fun getBarang(@Query("token") token: String?,@Query("page") page : Int, @Query("search") search : String) : Call<BarangResponse>
 
+    @GET("barang/data/stok-tipis")
+    fun getBarangStokTipis(@Query("token") token: String?,@Query("page") page : Int, @Query("search") search : String) : Call<BarangResponse>
+
     @GET("barang/delete")
     fun deleteBarang(@Query("token") token: String?,@Query("id_barang") id_barang : String) : Call<CommonResponse>
 

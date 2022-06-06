@@ -42,10 +42,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toStartOf="@+id/ivUser"
+            android:inputType="textAutoComplete"
             android:background="@drawable/bg_edittext_rounded"
             android:drawableStart="@drawable/ic_baseline_search_24"
             android:hint="Cari Barang"
             android:padding="5dip"
+            android:id="@+id/etSearch"
             android:textColorHint="@color/grey_400" />
 
         <LinearLayout
@@ -73,6 +75,7 @@
                 android:layout_height="35dp"
                 android:layout_weight="1"
                 android:text="Stok Menipis"
+                android:id="@+id/btnStokTipis"
                 android:fontFamily="@font/cera_medium"
                 android:textSize="15sp"
                 android:background="@color/colorPrimary"
