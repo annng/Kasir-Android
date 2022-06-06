@@ -2,6 +2,7 @@ package com.tapisdev.penjualankasir.util
 
 
 import com.tapisdev.penjualankasir.model.LoginInfo
+import com.tapisdev.penjualankasir.model.PelangganInfo
 import com.tapisdev.penjualankasir.model.RegisterInfo
 import com.tapisdev.penjualankasir.response.BarangResponse
 import com.tapisdev.penjualankasir.response.CommonResponse
@@ -40,6 +41,9 @@ interface ApiServices {
 
     @GET("barang/delete")
     fun deleteBarang(@Query("token") token: String?,@Query("id_barang") id_barang : String) : Call<CommonResponse>
+
+    @POST("pelanggan/add")
+    fun savePelanggan(@Query("token") token: String?,@Body userData: PelangganInfo) : Call<CommonResponse>
 
 
 
