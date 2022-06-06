@@ -63,7 +63,7 @@ dependencies {
     //lottie
     implementation 'com.airbnb.android:lottie:3.4.+'
     //CircelImageView
-    implementation 'com.makeramen:roundedimageview:2.3.0'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
     //error guava
     implementation 'com.google.guava:guava:27.0.1-android'
     //pdf viewerw

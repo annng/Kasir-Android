@@ -5,7 +5,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
 
     <application
@@ -17,6 +18,9 @@
         android:theme="@style/Theme.PenjualanKasir"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
+        <activity
+            android:name=".activity.DetailBarangActivity"
+            android:exported="false" />
         <activity
             android:name=".activity.SplashActivity"
             android:exported="true">
@@ -44,9 +48,7 @@
             android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>
