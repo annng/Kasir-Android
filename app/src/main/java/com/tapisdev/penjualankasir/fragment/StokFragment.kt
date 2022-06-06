@@ -83,7 +83,6 @@ class StokFragment : Fragment() {
                     Log.d("rvBarang"," ini terakir")
                     //next page
                     if (isFilterStokMenipis){
-                        //get more stok tipis
                         getMoreDataBarangStokMenipis()
                     }else{
                         getMoreDataBarang()

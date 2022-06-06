@@ -13,11 +13,13 @@ import com.tapisdev.penjualankasir.fragment.HomeFragment
 import com.tapisdev.penjualankasir.fragment.HutangFragment
 import com.tapisdev.penjualankasir.fragment.StokFragment
 import com.tapisdev.penjualankasir.fragment.UntungFragment
+import com.tapisdev.penjualankasir.model.SharedVariable
 import com.tapisdev.penjualankasir.model.UserPreference
 
 class HomeActivity : BaseActivity() {
 
     private lateinit var binding: ActivityHomeBinding
+    lateinit var nextFragment  : Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,9 +29,18 @@ class HomeActivity : BaseActivity() {
         setContentView(binding.root)
 
         binding.navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-        val fragment = HomeFragment.newInstance()
-        addFragment(fragment)
 
+        if (SharedVariable.nextFragment.equals("")){
+            nextFragment = HomeFragment.newInstance()
+        }else if (SharedVariable.nextFragment.equals("stok")){
+            nextFragment = StokFragment.newInstance()
+        }else if (SharedVariable.nextFragment.equals("hutang")){
+            nextFragment = HutangFragment.newInstance()
+        }else if (SharedVariable.nextFragment.equals("untung")){
+            nextFragment = UntungFragment.newInstance()
+        }
+
+        addFragment(nextFragment)
     }
 
 

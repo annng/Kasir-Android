@@ -19,6 +19,9 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
         <activity
+            android:name=".activity.UbahBarangActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.DetailBarangActivity"
             android:exported="false" />
         <activity
@@ -48,7 +51,7 @@
             android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>

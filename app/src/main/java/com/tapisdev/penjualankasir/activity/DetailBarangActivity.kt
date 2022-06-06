@@ -44,6 +44,9 @@ class DetailBarangActivity : BaseActivity() {
             onBackPressed()
         }
         binding.btnEdit.setOnClickListener {
+            val i = Intent(this,UbahBarangActivity::class.java)
+            i.putExtra("barang",barang)
+            startActivity(i)
         }
         binding.btnDelete.setOnClickListener {
             deleteBarang(barang.id!!)

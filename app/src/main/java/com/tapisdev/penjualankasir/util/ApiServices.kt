@@ -29,6 +29,9 @@ interface ApiServices {
     @POST("barang/add")
     fun addBarang(@Query("token") token: String?,@Body file : RequestBody) : Call<CommonResponse>
 
+    @POST("barang/update")
+    fun editBarang(@Query("token") token: String?,@Body file : RequestBody) : Call<CommonResponse>
+
     @GET("barang/data")
     fun getBarang(@Query("token") token: String?,@Query("page") page : Int, @Query("search") search : String) : Call<BarangResponse>
 
