@@ -84,7 +84,7 @@
                         android:textStyle="bold" />
 
                     <ImageView
-                        android:id="@+id/ivKTP"
+                        android:id="@+id/ivBarang"
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
                         android:src="@drawable/placeholder" />
@@ -125,7 +125,7 @@
                         android:textStyle="normal" />
 
                     <com.tapisdev.penjualankasir.customview.EditText_Roboto_Regular
-                        android:id="@+id/etEmail"
+                        android:id="@+id/etHargaBeli"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -206,7 +206,7 @@
                         android:textStyle="bold" />
 
                     <Spinner
-                        android:id="@+id/spKategori"
+                        android:id="@+id/spSatuan"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -224,6 +224,7 @@
                         android:background="@color/colorPrimary"
                         android:fontFamily="@font/cera_medium"
                         android:text="Simpan"
+                        android:id="@+id/btnSimpan"
                         android:textColor="@color/white"
                         android:textSize="15sp" />
 

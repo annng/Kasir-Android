@@ -22,6 +22,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", "\"https://192.168.2.124/CatatanKasirAPI/\""
+        }
+        debug {
+            buildConfigField "String", 'BASE_URL', "\"http://192.168.2.124/CatatanKasirAPI/\""
         }
     }
     compileOptions {
@@ -31,11 +35,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    androidExtensions {
-        experimental = true
-    }
     viewBinding{
         enabled = true
+    }
+    androidExtensions {
+        experimental = true
     }
     buildFeatures {
         viewBinding true

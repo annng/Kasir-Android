@@ -26,7 +26,7 @@ class ApiMain : Application() {
         .writeTimeout(30, TimeUnit.SECONDS)
         .build()
     private val retrofit = Retrofit.Builder()
-        .baseUrl("http://192.168.1.6/ApiCatatanKasir/")
+        .baseUrl(BuildConfig.BASE_URL)
         .client(client)
         .addConverterFactory(GsonConverterFactory.create())
         .build()

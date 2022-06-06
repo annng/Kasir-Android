@@ -85,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvBarang"
@@ -96,10 +96,32 @@
                 android:paddingEnd="10dp"
                 android:visibility="gone" />
 
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBar"
+                android:layout_gravity="center_horizontal"
+                android:visibility="gone"
+                android:layout_marginTop="20dp"/>
+
             <include
                 layout="@layout/shimmer_main"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
+                android:id="@+id/tvInfoEmpty"
+                android:visibility="gone"
+                android:fontFamily="@font/cera_medium"
+                android:text="Belum ada barang untuk saat ini"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

@@ -3,6 +3,7 @@ package com.tapisdev.penjualankasir.util
 
 import com.tapisdev.penjualankasir.model.LoginInfo
 import com.tapisdev.penjualankasir.model.RegisterInfo
+import com.tapisdev.penjualankasir.response.BarangResponse
 import com.tapisdev.penjualankasir.response.CommonResponse
 import com.tapisdev.penjualankasir.response.DetailUserResponse
 import com.tapisdev.penjualankasir.response.LoginResponse
@@ -24,6 +25,12 @@ interface ApiServices {
 
     @GET("user/detail")
     fun detailUser(@Query("token") token : String) : Call<DetailUserResponse>
+
+    @POST("barang/add")
+    fun addBarang(@Query("token") token: String?,@Body file : RequestBody) : Call<CommonResponse>
+
+    @GET("barang/data")
+    fun getBarang(@Query("token") token: String?,@Query("page") page : Int, @Query("search") search : String) : Call<BarangResponse>
 
 
 

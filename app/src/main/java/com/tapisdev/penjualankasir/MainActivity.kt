@@ -60,7 +60,7 @@ class MainActivity : BaseActivity() {
         ApiMain().services.loginUser(loginInfo).enqueue(
             object : Callback<LoginResponse> {
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                    showErrorMessage("gagal melakukan pendaftaran, coba lagi nanti")
+                    showErrorMessage("gagal melakukan login, coba lagi nanti")
                     Log.d(TAG_LOGIN,t.message.toString())
                     dismissLoading()
                 }
