@@ -90,9 +90,14 @@ class HomeFragment : Fragment() {
             startActivity(i)
         }
 
+        updateUI()
         getDataPelanggan()
         getDataBarang()
         return root
+    }
+
+    fun updateUI(){
+        binding.tvNamaUmkm.setText(mUserPref.getNamaUmkm())
     }
 
     fun resetPagination(){

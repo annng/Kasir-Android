@@ -25,6 +25,7 @@
             android:layout_marginHorizontal="10dp"
             android:fontFamily="@font/cera_medium"
             android:text="Nama UMKM"
+            android:id="@+id/tvNamaUmkm"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
