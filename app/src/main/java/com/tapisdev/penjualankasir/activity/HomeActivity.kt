@@ -9,10 +9,7 @@ import androidx.fragment.app.Fragment
 import com.tapisdev.lokamotor.base.BaseActivity
 import com.tapisdev.penjualankasir.R
 import com.tapisdev.penjualankasir.databinding.ActivityHomeBinding
-import com.tapisdev.penjualankasir.fragment.HomeFragment
-import com.tapisdev.penjualankasir.fragment.HutangFragment
-import com.tapisdev.penjualankasir.fragment.StokFragment
-import com.tapisdev.penjualankasir.fragment.UntungFragment
+import com.tapisdev.penjualankasir.fragment.*
 import com.tapisdev.penjualankasir.model.SharedVariable
 import com.tapisdev.penjualankasir.model.UserPreference
 
@@ -38,6 +35,8 @@ class HomeActivity : BaseActivity() {
             nextFragment = HutangFragment.newInstance()
         }else if (SharedVariable.nextFragment.equals("untung")){
             nextFragment = UntungFragment.newInstance()
+        }else if (SharedVariable.nextFragment.equals("transaksi")){
+            nextFragment = TransaksiFragment.newInstance()
         }
 
         addFragment(nextFragment)
@@ -64,6 +63,11 @@ class HomeActivity : BaseActivity() {
             }
             R.id.navigation_untung -> {
                 val fragment = UntungFragment.newInstance()
+                addFragment(fragment)
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_transaksi -> {
+                val fragment = TransaksiFragment.newInstance()
                 addFragment(fragment)
                 return@OnNavigationItemSelectedListener true
             }

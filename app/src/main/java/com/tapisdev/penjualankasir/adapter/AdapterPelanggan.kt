@@ -37,7 +37,6 @@ class AdapterPelanggan(private val list:ArrayList<Pelanggan>) : RecyclerView.Ada
         with(holder){
             with(list.get(position)){
 
-
                 binding.tvNamaPelanggan.setText(""+list?.get(position).name)
                 binding.tvPhone.setText(""+list?.get(position).phone)
                 binding.tvAlamat.setText(list?.get(position).alamat)
