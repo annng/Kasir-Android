@@ -147,6 +147,7 @@
                         android:fontFamily="@font/cera_light"
                         android:id="@+id/tvLupaPass"
                         android:layout_weight="1"
+                        android:visibility="invisible"
                         android:text="Lupa Password"
                         android:textColor="@color/black"
                         android:textSize="14sp"

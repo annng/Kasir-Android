@@ -66,13 +66,27 @@
                 android:orientation="horizontal">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvPelatihanKerja"
+                    android:id="@+id/rvBarang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clipToPadding="false"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
                     android:visibility="gone" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_horizontal"
+                    android:id="@+id/tvInfoEmptyBarang"
+                    android:visibility="gone"
+                    android:fontFamily="@font/cera_medium"
+                    android:text="Belum ada data barang untuk saat ini"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
 
                 <include
                     layout="@layout/shimmer_horizontal"
@@ -124,6 +138,20 @@
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
                     android:visibility="gone" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_horizontal"
+                    android:id="@+id/tvInfoEmpty"
+                    android:visibility="gone"
+                    android:fontFamily="@font/cera_medium"
+                    android:text="Belum ada data pelanggan untuk saat ini"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
 
                 <include
                     layout="@layout/shimmer_main"

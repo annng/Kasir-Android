@@ -4,10 +4,7 @@ package com.tapisdev.penjualankasir.util
 import com.tapisdev.penjualankasir.model.LoginInfo
 import com.tapisdev.penjualankasir.model.PelangganInfo
 import com.tapisdev.penjualankasir.model.RegisterInfo
-import com.tapisdev.penjualankasir.response.BarangResponse
-import com.tapisdev.penjualankasir.response.CommonResponse
-import com.tapisdev.penjualankasir.response.DetailUserResponse
-import com.tapisdev.penjualankasir.response.LoginResponse
+import com.tapisdev.penjualankasir.response.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -44,6 +41,9 @@ interface ApiServices {
 
     @POST("pelanggan/add")
     fun savePelanggan(@Query("token") token: String?,@Body userData: PelangganInfo) : Call<CommonResponse>
+
+    @GET("pelanggan/data")
+    fun getPelanggan(@Query("token") token: String?,@Query("page") page : Int, @Query("search") search : String) : Call<PelangganResponse>
 
 
 
