@@ -16,17 +16,22 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.facebook.shimmer.ShimmerFrameLayout
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.tapisdev.penjualankasir.activity.HomeActivity
 import com.tapisdev.penjualankasir.activity.TambahBarangActivity
 import com.tapisdev.penjualankasir.adapter.AdapterBarang
 import com.tapisdev.penjualankasir.adapter.AdapterKeranjang
+import com.tapisdev.penjualankasir.adapter.AdapterPelanggan
 import com.tapisdev.penjualankasir.databinding.*
 import com.tapisdev.penjualankasir.model.Barang
 import com.tapisdev.penjualankasir.model.Keranjang
+import com.tapisdev.penjualankasir.model.Pelanggan
 import com.tapisdev.penjualankasir.model.UserPreference
 import com.tapisdev.penjualankasir.response.AllBarangResponse
+import com.tapisdev.penjualankasir.response.AllPelangganResponse
 import com.tapisdev.penjualankasir.util.ApiMain
 import es.dmoral.toasty.Toasty
 import retrofit2.Call
@@ -46,19 +51,24 @@ class TransaksiFragment : Fragment() {
     private val binding get() = _binding!!
 
     var listBarang = ArrayList<Barang>()
+    var listPelanggan = ArrayList<Pelanggan>()
     var listNamaBarang = ArrayList<String>()
     var listKeranjang = ArrayList<Keranjang>()
 
     var selectedBarang : Barang? = null
     lateinit var adapter : AdapterBarang
     lateinit var adapterKeranjang : AdapterKeranjang
+    lateinit var adapterPelanggan : AdapterPelanggan
     lateinit var mUserPref : UserPreference
     lateinit var pDialogLoading : SweetAlertDialog
+    lateinit var dialog : BottomSheetDialog
+
     val nf = NumberFormat.getNumberInstance(Locale.GERMAN)
     val df = nf as DecimalFormat
 
     var totalBayar = 0
     var TAG_GET_BARANG = "barang"
+    var TAG_GET_PELANGGAN = "pelanggan"
     var TAG_TEXT_AUTOCOMPLETE = "autocomplete"
 
 
@@ -73,6 +83,7 @@ class TransaksiFragment : Fragment() {
         mUserPref = UserPreference(requireContext())
         adapter = AdapterBarang(listBarang)
         adapterKeranjang = AdapterKeranjang(listKeranjang,this)
+        adapterPelanggan = AdapterPelanggan(listPelanggan)
 
         val layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -100,6 +111,9 @@ class TransaksiFragment : Fragment() {
         binding.ivSelesaiTransaksi.setOnClickListener {
 
         }
+        binding.cardPelanggan.setOnClickListener {
+            showDialogPelanggan()
+        }
         binding.btnTambahBarang.setOnClickListener {
             checkValidationTambah()
         }
@@ -110,11 +124,33 @@ class TransaksiFragment : Fragment() {
         return root
     }
 
+    fun showDialogPelanggan(){
+        dialog = BottomSheetDialog(requireContext())
+        /*val view = layoutInflater.inflate(R.layout.bottom, null)
+
+        val rvKategori = view.findViewById<RecyclerView>(R.id.rvPelanggan)
+
+        val layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rvPelanggan.setHasFixedSize(true)
+        rvPelanggan.layoutManager = layoutManager
+        rvPelanggan.adapter = adapterPelanggan
+        adapterPelanggan.notifyDataSetChanged()
+
+
+        dialog.setCancelable(true)
+        dialog.setContentView(view)
+        dialog.show()*/
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     override fun onResume() {
         super.onResume()
         if (listBarang.size == 0){
             getDataBarang()
+        }
+        if (listPelanggan.size == 0){
+            getDataPelanggan()
         }
         totalBayar = 0
         listKeranjang.clear()
@@ -236,6 +272,46 @@ class TransaksiFragment : Fragment() {
             }
         })
 
+    }
+
+    fun getDataPelanggan(){
+
+        ApiMain().services.getAllPelanggan(mUserPref.getToken()).enqueue(object :
+            retrofit2.Callback<AllPelangganResponse> {
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onResponse(call: Call<AllPelangganResponse>, response: Response<AllPelangganResponse>) {
+                //Tulis code jika response sukses
+                Log.d(TAG_GET_PELANGGAN,response.toString())
+                Log.d(TAG_GET_PELANGGAN,"http status : "+response.code())
+
+                if(response.code() == 200) {
+                    listPelanggan.clear()
+                    response.body()?.data_pelanggan?.let {
+                        Log.d(TAG_GET_PELANGGAN,"dari API : "+it)
+                        Log.d(TAG_GET_PELANGGAN,"jumlah dari API : "+it.size)
+                        listPelanggan.addAll(it)
+                        adapter.notifyDataSetChanged()
+
+                        Log.d(TAG_GET_PELANGGAN,"isi adapter  : "+adapter.itemCount)
+                    }
+
+
+                }else {
+                    Toasty.error(requireContext(), "gagal mengambil data", Toast.LENGTH_SHORT, true).show()
+                    Log.d(TAG_GET_PELANGGAN,"err :"+response.message())
+                }
+            }
+            override fun onFailure(call: Call<AllPelangganResponse>, t: Throwable){
+                //Tulis code jika response fail
+                val errMsg = t.message.toString()
+                if (errMsg.takeLast(6).equals("$.null")){
+                    Log.d(TAG_GET_PELANGGAN,"rusak nya gpapa kok  ")
+                }else{
+                    Toasty.error(requireContext(), "response failure for more data", Toast.LENGTH_SHORT, true).show()
+                    Log.d(TAG_GET_PELANGGAN,"rusak : "+t.message.toString())
+                }
+            }
+        })
     }
 
     override fun onDestroyView() {

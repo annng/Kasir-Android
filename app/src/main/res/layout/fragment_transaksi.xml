@@ -101,8 +101,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:id="@+id/cardPelanggan"
+            android:clickable="true"
             app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="10dp">
+            app:cardCornerRadius="10dp"
+            android:focusable="true">
 
 
             <RelativeLayout

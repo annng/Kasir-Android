@@ -48,6 +48,9 @@ interface ApiServices {
     @GET("pelanggan/data")
     fun getPelanggan(@Query("token") token: String?,@Query("page") page : Int, @Query("search") search : String) : Call<PelangganResponse>
 
+    @GET("pelanggan/data/all")
+    fun getAllPelanggan(@Query("token") token: String?) : Call<AllPelangganResponse>
+
 
 
 }
