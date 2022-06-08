@@ -25,7 +25,8 @@ android {
             buildConfigField "String", "BASE_URL", "\"https://192.168.2.124/CatatanKasirAPI/\""
         }
         debug {
-            buildConfigField "String", 'BASE_URL', "\"http://192.168.2.124/CatatanKasirAPI/\""
+           // buildConfigField "String", 'BASE_URL', "\"http://192.168.2.124/CatatanKasirAPI/\""
+            buildConfigField "String", 'BASE_URL', "\"https://apicatatankasir.wajibdatang.com/\""
         }
     }
     compileOptions {

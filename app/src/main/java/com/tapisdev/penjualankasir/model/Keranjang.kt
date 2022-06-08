@@ -13,4 +13,6 @@ data class Keranjang(
     var picture: String? = "",
     var satuan: String? = "",
     var subtotal: Int? = 0,
+    var id_barang: String? = "",
+    var untung: Int? = 0,
 ) : Parcelable

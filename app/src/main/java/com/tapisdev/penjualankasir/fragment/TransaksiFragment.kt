@@ -180,6 +180,9 @@ class TransaksiFragment : Fragment() {
         else{
             val jumlah = jmlBeli.toInt()
             val subtotal = jumlah * selectedBarang?.harga_jual!!
+            val subtotal_harga_beli = jumlah * selectedBarang?.harga_beli!!
+            val untung = subtotal - subtotal_harga_beli
+
             val keranjang = Keranjang(
                 selectedBarang?.name,
                 jumlah,
@@ -187,7 +190,9 @@ class TransaksiFragment : Fragment() {
                 selectedBarang?.deskripsi,
                 selectedBarang?.picture,
                 selectedBarang?.satuan,
-                subtotal
+                subtotal,
+                selectedBarang?.id,
+                untung
             )
 
             saveToCart(keranjang)
@@ -233,7 +238,7 @@ class TransaksiFragment : Fragment() {
                         Log.d(TAG_ORDER,"http code dari API "+responAPI!!.http_status)
 
                         Toasty.success(requireContext(), "Transaksi berhasil !", Toast.LENGTH_SHORT, true).show()
-
+                        resetTransaksi()
 
                     }else if (response.code() == 202){
                         Toasty.error(requireContext(), "gagal simpan transaksi, coba lagi nanti", Toast.LENGTH_SHORT, true).show()
@@ -242,6 +247,22 @@ class TransaksiFragment : Fragment() {
             }
         )
 
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun resetTransaksi(){
+        listKeranjang.clear()
+        adapterKeranjang.notifyDataSetChanged()
+
+        selectedBarang = null
+        SharedVariable.selectedPelanggan = null
+        SharedVariable.pelangganType = "guest"
+
+        totalBayar = 0
+        binding.tvTotal.setText("Rp. 0")
+
+        resetSelectedBarangInfo()
+        setPelangganInfo()
     }
 
     fun showSelectedBarangInfo(barang : Barang){

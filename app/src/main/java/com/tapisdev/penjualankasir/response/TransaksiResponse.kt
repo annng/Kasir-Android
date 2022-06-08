@@ -10,7 +10,7 @@ data class TransaksiResponse(
     val message: String,
     @SerializedName("http_status")
     val http_status: String,
-    @SerializedName("data")
-    val data_transaksi : ArrayList<Keranjang>
+    /*@SerializedName("data")
+    val data_transaksi : ArrayList<Keranjang>*/
 
 )
