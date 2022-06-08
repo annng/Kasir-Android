@@ -90,7 +90,7 @@
                     android:layout_gravity="center_horizontal"
                     android:fontFamily="@font/cera_medium"
                     android:id="@+id/tvTotal"
-                    android:text="Rp. xxx.xxx"
+                    android:text="Rp. 0"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -130,6 +130,7 @@
                     android:layout_toEndOf="@+id/ivIconHutang"
                     android:fontFamily="@font/cera_medium"
                     android:text="Pelanggan"
+                    android:id="@+id/tvNamaPelanggan"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 

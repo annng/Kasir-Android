@@ -7,6 +7,8 @@ class SharedVariable {
         lateinit var user : UserModel
         var nextFragment = ""
         var arrLayananDipilih = ArrayList<String>()
+        var selectedPelanggan: Pelanggan? = null
+        var pelangganType = "guest" //defaultnya guest
 
         open fun resetLayananDipilih(){
             arrLayananDipilih.clear()

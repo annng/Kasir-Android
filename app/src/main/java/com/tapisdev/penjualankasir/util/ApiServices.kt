@@ -2,6 +2,7 @@ package com.tapisdev.penjualankasir.util
 
 
 import com.tapisdev.penjualankasir.model.LoginInfo
+import com.tapisdev.penjualankasir.model.OrderInfo
 import com.tapisdev.penjualankasir.model.PelangganInfo
 import com.tapisdev.penjualankasir.model.RegisterInfo
 import com.tapisdev.penjualankasir.response.*
@@ -50,6 +51,9 @@ interface ApiServices {
 
     @GET("pelanggan/data/all")
     fun getAllPelanggan(@Query("token") token: String?) : Call<AllPelangganResponse>
+
+    @POST("transaksi/store")
+    fun saveTransaksi(@Query("token") token: String?,@Body orderInfo: OrderInfo) : Call<TransaksiResponse>
 
 
 

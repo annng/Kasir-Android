@@ -19,6 +19,9 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
         <activity
+            android:name=".activity.SelectPelangganActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.UbahBarangActivity"
             android:exported="true" />
         <activity

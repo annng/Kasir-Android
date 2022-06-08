@@ -1,20 +1,32 @@
 package com.tapisdev.penjualankasir.activity
 
+import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.RadioButton
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.tapisdev.lokamotor.base.BaseActivity
 import com.tapisdev.penjualankasir.R
+import com.tapisdev.penjualankasir.adapter.AdapterPelanggan
 import com.tapisdev.penjualankasir.databinding.ActivityHomeBinding
 import com.tapisdev.penjualankasir.fragment.*
+import com.tapisdev.penjualankasir.model.Pelanggan
 import com.tapisdev.penjualankasir.model.SharedVariable
 import com.tapisdev.penjualankasir.model.UserPreference
+import com.tapisdev.penjualankasir.response.AllPelangganResponse
+import com.tapisdev.penjualankasir.util.ApiMain
+import es.dmoral.toasty.Toasty
+import retrofit2.Call
+import retrofit2.Response
+
 
 class HomeActivity : BaseActivity() {
 
@@ -51,6 +63,7 @@ class HomeActivity : BaseActivity() {
     }
 
 
+
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
@@ -82,6 +95,11 @@ class HomeActivity : BaseActivity() {
 
         }
         false
+    }
+
+
+    override fun onResume() {
+        super.onResume()
     }
 
     private fun addFragment(fragment: Fragment) {

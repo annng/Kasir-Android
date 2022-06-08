@@ -18,23 +18,22 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.pedant.SweetAlert.SweetAlertDialog
-import com.facebook.shimmer.ShimmerFrameLayout
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.tapisdev.penjualankasir.MainActivity
 import com.tapisdev.penjualankasir.activity.HomeActivity
+import com.tapisdev.penjualankasir.activity.SelectPelangganActivity
 import com.tapisdev.penjualankasir.activity.TambahBarangActivity
 import com.tapisdev.penjualankasir.adapter.AdapterBarang
 import com.tapisdev.penjualankasir.adapter.AdapterKeranjang
 import com.tapisdev.penjualankasir.adapter.AdapterPelanggan
 import com.tapisdev.penjualankasir.databinding.*
-import com.tapisdev.penjualankasir.model.Barang
-import com.tapisdev.penjualankasir.model.Keranjang
-import com.tapisdev.penjualankasir.model.Pelanggan
-import com.tapisdev.penjualankasir.model.UserPreference
+import com.tapisdev.penjualankasir.model.*
 import com.tapisdev.penjualankasir.response.AllBarangResponse
 import com.tapisdev.penjualankasir.response.AllPelangganResponse
+import com.tapisdev.penjualankasir.response.TransaksiResponse
 import com.tapisdev.penjualankasir.util.ApiMain
 import es.dmoral.toasty.Toasty
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 import java.io.Serializable
 import java.text.DecimalFormat
@@ -61,14 +60,15 @@ class TransaksiFragment : Fragment() {
     lateinit var adapterPelanggan : AdapterPelanggan
     lateinit var mUserPref : UserPreference
     lateinit var pDialogLoading : SweetAlertDialog
-    lateinit var dialog : BottomSheetDialog
+    lateinit var orderInfo: OrderInfo
 
     val nf = NumberFormat.getNumberInstance(Locale.GERMAN)
     val df = nf as DecimalFormat
 
     var totalBayar = 0
     var TAG_GET_BARANG = "barang"
-    var TAG_GET_PELANGGAN = "pelanggan"
+    var TAG_ORDER = "order"
+    var id_pelanggan = "0"
     var TAG_TEXT_AUTOCOMPLETE = "autocomplete"
 
 
@@ -109,38 +109,18 @@ class TransaksiFragment : Fragment() {
             getDataBarang()
         }
         binding.ivSelesaiTransaksi.setOnClickListener {
-
+            checkValidationOrder()
         }
         binding.cardPelanggan.setOnClickListener {
-            showDialogPelanggan()
+            val i = Intent(requireContext(),SelectPelangganActivity::class.java)
+            startActivity(i)
         }
         binding.btnTambahBarang.setOnClickListener {
             checkValidationTambah()
         }
 
 
-
-
         return root
-    }
-
-    fun showDialogPelanggan(){
-        dialog = BottomSheetDialog(requireContext())
-        /*val view = layoutInflater.inflate(R.layout.bottom, null)
-
-        val rvKategori = view.findViewById<RecyclerView>(R.id.rvPelanggan)
-
-        val layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        rvPelanggan.setHasFixedSize(true)
-        rvPelanggan.layoutManager = layoutManager
-        rvPelanggan.adapter = adapterPelanggan
-        adapterPelanggan.notifyDataSetChanged()
-
-
-        dialog.setCancelable(true)
-        dialog.setContentView(view)
-        dialog.show()*/
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -149,12 +129,10 @@ class TransaksiFragment : Fragment() {
         if (listBarang.size == 0){
             getDataBarang()
         }
-        if (listPelanggan.size == 0){
-            getDataPelanggan()
-        }
-        totalBayar = 0
-        listKeranjang.clear()
-        adapterKeranjang.notifyDataSetChanged()
+        setPelangganInfo()
+        //totalBayar = 0
+        //listKeranjang.clear()
+        //adapterKeranjang.notifyDataSetChanged()
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -183,6 +161,15 @@ class TransaksiFragment : Fragment() {
         binding.tvTotal.setText("Rp. "+df.format(totalBayar))
     }
 
+    fun setPelangganInfo(){
+        if (SharedVariable.pelangganType.equals("guest")){
+            binding.tvNamaPelanggan.setText("Pelanggan Guest")
+        }else{
+            id_pelanggan = SharedVariable.selectedPelanggan?.id!!
+            binding.tvNamaPelanggan.setText(SharedVariable.selectedPelanggan?.name)
+        }
+    }
+
     fun checkValidationTambah(){
         val jmlBeli = binding.etJumlahBeli.text.toString()
         if (jmlBeli.equals("") || jmlBeli.length == 0){
@@ -207,6 +194,54 @@ class TransaksiFragment : Fragment() {
             selectedBarang = null
             resetSelectedBarangInfo()
         }
+    }
+
+    fun checkValidationOrder(){
+        if (listKeranjang.size == 0){
+            Toasty.error(requireContext(), "Anda belum memilih barang", Toast.LENGTH_SHORT, true).show()
+        }else{
+            orderInfo = OrderInfo(
+                id_pelanggan,
+                SharedVariable.pelangganType,
+                totalBayar,
+                listKeranjang
+            )
+            saveOrder()
+        }
+    }
+
+    fun saveOrder(){
+        showLoading()
+        Log.d(TAG_ORDER,orderInfo.toString())
+
+        ApiMain().services.saveTransaksi(mUserPref.getToken(),orderInfo).enqueue(
+            object : Callback<TransaksiResponse> {
+                override fun onFailure(call: Call<TransaksiResponse>, t: Throwable) {
+                    Toasty.error(requireContext(), "gagal simpan transaksi, coba lagi nanti", Toast.LENGTH_SHORT, true).show()
+                    Log.d(TAG_ORDER,t.message.toString())
+                    dismissLoading()
+                }
+                override fun onResponse(call: Call<TransaksiResponse>, response: Response<TransaksiResponse>) {
+                    val responAPI = response.body()
+                    val responseStatus = response.code()
+
+
+                    dismissLoading()
+                    if(response.code() == 200) {
+                        Log.d(TAG_ORDER,"body "+responAPI!!.toString())
+                        Log.d(TAG_ORDER,"http code asli "+responseStatus.toString())
+                        Log.d(TAG_ORDER,"http code dari API "+responAPI!!.http_status)
+
+                        Toasty.success(requireContext(), "Transaksi berhasil !", Toast.LENGTH_SHORT, true).show()
+
+
+                    }else if (response.code() == 202){
+                        Toasty.error(requireContext(), "gagal simpan transaksi, coba lagi nanti", Toast.LENGTH_SHORT, true).show()
+                    }
+                }
+            }
+        )
+
     }
 
     fun showSelectedBarangInfo(barang : Barang){
@@ -272,46 +307,6 @@ class TransaksiFragment : Fragment() {
             }
         })
 
-    }
-
-    fun getDataPelanggan(){
-
-        ApiMain().services.getAllPelanggan(mUserPref.getToken()).enqueue(object :
-            retrofit2.Callback<AllPelangganResponse> {
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onResponse(call: Call<AllPelangganResponse>, response: Response<AllPelangganResponse>) {
-                //Tulis code jika response sukses
-                Log.d(TAG_GET_PELANGGAN,response.toString())
-                Log.d(TAG_GET_PELANGGAN,"http status : "+response.code())
-
-                if(response.code() == 200) {
-                    listPelanggan.clear()
-                    response.body()?.data_pelanggan?.let {
-                        Log.d(TAG_GET_PELANGGAN,"dari API : "+it)
-                        Log.d(TAG_GET_PELANGGAN,"jumlah dari API : "+it.size)
-                        listPelanggan.addAll(it)
-                        adapter.notifyDataSetChanged()
-
-                        Log.d(TAG_GET_PELANGGAN,"isi adapter  : "+adapter.itemCount)
-                    }
-
-
-                }else {
-                    Toasty.error(requireContext(), "gagal mengambil data", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_GET_PELANGGAN,"err :"+response.message())
-                }
-            }
-            override fun onFailure(call: Call<AllPelangganResponse>, t: Throwable){
-                //Tulis code jika response fail
-                val errMsg = t.message.toString()
-                if (errMsg.takeLast(6).equals("$.null")){
-                    Log.d(TAG_GET_PELANGGAN,"rusak nya gpapa kok  ")
-                }else{
-                    Toasty.error(requireContext(), "response failure for more data", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_GET_PELANGGAN,"rusak : "+t.message.toString())
-                }
-            }
-        })
     }
 
     override fun onDestroyView() {

@@ -1,17 +1,11 @@
 package com.tapisdev.penjualankasir.adapter
 
 
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.tapisdev.penjualankasir.databinding.ItemsBarangBinding
-import com.tapisdev.penjualankasir.model.Barang
-import com.tapisdev.penjualankasir.BuildConfig
-import com.tapisdev.penjualankasir.activity.DetailBarangActivity
+import com.tapisdev.penjualankasir.activity.SelectPelangganActivity
 import com.tapisdev.penjualankasir.databinding.ItemsPelangganBinding
 import com.tapisdev.penjualankasir.model.Pelanggan
 
@@ -42,6 +36,11 @@ class AdapterPelanggan(private val list:ArrayList<Pelanggan>) : RecyclerView.Ada
                 binding.tvAlamat.setText(list?.get(position).alamat)
 
                 binding.rlPelanggan.setOnClickListener {
+
+                    if (binding.rlPelanggan.context is SelectPelangganActivity) {
+                        (binding.rlPelanggan.context as SelectPelangganActivity).setSelectedPelanggan(list?.get(position))
+                    }
+
                    /* val i  = Intent(binding.rlPelanggan.context,DetailBarangActivity::class.java)
                     i.putExtra("pelanggan",list?.get(position))
                     binding.rlPelanggan.context.startActivity(i)*/
