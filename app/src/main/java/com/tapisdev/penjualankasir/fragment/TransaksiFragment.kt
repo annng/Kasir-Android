@@ -29,7 +29,7 @@ import com.tapisdev.penjualankasir.databinding.*
 import com.tapisdev.penjualankasir.model.*
 import com.tapisdev.penjualankasir.response.AllBarangResponse
 import com.tapisdev.penjualankasir.response.AllPelangganResponse
-import com.tapisdev.penjualankasir.response.TransaksiResponse
+import com.tapisdev.penjualankasir.response.CommonResponse
 import com.tapisdev.penjualankasir.util.ApiMain
 import es.dmoral.toasty.Toasty
 import retrofit2.Call
@@ -220,13 +220,13 @@ class TransaksiFragment : Fragment() {
         Log.d(TAG_ORDER,orderInfo.toString())
 
         ApiMain().services.saveTransaksi(mUserPref.getToken(),orderInfo).enqueue(
-            object : Callback<TransaksiResponse> {
-                override fun onFailure(call: Call<TransaksiResponse>, t: Throwable) {
+            object : Callback<CommonResponse> {
+                override fun onFailure(call: Call<CommonResponse>, t: Throwable) {
                     Toasty.error(requireContext(), "gagal simpan transaksi, coba lagi nanti", Toast.LENGTH_SHORT, true).show()
                     Log.d(TAG_ORDER,t.message.toString())
                     dismissLoading()
                 }
-                override fun onResponse(call: Call<TransaksiResponse>, response: Response<TransaksiResponse>) {
+                override fun onResponse(call: Call<CommonResponse>, response: Response<CommonResponse>) {
                     val responAPI = response.body()
                     val responseStatus = response.code()
 

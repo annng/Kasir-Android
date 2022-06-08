@@ -53,7 +53,7 @@ interface ApiServices {
     fun getAllPelanggan(@Query("token") token: String?) : Call<AllPelangganResponse>
 
     @POST("transaksi/store")
-    fun saveTransaksi(@Query("token") token: String?,@Body orderInfo: OrderInfo) : Call<TransaksiResponse>
+    fun saveTransaksi(@Query("token") token: String?,@Body orderInfo: OrderInfo) : Call<CommonResponse>
 
 
 
