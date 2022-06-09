@@ -55,6 +55,9 @@ interface ApiServices {
     @POST("transaksi/store")
     fun saveTransaksi(@Query("token") token: String?,@Body orderInfo: OrderInfo) : Call<CommonResponse>
 
+    @GET("transaksi/history")
+    fun historyTransaksi(@Query("token") token: String?,@Query("page") page : Int) : Call<UntungResponse>
+
 
 
 }

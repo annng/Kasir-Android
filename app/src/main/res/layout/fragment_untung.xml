@@ -142,6 +142,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
+                android:id="@+id/tvInfoEmpty"
+                android:visibility="gone"
+                android:fontFamily="@font/cera_medium"
+                android:text="Belum ada untung untuk saat ini"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+
         </LinearLayout>
 
     </LinearLayout>

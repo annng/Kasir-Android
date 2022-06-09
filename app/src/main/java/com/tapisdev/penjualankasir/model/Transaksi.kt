@@ -11,6 +11,6 @@ data class Transaksi(
     var total_bayar: Int? = 0,
     var total_untung: Int? = 0,
     var status_pembayaran: String? = "",
-    var created_at: String? = "",
+    var tgl_transaksi: String? = "",
 
 ) : Parcelable
