@@ -58,6 +58,9 @@ interface ApiServices {
     @GET("transaksi/history")
     fun historyTransaksi(@Query("token") token: String?,@Query("page") page : Int) : Call<UntungResponse>
 
+    @GET("transaksi/total-untung")
+    fun getTotalUntung(@Query("token") token: String?) : Call<TotalUntungResponse>
+
 
 
 }

@@ -23,11 +23,16 @@ import com.tapisdev.penjualankasir.databinding.FragmentUntungBinding
 import com.tapisdev.penjualankasir.model.Barang
 import com.tapisdev.penjualankasir.model.Transaksi
 import com.tapisdev.penjualankasir.model.UserPreference
+import com.tapisdev.penjualankasir.response.TotalUntungResponse
 import com.tapisdev.penjualankasir.response.UntungResponse
 import com.tapisdev.penjualankasir.util.ApiMain
 import es.dmoral.toasty.Toasty
 import retrofit2.Call
 import retrofit2.Response
+import java.text.DecimalFormat
+import java.text.NumberFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class UntungFragment : Fragment() {
 
@@ -42,11 +47,14 @@ class UntungFragment : Fragment() {
     lateinit var adapter : AdapterTransaksi
 
     var listTransaksi = ArrayList<Transaksi>()
+    val nf = NumberFormat.getNumberInstance(Locale.GERMAN)
+    val df = nf as DecimalFormat
 
 
     var CURRENT_PAGE = 1
     var NEXT_PAGE = CURRENT_PAGE + 1
     var TAG_GET_TRANSAKSI = "transaksi"
+    var TAG_GET_TOTALUNTUNG = "totaluntung"
     var TAG_GET_MORE_TRANSAKSI = "moretransaksi"
 
 
@@ -70,7 +78,8 @@ class UntungFragment : Fragment() {
         binding.rvUntung.adapter = adapter
 
 
-
+        getDataUntung()
+        getTotalUntung()
         return root
     }
 
@@ -118,6 +127,49 @@ class UntungFragment : Fragment() {
                 if (errMsg.takeLast(6).equals("$.null")){
                     Log.d(TAG_GET_TRANSAKSI,"rusak nya gpapa kok  ")
                     hideLoadingShimmer()
+                }else{
+                    Toasty.error(requireContext(), "response failure for more data", Toast.LENGTH_SHORT, true).show()
+                    Log.d(TAG_GET_TRANSAKSI,"rusak : "+t.message.toString())
+                }
+            }
+        })
+    }
+
+    fun getTotalUntung(){
+        binding.progressBar.visibility = View.VISIBLE
+
+        ApiMain().services.getTotalUntung(mUserPref.getToken()).enqueue(object :
+            retrofit2.Callback<TotalUntungResponse> {
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onResponse(call: Call<TotalUntungResponse>, response: Response<TotalUntungResponse>) {
+                //Tulis code jika response sukses
+                Log.d(TAG_GET_TRANSAKSI,response.toString())
+                Log.d(TAG_GET_TRANSAKSI,"http status : "+response.code())
+
+
+                if(response.code() == 200) {
+                    val responAPI = response.body()
+                    Log.d(TAG_GET_TOTALUNTUNG,"respon api : "+responAPI.toString())
+                    val totalUntung = responAPI!!.data
+                    val total =  totalUntung.toInt()
+                    Log.d(TAG_GET_TOTALUNTUNG,"hasil : "+totalUntung)
+                    binding.progressBar.visibility = View.GONE
+                    binding.tvKeuntunganTotal.setText("Rp. "+df.format(total))
+                    binding.tvKeuntunganTotal.visibility = View.VISIBLE
+
+
+                }else {
+                    binding.progressBar.visibility = View.GONE
+                    Toasty.error(requireContext(), "gagal mengambil data total untung", Toast.LENGTH_SHORT, true).show()
+                    Log.d(TAG_GET_TRANSAKSI,"err :"+response.message())
+                }
+            }
+            override fun onFailure(call: Call<TotalUntungResponse>, t: Throwable){
+                //Tulis code jika response fail
+                binding.progressBar.visibility = View.GONE
+                val errMsg = t.message.toString()
+                if (errMsg.takeLast(6).equals("$.null")){
+                    Log.d(TAG_GET_TRANSAKSI,"rusak nya gpapa kok  ")
                 }else{
                     Toasty.error(requireContext(), "response failure for more data", Toast.LENGTH_SHORT, true).show()
                     Log.d(TAG_GET_TRANSAKSI,"rusak : "+t.message.toString())

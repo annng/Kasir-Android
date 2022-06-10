@@ -39,7 +39,14 @@ class AdapterTransaksi(private val list:ArrayList<Transaksi>) : RecyclerView.Ada
                 val nf = NumberFormat.getNumberInstance(Locale.GERMAN)
                 val df = nf as DecimalFormat
 
-                binding.tvNamaPelanggan.setText(""+list?.get(position).nama_pelanggan)
+                var nama_pelanggan = ""
+                if (list?.get(position).nama_pelanggan == null || list?.get(position).nama_pelanggan.equals("")){
+                    nama_pelanggan = "Guest"
+                }else{
+                    nama_pelanggan = list?.get(position).nama_pelanggan!!
+                }
+
+                binding.tvNamaPelanggan.setText(nama_pelanggan)
                 binding.tvTanggal.setText(""+list?.get(position).tgl_transaksi)
                 binding.tvTotalBayar.setText("Total bayar Rp. "+df.format(list?.get(position).total_bayar)+" -  Untung "+df.format(list?.get(position).total_untung))
 
