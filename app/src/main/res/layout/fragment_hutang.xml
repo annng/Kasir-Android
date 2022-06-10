@@ -89,7 +89,7 @@
 
             <Button
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginHorizontal="5dp"
                 android:text="Tambah Hutang"
@@ -103,7 +103,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_marginHorizontal="5dp"
-                android:layout_height="35dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Hutang Saya"
                 android:fontFamily="@font/cera_medium"
@@ -133,6 +133,20 @@
                 layout="@layout/shimmer_main"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
+                android:id="@+id/tvInfoEmpty"
+                android:visibility="gone"
+                android:fontFamily="@font/cera_medium"
+                android:text="Belum ada untung untuk saat ini"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

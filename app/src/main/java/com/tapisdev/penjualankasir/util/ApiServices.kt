@@ -1,10 +1,7 @@
 package com.tapisdev.penjualankasir.util
 
 
-import com.tapisdev.penjualankasir.model.LoginInfo
-import com.tapisdev.penjualankasir.model.OrderInfo
-import com.tapisdev.penjualankasir.model.PelangganInfo
-import com.tapisdev.penjualankasir.model.RegisterInfo
+import com.tapisdev.penjualankasir.model.*
 import com.tapisdev.penjualankasir.response.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -60,6 +57,12 @@ interface ApiServices {
 
     @GET("transaksi/total-untung")
     fun getTotalUntung(@Query("token") token: String?) : Call<TotalUntungResponse>
+
+    @GET("hutang/data")
+    fun getDataHutang(@Query("token") token: String?,@Query("page") page : Int) : Call<HutangResponse>
+
+    @POST("hutang/add")
+    fun saveHutang(@Query("token") token: String?,@Body hutangInfo: HutangInfo) : Call<CommonResponse>
 
 
 
