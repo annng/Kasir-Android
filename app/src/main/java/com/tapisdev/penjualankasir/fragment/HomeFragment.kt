@@ -12,6 +12,9 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.facebook.shimmer.ShimmerFrameLayout
+import com.github.aachartmodel.aainfographics.aachartcreator.AAChartModel
+import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
+import com.github.aachartmodel.aainfographics.aachartcreator.AASeriesElement
 import com.tapisdev.penjualankasir.MainActivity
 import com.tapisdev.penjualankasir.R
 import com.tapisdev.penjualankasir.activity.ProfileActivity
@@ -91,6 +94,7 @@ class HomeFragment : Fragment() {
         }
 
         updateUI()
+        configChartModel()
         getDataPelanggan()
         getDataBarang()
         return root
@@ -98,6 +102,23 @@ class HomeFragment : Fragment() {
 
     fun updateUI(){
         binding.tvNamaUmkm.setText(mUserPref.getNamaUmkm())
+    }
+
+    fun configChartModel(){
+        val aaChartModel : AAChartModel = AAChartModel()
+            .chartType(AAChartType.Column)
+            .title("Penjualan by tanggal")
+            .backgroundColor("#EFEDED")
+            .dataLabelsEnabled(true)
+            .series(arrayOf(
+                AASeriesElement()
+                    .name("11 Juni")
+                    .data(arrayOf(11.0)),
+                AASeriesElement()
+                    .name("12 Juni")
+                    .data(arrayOf(20.0))
+            ))
+        binding.chartView.aa_drawChartWithChartModel(aaChartModel)
     }
 
     fun resetPagination(){
