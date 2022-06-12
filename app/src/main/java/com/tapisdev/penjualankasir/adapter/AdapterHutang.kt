@@ -56,13 +56,6 @@ class AdapterHutang(private val list:ArrayList<Hutang>) : RecyclerView.Adapter<A
                 binding.tvTanggal.setText(""+list?.get(position).tgl_hutang)
                 binding.tvTotalBayar.setText("Hutang Rp. "+df.format(list?.get(position).hutang))
 
-                binding.rlBarang.setOnClickListener {
-
-
-                   /* val i  = Intent(binding.rlPelanggan.context,DetailBarangActivity::class.java)
-                    i.putExtra("pelanggan",list?.get(position))
-                    binding.rlPelanggan.context.startActivity(i)*/
-                }
 
             }
         }

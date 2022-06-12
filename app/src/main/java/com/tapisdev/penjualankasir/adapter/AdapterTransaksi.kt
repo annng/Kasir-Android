@@ -1,10 +1,12 @@
 package com.tapisdev.penjualankasir.adapter
 
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.tapisdev.penjualankasir.activity.HistoryTransaksiActivity
 import com.tapisdev.penjualankasir.activity.SelectPelangganActivity
 import com.tapisdev.penjualankasir.databinding.ItemsPelangganBinding
 import com.tapisdev.penjualankasir.databinding.ItemsTransaksiBinding
@@ -50,12 +52,11 @@ class AdapterTransaksi(private val list:ArrayList<Transaksi>) : RecyclerView.Ada
                 binding.tvTanggal.setText(""+list?.get(position).tgl_transaksi)
                 binding.tvTotalBayar.setText("Total bayar Rp. "+df.format(list?.get(position).total_bayar)+" -  Untung "+df.format(list?.get(position).total_untung))
 
-                binding.rlBarang.setOnClickListener {
+                binding.rlTransaksi.setOnClickListener {
 
-
-                   /* val i  = Intent(binding.rlPelanggan.context,DetailBarangActivity::class.java)
-                    i.putExtra("pelanggan",list?.get(position))
-                    binding.rlPelanggan.context.startActivity(i)*/
+                    val i  = Intent(binding.rlTransaksi.context,HistoryTransaksiActivity::class.java)
+                    i.putExtra("transaksi",list?.get(position))
+                    binding.rlTransaksi.context.startActivity(i)
                 }
 
             }

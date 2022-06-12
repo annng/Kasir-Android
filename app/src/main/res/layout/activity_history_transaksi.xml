@@ -37,7 +37,7 @@
                 android:layout_gravity="left"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/cera_black"
-                android:text="Detail Barang"
+                android:text="Detail Transaksi"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -73,10 +73,11 @@
                     android:layout_height="wrap_content">
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="80dp"
-                        android:id="@+id/ivFoto"
-                        android:layout_height="80dp"
-                        android:src="@drawable/ic_baseline_add_shopping_cart_24"/>
+                        android:layout_width="60dp"
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/ivUser"
+                        android:layout_height="60dp"
+                        android:src="@drawable/user"/>
 
                 </LinearLayout>
 
@@ -92,10 +93,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/cera_medium"
-                        android:text="Nama Brang"
+                        android:text="Nama pelanggan"
                         android:textColor="@color/black"
                         android:textSize="15sp"
-                        android:id="@+id/tvNamaBarang"
+                        android:id="@+id/tvNamaPelanggan"
                         android:textStyle="normal" />
 
                     <TextView
@@ -119,97 +120,32 @@
                 android:paddingBottom="10dp"
                 android:layout_marginTop="11.7dp"
                 android:background="@color/white">
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="1"
                     android:paddingTop="14.3dp"
                     android:paddingLeft="18.3dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="11.7sp"
-                        android:fontFamily="@font/cera_medium"
-                        android:textStyle="normal"
-                        android:textColor="@color/grey_800"
-                        android:text="Stok"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:fontFamily="@font/cera_medium"
-                        android:textStyle="normal"
-                        android:id="@+id/tvStok"
-                        android:layout_marginTop="5.7dp"
-                        android:textColor="@color/black"
-                        android:text="Stok"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="11.7sp"
-                        android:fontFamily="sans-serif"
-                        android:textStyle="normal"
-                        android:layout_marginTop="17.3dp"
-                        android:textColor="@color/grey_800"
-                        android:text="Harga Beli"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:fontFamily="sans-serif"
-                        android:textStyle="normal"
-                        android:id="@+id/tvHargaBeli"
-                        android:textColor="@color/black"
-                        android:text="Rp."
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="11.7sp"
-                        android:fontFamily="sans-serif"
-                        android:textStyle="normal"
-                        android:layout_marginTop="17.3dp"
-                        android:textColor="@color/grey_800"
-                        android:text="Harga Jual"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:fontFamily="sans-serif"
-                        android:textStyle="normal"
-                        android:id="@+id/tvHargaJual"
-                        android:textColor="@color/black"
-                        android:text="Rp. "
-                        />
 
-                    <TextView
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvTransaksi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="false"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:visibility="invisible" />
+
+                    <ProgressBar
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="11.7sp"
-                        android:fontFamily="sans-serif"
-                        android:textStyle="normal"
-                        android:layout_marginTop="17.3dp"
-                        android:textColor="@color/grey_800"
-                        android:text="Satuan"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:fontFamily="sans-serif"
-                        android:textStyle="normal"
-                        android:id="@+id/tvSatuan"
-                        android:textColor="@color/black"
-                        android:text="email"
-                        />
+                        android:layout_centerInParent="true"
+                        android:id="@+id/progressBar"
+                        android:visibility="visible"/>
 
 
-                </LinearLayout>
+                </RelativeLayout>
             </LinearLayout>
 
 
@@ -222,22 +158,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:weightSum="2"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btnEdit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_weight="1"
-            android:drawableLeft="@drawable/ic_baseline_mode_edit_24"
-            android:drawableTint="@color/white"
-            android:layout_marginBottom="10dp"
-            android:backgroundTint="@color/colorPrimary"
-            android:text="Ubah" />
 
         <Button
             android:id="@+id/btnDelete"
@@ -246,12 +168,13 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="20dp"
+            android:visibility="gone"
             android:layout_marginBottom="10dp"
             android:drawableTint="@color/white"
             android:drawableRight="@drawable/ic_baseline_delete_forever_24"
             android:layout_weight="1"
-            android:backgroundTint="@color/colorPrimary"
-            android:text="Hapus" />
+            android:backgroundTint="@color/colorRed"
+            android:text="Hapus Transaksi" />
 
     </LinearLayout>
 
