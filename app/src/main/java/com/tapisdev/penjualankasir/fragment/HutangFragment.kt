@@ -49,6 +49,7 @@ class HutangFragment : Fragment() {
     val nf = NumberFormat.getNumberInstance(Locale.GERMAN)
     val df = nf as DecimalFormat
 
+    var TIPE_HUTANG = "pelanggan"
     var CURRENT_PAGE = 1
     var NEXT_PAGE = CURRENT_PAGE + 1
     var TAG_GET_HUTANG = "hutang"
@@ -77,6 +78,10 @@ class HutangFragment : Fragment() {
             val i = Intent(requireContext(),TambahHutangActivity::class.java)
             startActivity(i)
         }
+        binding.btnHutangSaya.setOnClickListener {
+            TIPE_HUTANG = "saya"
+            getDataHutang()
+        }
 
 
         getDataHutang()
@@ -92,7 +97,7 @@ class HutangFragment : Fragment() {
         showLoadingShimmer()
         resetPagination()
 
-        ApiMain().services.getDataHutang(mUserPref.getToken(),CURRENT_PAGE).enqueue(object :
+        ApiMain().services.getDataHutang(mUserPref.getToken(),CURRENT_PAGE,TIPE_HUTANG).enqueue(object :
             retrofit2.Callback<HutangResponse> {
             @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(call: Call<HutangResponse>, response: Response<HutangResponse>) {

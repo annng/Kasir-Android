@@ -197,6 +197,7 @@
                     android:layout_toLeftOf="@+id/ivSearch"
                     android:background="@drawable/bg_editfield"
                     android:hint="Cari Barang"
+                    android:textColor="@color/black"
                     android:imeOptions="actionGo"
                     android:inputType="text"
                     android:maxLines="1"

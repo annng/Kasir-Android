@@ -11,5 +11,7 @@ data class Hutang(
     var hutang: Int? = 0,
     var status: String? = "",
     var tgl_hutang: String? = "",
+    var hutang_type: String? = "",
+    var deskripsi: String? = "",
 
 ) : Parcelable

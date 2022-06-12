@@ -22,10 +22,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "BASE_URL", "\"https://192.168.2.124/CatatanKasirAPI/\""
+            buildConfigField "String", "BASE_URL", "\"https://192.168.1.7/CatatanKasirAPI/\""
         }
         debug {
-            buildConfigField "String", 'BASE_URL', "\"http://192.168.2.124/CatatanKasirAPI/\""
+            buildConfigField "String", 'BASE_URL', "\"http://192.168.1.7/ApiCatatanKasir/\""
           //  buildConfigField "String", 'BASE_URL', "\"https://apicatatankasir.wajibdatang.com/\""
         }
     }

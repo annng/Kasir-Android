@@ -43,11 +43,16 @@ class AdapterHutang(private val list:ArrayList<Hutang>) : RecyclerView.Adapter<A
                 var nama_pelanggan = ""
                 if (list?.get(position).nama_pelanggan == null || list?.get(position).nama_pelanggan.equals("")){
                     nama_pelanggan = "Guest"
-                }else{
+                }
+                else{
                     nama_pelanggan = list?.get(position).nama_pelanggan!!
                 }
 
-                binding.tvNamaPelanggan.setText(nama_pelanggan)
+                if (list?.get(position).hutang_type.equals("saya")){
+                    binding.tvNamaPelanggan.setText(list?.get(position).deskripsi)
+                }else{
+                    binding.tvNamaPelanggan.setText(nama_pelanggan)
+                }
                 binding.tvTanggal.setText(""+list?.get(position).tgl_hutang)
                 binding.tvTotalBayar.setText("Hutang Rp. "+df.format(list?.get(position).hutang))
 

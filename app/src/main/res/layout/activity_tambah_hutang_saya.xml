@@ -37,7 +37,7 @@
                 android:layout_gravity="left"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/cera_black"
-                android:text="Tambah Hutang"
+                android:text="Tambah Hutang Saya"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -60,6 +60,8 @@
             android:padding="10dp">
 
 
+
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -73,52 +75,6 @@
                     android:layout_margin="10dp"
                     android:orientation="vertical">
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:id="@+id/cardPelanggan"
-                        android:clickable="true"
-                        app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="10dp"
-                        android:focusable="true">
-
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:id="@+id/rlLaporanUntung"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="30dp"
-                                android:id="@+id/ivIconHutang"
-                                android:layout_height="30dp"
-                                android:layout_alignParentLeft="true"
-                                android:src="@drawable/user"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:layout_marginHorizontal="10dp"
-                                android:layout_toEndOf="@+id/ivIconHutang"
-                                android:fontFamily="@font/cera_medium"
-                                android:text="Pelanggan"
-                                android:id="@+id/tvNamaPelanggan"
-                                android:textColor="@color/black"
-                                android:textSize="14sp" />
-
-                            <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_alignParentEnd="true"
-                                android:layout_centerVertical="true"
-                                android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
-
-                        </RelativeLayout>
-                    </androidx.cardview.widget.CardView>
 
                     <com.tapisdev.penjualankasir.customview.EditText_Roboto_Regular
                         android:id="@+id/etHutang"
@@ -137,6 +93,24 @@
                         android:textSize="15sp"
                         android:textStyle="normal" />
 
+                    <com.tapisdev.penjualankasir.customview.EditText_Roboto_Regular
+                        android:id="@+id/etDeskripsi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/white"
+                        android:fontFamily="sans-serif"
+                        android:hint="Deskripsi hutang"
+                        android:inputType="textMultiLine"
+                        android:lines="3"
+                        android:paddingLeft="16.3dp"
+                        android:paddingTop="15.7dp"
+                        android:paddingBottom="15.7dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/grey_800"
+                        android:textSize="15sp"
+                        android:textStyle="normal" />
+
 
                     <Button
                         android:layout_width="match_parent"
@@ -146,46 +120,6 @@
                         android:fontFamily="@font/cera_medium"
                         android:text="Simpan"
                         android:id="@+id/btnSimpan"
-                        android:textColor="@color/white"
-                        android:textSize="15sp" />
-
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                app:cardBackgroundColor="@color/grey_200"
-                app:cardCornerRadius="10dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:orientation="vertical">
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/cera_black"
-                        android:text="Ingin mencatat hutang milik UMKM / Hutang Pribadi ?"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="35dp"
-                        android:layout_marginTop="15dp"
-                        android:background="@color/colorPrimary"
-                        android:fontFamily="@font/cera_medium"
-                        android:text="Tambah Hutang Pribadi"
-                        android:id="@+id/btnKeTambahHutangSaya"
                         android:textColor="@color/white"
                         android:textSize="15sp" />
 

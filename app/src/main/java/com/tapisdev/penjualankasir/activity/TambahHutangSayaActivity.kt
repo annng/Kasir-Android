@@ -1,14 +1,12 @@
 package com.tapisdev.penjualankasir.activity
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.tapisdev.lokamotor.base.BaseActivity
 import com.tapisdev.penjualankasir.R
-import com.tapisdev.penjualankasir.databinding.ActivityTambahHutangBinding
-import com.tapisdev.penjualankasir.model.Hutang
+import com.tapisdev.penjualankasir.databinding.ActivityTambahHutangSayaBinding
 import com.tapisdev.penjualankasir.model.HutangInfo
 import com.tapisdev.penjualankasir.model.SharedVariable
 import com.tapisdev.penjualankasir.model.UserPreference
@@ -19,15 +17,16 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class TambahHutangActivity : BaseActivity() {
-    lateinit var binding : ActivityTambahHutangBinding
+class TambahHutangSayaActivity : BaseActivity() {
+
+    lateinit var binding  : ActivityTambahHutangSayaBinding
     lateinit var hutangInfo: HutangInfo
     var id_pelanggan = "0"
-
     var TAG_HUTANG = "hutang"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityTambahHutangBinding.inflate(layoutInflater)
+        binding = ActivityTambahHutangSayaBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
         mUserPref = UserPreference(this)
@@ -35,34 +34,25 @@ class TambahHutangActivity : BaseActivity() {
         binding.ivBack.setOnClickListener {
             onBackPressed()
         }
-        binding.cardPelanggan.setOnClickListener {
-            val i = Intent(this,SelectPelangganActivity::class.java)
-            startActivity(i)
-        }
         binding.btnSimpan.setOnClickListener {
             checkValidation()
         }
-        binding.btnKeTambahHutangSaya.setOnClickListener {
-            val i = Intent(this,TambahHutangSayaActivity::class.java)
-            startActivity(i)
-        }
-
     }
 
     fun checkValidation(){
         val nominal = binding.etHutang.text.toString()
+        val deskripsi = binding.etDeskripsi.text.toString()
 
         if (nominal.equals("") || nominal.length == 0){
             showErrorMessage("Hutang belum diisi")
-        }else if (SharedVariable.pelangganType.equals("registered") && SharedVariable.selectedPelanggan == null){
-            showErrorMessage("pelanggan belum dipilih")
-        }else{
-            if (SharedVariable.pelangganType.equals("registered")){
-                id_pelanggan = SharedVariable.selectedPelanggan?.id!!
-            }
+        }else if (deskripsi.equals("") || deskripsi.length == 0){
+            showErrorMessage("Deskripsi belum diisi")
+        }
+        else{
+
             val nominal_hutang = nominal.toInt()
-            val hutang_type = "pelanggan"
-            val deskripsi = ""
+            val hutang_type = "saya"
+
             hutangInfo = HutangInfo(
                 id_pelanggan,
                 SharedVariable.pelangganType,
@@ -81,7 +71,7 @@ class TambahHutangActivity : BaseActivity() {
         ApiMain().services.saveHutang(mUserPref.getToken(),hutangInfo).enqueue(
             object : Callback<CommonResponse> {
                 override fun onFailure(call: Call<CommonResponse>, t: Throwable) {
-                    Toasty.error(this@TambahHutangActivity, "gagal simpan transaksi, coba lagi nanti", Toast.LENGTH_SHORT, true).show()
+                    Toasty.error(this@TambahHutangSayaActivity, "gagal simpan hutang, coba lagi nanti", Toast.LENGTH_SHORT, true).show()
                     Log.d(TAG_HUTANG,t.message.toString())
                     dismissLoading()
                 }
@@ -96,28 +86,14 @@ class TambahHutangActivity : BaseActivity() {
                         Log.d(TAG_HUTANG,"http code asli "+responseStatus.toString())
                         Log.d(TAG_HUTANG,"http code dari API "+responAPI!!.http_status)
 
-                        Toasty.success(this@TambahHutangActivity, "Tambah hutang berhasil !", Toast.LENGTH_SHORT, true).show()
+                        Toasty.success(this@TambahHutangSayaActivity, "Tambah hutang berhasil !", Toast.LENGTH_SHORT, true).show()
                         onBackPressed()
 
                     }else if (response.code() == 202){
-                        Toasty.error(this@TambahHutangActivity, "gagal simpan transaksi, coba lagi nanti", Toast.LENGTH_SHORT, true).show()
+                        Toasty.error(this@TambahHutangSayaActivity, "gagal simpan hutang, coba lagi nanti", Toast.LENGTH_SHORT, true).show()
                     }
                 }
             }
         )
-    }
-
-    fun setPelangganInfo(){
-        if (SharedVariable.pelangganType.equals("guest")){
-            binding.tvNamaPelanggan.setText("Pelanggan Guest")
-        }else{
-            id_pelanggan = SharedVariable.selectedPelanggan?.id!!
-            binding.tvNamaPelanggan.setText(SharedVariable.selectedPelanggan?.name)
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        setPelangganInfo()
     }
 }

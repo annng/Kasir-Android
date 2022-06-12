@@ -59,7 +59,7 @@ interface ApiServices {
     fun getTotalUntung(@Query("token") token: String?) : Call<TotalUntungResponse>
 
     @GET("hutang/data")
-    fun getDataHutang(@Query("token") token: String?,@Query("page") page : Int) : Call<HutangResponse>
+    fun getDataHutang(@Query("token") token: String?,@Query("page") page : Int,@Query("hutang_type") hutang_type: String?,) : Call<HutangResponse>
 
     @POST("hutang/add")
     fun saveHutang(@Query("token") token: String?,@Body hutangInfo: HutangInfo) : Call<CommonResponse>
