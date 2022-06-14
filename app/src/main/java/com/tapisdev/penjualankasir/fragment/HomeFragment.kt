@@ -23,9 +23,11 @@ import com.tapisdev.penjualankasir.adapter.AdapterBarang
 import com.tapisdev.penjualankasir.adapter.AdapterPelanggan
 import com.tapisdev.penjualankasir.databinding.FragmentHomeBinding
 import com.tapisdev.penjualankasir.model.Barang
+import com.tapisdev.penjualankasir.model.DataChartPenjualan
 import com.tapisdev.penjualankasir.model.Pelanggan
 import com.tapisdev.penjualankasir.model.UserPreference
 import com.tapisdev.penjualankasir.response.BarangResponse
+import com.tapisdev.penjualankasir.response.ChartTransaksiResponse
 import com.tapisdev.penjualankasir.response.PelangganResponse
 import com.tapisdev.penjualankasir.util.ApiMain
 import es.dmoral.toasty.Toasty
@@ -47,11 +49,13 @@ class HomeFragment : Fragment() {
     lateinit var adapterBarang : AdapterBarang
     var listPelanggan = ArrayList<Pelanggan>()
     var listBarang = ArrayList<Barang>()
+    var listDataChart = ArrayList<DataChartPenjualan>()
 
     var CURRENT_PAGE = 1
     var NEXT_PAGE = CURRENT_PAGE + 1
     var TAG_GET_PELANGGAN = "pelanggan"
     var TAG_GET_BARANG = "pelanggan"
+    var TAG_GET_CHART = "datachart"
     var TAG_GET_MORE_PELANGGAN = "morepelanggan"
     var KATA_KUNCI = ""
 
@@ -94,9 +98,9 @@ class HomeFragment : Fragment() {
         }
 
         updateUI()
-        configChartModel()
         getDataPelanggan()
         getDataBarang()
+        //getDataChart()
         return root
     }
 
@@ -105,20 +109,30 @@ class HomeFragment : Fragment() {
     }
 
     fun configChartModel(){
-        val aaChartModel : AAChartModel = AAChartModel()
+
+        /*var arr = arrayOf(AASeriesElement())
+        for (i in 0..(listDataChart.size - 2)){
+            var data = AASeriesElement()
+                .name(listDataChart.get(i).date)
+                .data(arrayOf(listDataChart.get(i).jumlah!!.toDouble()))
+            Log.d(TAG_GET_CHART," data ke "+i+" = "+listDataChart.get(i).toString())
+        }
+        Log.d(TAG_GET_CHART,"arayna "+arr[0].toString())
+       val aaChartModel : AAChartModel = AAChartModel()
             .chartType(AAChartType.Column)
             .title("Penjualan by tanggal")
             .backgroundColor("#EFEDED")
             .dataLabelsEnabled(true)
-            .series(arrayOf(
+            .series(arrayOf(arr))
+            *//*.series(arrayOf(
                 AASeriesElement()
                     .name("11 Juni")
                     .data(arrayOf(11.0)),
                 AASeriesElement()
                     .name("12 Juni")
                     .data(arrayOf(20.0))
-            ))
-        binding.chartView.aa_drawChartWithChartModel(aaChartModel)
+            ))*//*
+        binding.chartView.aa_drawChartWithChartModel(aaChartModel)*/
     }
 
     fun resetPagination(){
@@ -215,6 +229,45 @@ class HomeFragment : Fragment() {
                 }else{
                     Toasty.error(requireContext(), "response failure for more data", Toast.LENGTH_SHORT, true).show()
                     Log.d(TAG_GET_BARANG,"rusak : "+t.message.toString())
+                }
+            }
+        })
+    }
+
+    fun getDataChart(){
+
+        ApiMain().services.getDataChart(mUserPref.getToken()).enqueue(object :
+            retrofit2.Callback<ChartTransaksiResponse> {
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onResponse(call: Call<ChartTransaksiResponse>, response: Response<ChartTransaksiResponse>) {
+                //Tulis code jika response sukses
+                Log.d(TAG_GET_CHART,response.toString())
+                Log.d(TAG_GET_CHART,"http status : "+response.code())
+
+                if(response.code() == 200) {
+                    listDataChart.clear()
+                    response.body()?.data_chart?.let {
+                        Log.d(TAG_GET_CHART,"dari API : "+it)
+                        Log.d(TAG_GET_CHART,"jumlah dari API : "+it.size)
+                        listDataChart.addAll(it)
+                    }
+                    configChartModel()
+
+
+                }else {
+                    Toasty.error(requireContext(), "gagal mengambil data chart", Toast.LENGTH_SHORT, true).show()
+                    Log.d(TAG_GET_CHART,"err :"+response.message())
+                }
+            }
+            override fun onFailure(call: Call<ChartTransaksiResponse>, t: Throwable){
+                //Tulis code jika response fail
+                val errMsg = t.message.toString()
+                if (errMsg.takeLast(6).equals("$.null")){
+                    Log.d(TAG_GET_CHART,"rusak nya gpapa kok  ")
+                    hideLoadingShimmerBarang()
+                }else{
+                    Toasty.error(requireContext(), "response failure for more data", Toast.LENGTH_SHORT, true).show()
+                    Log.d(TAG_GET_CHART,"rusak : "+t.message.toString())
                 }
             }
         })

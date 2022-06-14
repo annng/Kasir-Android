@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 
 @Parcelize
 data class Hutang(
+    var id: String? = "",
     var id_pelanggan: String? = "",
     var nama_pelanggan: String? = "",
     var hutang: Int? = 0,

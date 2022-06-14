@@ -61,11 +61,17 @@ interface ApiServices {
     @GET("transaksi/detail")
     fun getHistoryTransaksi(@Query("token") token: String?,@Query("transaksi_id") transaksi_id: String?) : Call<HistoryTransaksiResponse>
 
+    @GET("transaksi/chart")
+    fun getDataChart(@Query("token") token: String?) : Call<ChartTransaksiResponse>
+
     @GET("hutang/data")
     fun getDataHutang(@Query("token") token: String?,@Query("page") page : Int,@Query("hutang_type") hutang_type: String?,) : Call<HutangResponse>
 
     @POST("hutang/add")
     fun saveHutang(@Query("token") token: String?,@Body hutangInfo: HutangInfo) : Call<CommonResponse>
+
+    @POST("hutang/update")
+    fun editHutang(@Query("token") token: String?,@Body file : RequestBody) : Call<CommonResponse>
 
 
 

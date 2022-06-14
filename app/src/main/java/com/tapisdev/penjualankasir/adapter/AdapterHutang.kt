@@ -1,10 +1,12 @@
 package com.tapisdev.penjualankasir.adapter
 
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.tapisdev.penjualankasir.activity.DetailHutangActivity
 import com.tapisdev.penjualankasir.activity.SelectPelangganActivity
 import com.tapisdev.penjualankasir.databinding.ItemsPelangganBinding
 import com.tapisdev.penjualankasir.databinding.ItemsTransaksiBinding
@@ -55,6 +57,12 @@ class AdapterHutang(private val list:ArrayList<Hutang>) : RecyclerView.Adapter<A
                 }
                 binding.tvTanggal.setText(""+list?.get(position).tgl_hutang)
                 binding.tvTotalBayar.setText("Hutang Rp. "+df.format(list?.get(position).hutang))
+
+                binding.rlTransaksi.setOnClickListener {
+                    val i = Intent(binding.rlTransaksi.context,DetailHutangActivity::class.java)
+                    i.putExtra("hutang",list?.get(position))
+                    binding.rlTransaksi.context.startActivity(i)
+                }
 
 
             }
