@@ -1,17 +1,21 @@
 package com.tapisdev.penjualankasir.fragment
 
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.facebook.shimmer.ShimmerFrameLayout
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.tapisdev.penjualankasir.R
 import com.tapisdev.penjualankasir.activity.TambahBarangActivity
 import com.tapisdev.penjualankasir.activity.TambahHutangActivity
@@ -53,6 +57,7 @@ class HutangFragment : Fragment() {
     var CURRENT_PAGE = 1
     var NEXT_PAGE = CURRENT_PAGE + 1
     var TAG_GET_HUTANG = "hutang"
+    var TAG_GET_REPORT = "reporthutang"
     var TAG_GET_MORE_HUTANG = "morehutang"
 
     override fun onCreateView(
@@ -82,10 +87,112 @@ class HutangFragment : Fragment() {
             TIPE_HUTANG = "saya"
             getDataHutang()
         }
+        binding.cardLaporan.setOnClickListener {
+            showDialogFilter()
+        }
 
 
         getDataHutang()
         return root
+    }
+
+    fun showDialogFilter(){
+        val dialog = BottomSheetDialog(requireContext())
+        val view = layoutInflater.inflate(R.layout.bottom_sheet_select_time_hutang, null)
+
+        var selected_tgl_awal = ""
+        var selected_tgl_akhir = ""
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+        val btnPilihAwal = view.findViewById<Button>(R.id.btnPilihAwal)
+        val btnPilihAkhir = view.findViewById<Button>(R.id.btnPilihAkhir)
+        val btnFilter = view.findViewById<Button>(R.id.btnFilter)
+        val etTanggalAwal = view.findViewById<EditText>(R.id.etTanggalAwal)
+        val etTanggalAkhir = view.findViewById<EditText>(R.id.etTanggalAkhir)
+
+        btnPilihAwal.setOnClickListener {
+            val dpd = DatePickerDialog(requireActivity(), DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+
+                // Display Selected date in textbox
+                etTanggalAwal.setText("" + dayOfMonth + "/" + (monthOfYear + 1 ) + "/" + year)
+                //selected_tgl_awal = ""+dayOfMonth+"/"+(monthOfYear+1)+"/"+year
+                selected_tgl_awal = ""+year+"-"+(monthOfYear+1)+"-"+dayOfMonth
+
+            }, year, month, day)
+
+            dpd.show()
+        }
+        btnPilihAkhir.setOnClickListener {
+            val dpd = DatePickerDialog(requireActivity(), DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+
+                // Display Selected date in textbox
+                etTanggalAkhir.setText("" + dayOfMonth + "/" + (monthOfYear + 1 ) + "/" + year)
+                //selected_tgl_akhir = ""+dayOfMonth+"/"+(monthOfYear+1)+"/"+year
+                selected_tgl_akhir = ""+year+"-"+(monthOfYear+1)+"-"+dayOfMonth
+
+            }, year, month, day)
+
+            dpd.show()
+        }
+        btnFilter.setOnClickListener {
+            filterDataHutang(selected_tgl_awal,selected_tgl_akhir)
+            dialog.dismiss()
+        }
+
+        dialog.setCancelable(true)
+        dialog.setContentView(view)
+        dialog.show()
+    }
+
+    fun filterDataHutang(tgl_mulai : String,tgl_akhir : String){
+        Log.d(TAG_GET_REPORT," tgl_mulai "+tgl_mulai+ " dan tgl akir "+tgl_akhir)
+        resetPagination()
+        showLoadingShimmer()
+
+        ApiMain().services.getReportHutang(mUserPref.getToken(),tgl_mulai,tgl_akhir).enqueue(object :
+            retrofit2.Callback<HutangResponse> {
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onResponse(call: Call<HutangResponse>, response: Response<HutangResponse>) {
+                //Tulis code jika response sukses
+                Log.d(TAG_GET_REPORT,response.toString())
+                Log.d(TAG_GET_REPORT,"http status : "+response.code())
+
+                if(response.code() == 200) {
+                    listHutang.clear()
+                    response.body()?.data_hutang?.let {
+                        Log.d(TAG_GET_REPORT,"dari API : "+it)
+                        Log.d(TAG_GET_REPORT,"jumlah dari API : "+it.size)
+                        listHutang.addAll(it)
+                        adapter.notifyDataSetChanged()
+
+                        hideLoadingShimmer()
+                        Log.d(TAG_GET_REPORT,"isi adapter  : "+adapter.itemCount)
+                    }
+
+                    if (listHutang.size == 0){
+                        Toasty.info(requireContext(), "Belum ada data untuk rentang waktu ini..", Toast.LENGTH_SHORT, true).show()
+                        binding.tvInfoEmpty.visibility = View.VISIBLE
+                    }
+
+                }else {
+                    Toasty.error(requireContext(), "gagal mengambil data", Toast.LENGTH_SHORT, true).show()
+                    Log.d(TAG_GET_REPORT,"err :"+response.message())
+                }
+            }
+            override fun onFailure(call: Call<HutangResponse>, t: Throwable){
+                //Tulis code jika response fail
+                val errMsg = t.message.toString()
+                if (errMsg.takeLast(6).equals("$.null")){
+                    Log.d(TAG_GET_REPORT,"rusak nya gpapa kok  ")
+                    hideLoadingShimmer()
+                }else{
+                    Toasty.error(requireContext(), "response failure for more data", Toast.LENGTH_SHORT, true).show()
+                    Log.d(TAG_GET_REPORT,"rusak : "+t.message.toString())
+                }
+            }
+        })
     }
 
     fun resetPagination(){

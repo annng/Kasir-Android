@@ -33,6 +33,7 @@ class HomeActivity : BaseActivity() {
     private lateinit var binding: ActivityHomeBinding
     lateinit var nextFragment  : Fragment
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mUserPref = UserPreference(this)

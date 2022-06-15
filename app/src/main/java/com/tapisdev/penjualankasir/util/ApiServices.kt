@@ -73,6 +73,9 @@ interface ApiServices {
     @POST("hutang/update")
     fun editHutang(@Query("token") token: String?,@Body file : RequestBody) : Call<CommonResponse>
 
+    @GET("hutang/report")
+    fun getReportHutang(@Query("token") token: String?,@Query("dari") dari: String?,@Query("sampai") sampai: String?) : Call<HutangResponse>
+
 
 
 }
