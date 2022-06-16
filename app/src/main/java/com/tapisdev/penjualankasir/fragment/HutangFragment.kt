@@ -3,6 +3,7 @@ package com.tapisdev.penjualankasir.fragment
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.tapisdev.penjualankasir.BuildConfig
 import com.tapisdev.penjualankasir.R
 import com.tapisdev.penjualankasir.activity.TambahBarangActivity
 import com.tapisdev.penjualankasir.activity.TambahHutangActivity
@@ -59,6 +61,8 @@ class HutangFragment : Fragment() {
     var TAG_GET_HUTANG = "hutang"
     var TAG_GET_REPORT = "reporthutang"
     var TAG_GET_MORE_HUTANG = "morehutang"
+    var dari = ""
+    var sampai = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -90,9 +94,23 @@ class HutangFragment : Fragment() {
         binding.cardLaporan.setOnClickListener {
             showDialogFilter()
         }
+        binding.fabDownload.setOnClickListener {
+            if (listHutang.size > 0){
+                val base_url = BuildConfig.BASE_URL+"hutang/report/print?token="
+                val token = mUserPref.getToken()
+                val downloadURL = base_url+token+"&dari="+dari+"&sampai="+sampai
+
+                val i = Intent(Intent.ACTION_VIEW)
+                i.data = Uri.parse(downloadURL)
+                startActivity(i)
+            }else{
+                Toasty.error(requireContext(), "data hutang masih kosong", Toast.LENGTH_SHORT, true).show()
+            }
+        }
 
 
         getDataHutang()
+
         return root
     }
 
@@ -174,6 +192,10 @@ class HutangFragment : Fragment() {
                     if (listHutang.size == 0){
                         Toasty.info(requireContext(), "Belum ada data untuk rentang waktu ini..", Toast.LENGTH_SHORT, true).show()
                         binding.tvInfoEmpty.visibility = View.VISIBLE
+                    }else{
+                        dari = tgl_mulai
+                        sampai = tgl_akhir
+                        binding.fabDownload.visibility = View.VISIBLE
                     }
 
                 }else {
