@@ -64,6 +64,9 @@ interface ApiServices {
     @GET("transaksi/chart")
     fun getDataChart(@Query("token") token: String?) : Call<ChartTransaksiResponse>
 
+    @GET("transaksi/report")
+    fun getReportUntung(@Query("token") token: String?,@Query("dari") dari: String?,@Query("sampai") sampai: String?) : Call<UntungResponse>
+
     @GET("hutang/data")
     fun getDataHutang(@Query("token") token: String?,@Query("page") page : Int,@Query("hutang_type") hutang_type: String?,) : Call<HutangResponse>
 

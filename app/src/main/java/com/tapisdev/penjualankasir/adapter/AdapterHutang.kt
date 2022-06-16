@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tapisdev.penjualankasir.activity.DetailHutangActivity
 import com.tapisdev.penjualankasir.activity.SelectPelangganActivity
+import com.tapisdev.penjualankasir.databinding.ItemsHutangBinding
 import com.tapisdev.penjualankasir.databinding.ItemsPelangganBinding
 import com.tapisdev.penjualankasir.databinding.ItemsTransaksiBinding
 import com.tapisdev.penjualankasir.model.Hutang
@@ -24,7 +25,7 @@ class AdapterHutang(private val list:ArrayList<Hutang>) : RecyclerView.Adapter<A
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
 
-        val binding = ItemsTransaksiBinding.inflate(LayoutInflater.from(parent.context),parent, false)
+        val binding = ItemsHutangBinding.inflate(LayoutInflater.from(parent.context),parent, false)
         return MyViewHolder(binding)
     }
 
@@ -33,7 +34,7 @@ class AdapterHutang(private val list:ArrayList<Hutang>) : RecyclerView.Adapter<A
 
     class Holder(val view: View) : RecyclerView.ViewHolder(view)
 
-    inner class MyViewHolder(val binding: ItemsTransaksiBinding)
+    inner class MyViewHolder(val binding: ItemsHutangBinding)
         :RecyclerView.ViewHolder(binding.root)
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -57,6 +58,7 @@ class AdapterHutang(private val list:ArrayList<Hutang>) : RecyclerView.Adapter<A
                 }
                 binding.tvTanggal.setText(""+list?.get(position).tgl_hutang)
                 binding.tvTotalBayar.setText("Hutang Rp. "+df.format(list?.get(position).hutang))
+                binding.tvStatusHutang.setText(list?.get(position).status)
 
                 binding.rlTransaksi.setOnClickListener {
                     val i = Intent(binding.rlTransaksi.context,DetailHutangActivity::class.java)
