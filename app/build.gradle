@@ -25,8 +25,8 @@ android {
             buildConfigField "String", "BASE_URL", "\"https://192.168.1.7/CatatanKasirAPI/\""
         }
         debug {
-           // buildConfigField "String", 'BASE_URL', "\"http://192.168.1.7/ApiCatatanKasir/\""
-            buildConfigField "String", 'BASE_URL', "\"https://apicatatankasir.wajibdatang.com/\""
+            buildConfigField "String", 'BASE_URL', "\"http://192.168.2.124/CatatanKasirAPI/\""
+           // buildConfigField "String", 'BASE_URL', "\"https://apicatatankasir.wajibdatang.com/\""
         }
     }
     compileOptions {
@@ -75,7 +75,9 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.2.0")
 
     implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'com.github.AAChartModel:AAChartCore-Kotlin:-SNAPSHOT'
+    //graph
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    //implementation 'com.github.PhilJay:MPAndroidChart:v2.2.4'
 
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'

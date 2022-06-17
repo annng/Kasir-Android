@@ -2,6 +2,8 @@ package com.tapisdev.penjualankasir.fragment
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.DashPathEffect
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,10 +14,10 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.facebook.shimmer.ShimmerFrameLayout
-import com.github.aachartmodel.aainfographics.aachartcreator.AAChartModel
-import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
-import com.github.aachartmodel.aainfographics.aachartcreator.AASeriesElement
-import com.tapisdev.penjualankasir.MainActivity
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.tapisdev.penjualankasir.R
 import com.tapisdev.penjualankasir.activity.ProfileActivity
 import com.tapisdev.penjualankasir.activity.TambahPelangganActivity
@@ -31,6 +33,7 @@ import com.tapisdev.penjualankasir.response.ChartTransaksiResponse
 import com.tapisdev.penjualankasir.response.PelangganResponse
 import com.tapisdev.penjualankasir.util.ApiMain
 import es.dmoral.toasty.Toasty
+import kotlinx.android.synthetic.main.fragment_home.*
 import retrofit2.Call
 import retrofit2.Response
 
@@ -50,6 +53,7 @@ class HomeFragment : Fragment() {
     var listPelanggan = ArrayList<Pelanggan>()
     var listBarang = ArrayList<Barang>()
     var listDataChart = ArrayList<DataChartPenjualan>()
+    //lateinit var chart : LineChart
 
     var CURRENT_PAGE = 1
     var NEXT_PAGE = CURRENT_PAGE + 1
@@ -100,7 +104,8 @@ class HomeFragment : Fragment() {
         updateUI()
         getDataPelanggan()
         getDataBarang()
-        //getDataChart()
+        getDataChart()
+        configChartModel()
         return root
     }
 
@@ -109,30 +114,39 @@ class HomeFragment : Fragment() {
     }
 
     fun configChartModel(){
+        binding.chart.setBackgroundColor(Color.WHITE)
+        binding.chart.setDrawGridBackground(false)
+        binding.chart.setMaxVisibleValueCount(60)
+        binding.chart.setPinchZoom(true)
+        binding.chart.getDescription().setEnabled(false)
 
-        /*var arr = arrayOf(AASeriesElement())
-        for (i in 0..(listDataChart.size - 2)){
-            var data = AASeriesElement()
-                .name(listDataChart.get(i).date)
-                .data(arrayOf(listDataChart.get(i).jumlah!!.toDouble()))
-            Log.d(TAG_GET_CHART," data ke "+i+" = "+listDataChart.get(i).toString())
+        val values = ArrayList<Entry>()
+        for (i in 0  until listDataChart.size){
+            values.add(Entry(i.toFloat(), listDataChart.get(i).jumlah!!.toFloat(), resources.getDrawable(R.drawable.star)))
         }
-        Log.d(TAG_GET_CHART,"arayna "+arr[0].toString())
-       val aaChartModel : AAChartModel = AAChartModel()
-            .chartType(AAChartType.Column)
-            .title("Penjualan by tanggal")
-            .backgroundColor("#EFEDED")
-            .dataLabelsEnabled(true)
-            .series(arrayOf(arr))
-            *//*.series(arrayOf(
-                AASeriesElement()
-                    .name("11 Juni")
-                    .data(arrayOf(11.0)),
-                AASeriesElement()
-                    .name("12 Juni")
-                    .data(arrayOf(20.0))
-            ))*//*
-        binding.chartView.aa_drawChartWithChartModel(aaChartModel)*/
+
+        // create a dataset and give it a type
+        val set1 = LineDataSet(values, "Grafik Penjualan Bulan ini")
+        set1.setDrawIcons(false)
+        // draw dashed line
+        set1.enableDashedLine(10f, 5f, 0f)
+        set1.color = Color.BLUE
+        set1.setCircleColor(Color.RED)
+        set1.lineWidth = 1f
+        set1.circleRadius = 3f
+        set1.setDrawCircleHole(false)
+        set1.formLineWidth = 1f
+        set1.formLineDashEffect = DashPathEffect(floatArrayOf(10f, 5f), 0f)
+        set1.formSize = 15f
+        set1.valueTextSize = 9f
+        set1.enableDashedHighlightLine(10f, 5f, 0f)
+
+        val dataSets = ArrayList<ILineDataSet>()
+        dataSets.add(set1) // add the data sets
+        val data = LineData(dataSets)
+        binding.chart.data = data
+
+        binding.chart.animateX(1500)
     }
 
     fun resetPagination(){
@@ -313,6 +327,7 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         getDataPelanggan()
+        getDataChart()
     }
 
     override fun onDestroyView() {
