@@ -2,6 +2,7 @@ package com.tapisdev.penjualankasir.fragment
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
@@ -48,6 +49,7 @@ class StokFragment : Fragment() {
     var isFilterStokMenipis = false
 
 
+    @SuppressLint("ResourceAsColor")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -72,6 +74,8 @@ class StokFragment : Fragment() {
             startActivity(i)
         }
         binding.btnStokTipis.setOnClickListener {
+
+            binding.btnStokTipis.setTextColor(R.color.black)
             isFilterStokMenipis = true
             getDataBarangStokMenipis()
         }

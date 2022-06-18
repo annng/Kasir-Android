@@ -32,6 +32,7 @@ import com.tapisdev.penjualankasir.response.AllPelangganResponse
 import com.tapisdev.penjualankasir.response.CommonResponse
 import com.tapisdev.penjualankasir.util.ApiMain
 import es.dmoral.toasty.Toasty
+import kotlinx.android.synthetic.main.fragment_transaksi.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -172,13 +173,15 @@ class TransaksiFragment : Fragment() {
 
     fun checkValidationTambah(){
         val jmlBeli = binding.etJumlahBeli.text.toString()
+        val jumlah = jmlBeli.toInt()
         if (jmlBeli.equals("") || jmlBeli.length == 0){
             Toasty.error(requireContext(), "Jumlah pembelian belum diiisi", Toast.LENGTH_SHORT, true).show()
         }else if (selectedBarang == null){
             Toasty.error(requireContext(), "Anda belum memilih barang", Toast.LENGTH_SHORT, true).show()
+        }else if (jumlah > selectedBarang!!.stok!!){
+            Toasty.error(requireContext(), "Stok barang tidak cukup..", Toast.LENGTH_SHORT, true).show()
         }
         else{
-            val jumlah = jmlBeli.toInt()
             val subtotal = jumlah * selectedBarang?.harga_jual!!
             val subtotal_harga_beli = jumlah * selectedBarang?.harga_beli!!
             val untung = subtotal - subtotal_harga_beli

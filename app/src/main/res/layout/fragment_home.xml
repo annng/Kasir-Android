@@ -19,15 +19,15 @@
 
 
         <TextView
+            android:id="@+id/tvNamaUmkm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginHorizontal="10dp"
-            android:fontFamily="@font/cera_medium"
+            android:fontFamily="@font/cera_black"
             android:text="Nama UMKM"
-            android:id="@+id/tvNamaUmkm"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="18sp" />
 
         <ImageView
             android:layout_width="30dp"
