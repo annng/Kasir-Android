@@ -9,7 +9,7 @@ import com.artevak.kasirpos.model.UserPreference
 import com.artevak.kasirpos.response.LoginResponse
 import com.artevak.kasirpos.ui.activity.splash.SplashActivity
 import com.artevak.kasirpos.util.ApiMain
-import com.artevak.lokamotor.base.BaseActivity
+import com.artevak.kasirpos.base.BaseActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

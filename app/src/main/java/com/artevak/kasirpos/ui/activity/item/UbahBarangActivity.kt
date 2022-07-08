@@ -11,7 +11,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import com.bumptech.glide.Glide
-import com.artevak.lokamotor.base.BaseActivity
+import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.BuildConfig
 import com.artevak.kasirpos.ui.activity.HomeActivity
 import com.artevak.kasirpos.ui.activity.splash.SplashActivity

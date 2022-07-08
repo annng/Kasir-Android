@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.artevak.kasirpos.ui.activity.splash.SplashActivity
-import com.artevak.lokamotor.base.BaseActivity
+import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.databinding.ActivityDetailHutangBinding
 import com.artevak.kasirpos.model.Hutang
 import com.artevak.kasirpos.model.UserPreference

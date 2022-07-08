@@ -3,7 +3,7 @@ package com.artevak.kasirpos.ui.activity.auth
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import com.artevak.lokamotor.base.BaseActivity
+import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.databinding.ActivityRegisterBinding
 import com.artevak.kasirpos.model.RegisterInfo
 import com.artevak.kasirpos.response.CommonResponse

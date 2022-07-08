@@ -6,7 +6,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.artevak.lokamotor.base.BaseActivity
+import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.R
 import com.artevak.kasirpos.databinding.ActivityHomeBinding
 import com.artevak.kasirpos.ui.fragment.*

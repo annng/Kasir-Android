@@ -3,7 +3,7 @@ package com.artevak.kasirpos.ui.activity.debt
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.artevak.lokamotor.base.BaseActivity
+import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.databinding.ActivityTambahHutangSayaBinding
 import com.artevak.kasirpos.model.HutangInfo
 import com.artevak.kasirpos.model.SharedVariable

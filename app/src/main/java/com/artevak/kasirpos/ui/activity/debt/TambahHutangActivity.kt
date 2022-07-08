@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.artevak.kasirpos.ui.activity.customer.SelectPelangganActivity
-import com.artevak.lokamotor.base.BaseActivity
+import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.databinding.ActivityTambahHutangBinding
 import com.artevak.kasirpos.model.HutangInfo
 import com.artevak.kasirpos.model.SharedVariable

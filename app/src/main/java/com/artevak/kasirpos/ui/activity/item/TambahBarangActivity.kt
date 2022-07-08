@@ -11,7 +11,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import com.artevak.kasirpos.ui.activity.splash.SplashActivity
-import com.artevak.lokamotor.base.BaseActivity
+import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.databinding.ActivityTambahBarangBinding
 import com.artevak.kasirpos.model.UserPreference
 import com.artevak.kasirpos.response.CommonResponse

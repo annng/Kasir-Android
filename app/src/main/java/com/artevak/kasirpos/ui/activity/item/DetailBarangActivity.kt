@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.bumptech.glide.Glide
-import com.artevak.lokamotor.base.BaseActivity
+import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.BuildConfig
 import com.artevak.kasirpos.databinding.ActivityDetailBarangBinding
 import com.artevak.kasirpos.model.Barang

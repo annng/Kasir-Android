@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.facebook.shimmer.ShimmerFrameLayout
-import com.artevak.lokamotor.base.BaseActivity
+import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.R
 import com.artevak.kasirpos.ui.adapter.AdapterPelanggan
 import com.artevak.kasirpos.databinding.ActivitySelectPelangganBinding

@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import com.artevak.kasirpos.ui.activity.splash.SplashActivity
-import com.artevak.lokamotor.base.BaseActivity
+import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.databinding.ActivityTambahPelangganBinding
 import com.artevak.kasirpos.model.PelangganInfo
 import com.artevak.kasirpos.model.UserPreference

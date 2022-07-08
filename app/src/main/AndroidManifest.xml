@@ -17,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PenjualanKasir"
         android:usesCleartextTraffic="true"
+        android:requestLegacyExternalStorage="true"
         tools:replace="android:icon">
         <activity
             android:name="com.artevak.kasirpos.ui.activity.debt.DetailHutangActivity"

@@ -3,7 +3,7 @@ package com.artevak.kasirpos.ui.activity.profile
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import com.artevak.lokamotor.base.BaseActivity
+import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.ui.activity.auth.LoginActivity
 import com.artevak.kasirpos.databinding.ActivityProfileBinding
 import com.artevak.kasirpos.model.UserPreference

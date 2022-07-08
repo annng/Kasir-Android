@@ -1,4 +1,4 @@
-package com.artevak.lokamotor.base
+package com.artevak.kasirpos.base
 
 import android.content.Context
 import android.graphics.Color

@@ -7,7 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.artevak.lokamotor.base.BaseActivity
+import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.ui.adapter.AdapterHistoryTransaksi
 import com.artevak.kasirpos.databinding.ActivityHistoryTransaksiBinding
 import com.artevak.kasirpos.model.HistoryTransaksi
