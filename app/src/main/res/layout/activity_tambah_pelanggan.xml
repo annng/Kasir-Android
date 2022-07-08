@@ -74,7 +74,7 @@
                     android:orientation="vertical">
 
 
-                    <com.tapisdev.penjualankasir.customview.EditText_Roboto_Regular
+                    <com.artevak.kasirpos.customview.EditText_Roboto_Regular
                         android:id="@+id/etNamaPelanggan"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -90,7 +90,7 @@
                         android:textStyle="normal" />
 
 
-                    <com.tapisdev.penjualankasir.customview.EditText_Roboto_Regular
+                    <com.artevak.kasirpos.customview.EditText_Roboto_Regular
                         android:id="@+id/etPhone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
                         android:textSize="15sp"
                         android:textStyle="normal" />
 
-                    <com.tapisdev.penjualankasir.customview.EditText_Roboto_Regular
+                    <com.artevak.kasirpos.customview.EditText_Roboto_Regular
                         android:id="@+id/etAlamat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

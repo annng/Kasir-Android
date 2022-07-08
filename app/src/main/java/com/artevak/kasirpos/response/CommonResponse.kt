@@ -1,0 +1,11 @@
+package com.artevak.kasirpos.response
+
+import com.google.gson.annotations.SerializedName
+
+data class CommonResponse(
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("http_status")
+    val http_status: String
+
+)

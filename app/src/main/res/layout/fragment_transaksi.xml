@@ -248,7 +248,7 @@
                 android:weightSum="2"
                 android:layout_height="wrap_content">
 
-                <com.tapisdev.penjualankasir.customview.EditText_Roboto_Regular
+                <com.artevak.kasirpos.customview.EditText_Roboto_Regular
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"

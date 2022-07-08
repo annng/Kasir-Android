@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "621808776108",
+    "project_id": "ecommerce-pos-4371b",
+    "storage_bucket": "ecommerce-pos-4371b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:621808776108:android:89224244374ec31f924009",
+        "android_client_info": {
+          "package_name": "com.artevak.kasirpos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "621808776108-qa9i4uh1s21410jgk0nhl7td63fphssu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAL0PNzT-kAo6x9eKJrP73kUU7kt7ipwo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "621808776108-qa9i4uh1s21410jgk0nhl7td63fphssu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

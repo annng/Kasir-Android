@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.tapisdev.penjualankasir">
+    package="com.artevak.kasirpos">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -19,28 +19,28 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
         <activity
-            android:name=".activity.DetailHutangActivity"
+            android:name="com.artevak.kasirpos.activity.DetailHutangActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.HistoryTransaksiActivity"
+            android:name="com.artevak.kasirpos.activity.HistoryTransaksiActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.TambahHutangSayaActivity"
+            android:name="com.artevak.kasirpos.activity.TambahHutangSayaActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.TambahHutangActivity"
+            android:name="com.artevak.kasirpos.activity.TambahHutangActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.SelectPelangganActivity"
+            android:name="com.artevak.kasirpos.activity.SelectPelangganActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.UbahBarangActivity"
+            android:name="com.artevak.kasirpos.activity.UbahBarangActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.DetailBarangActivity"
+            android:name="com.artevak.kasirpos.activity.DetailBarangActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.SplashActivity"
+            android:name="com.artevak.kasirpos.activity.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,23 +49,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.ProfileActivity"
+            android:name="com.artevak.kasirpos.activity.ProfileActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.TambahPelangganActivity"
+            android:name="com.artevak.kasirpos.activity.TambahPelangganActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.TambahBarangActivity"
+            android:name="com.artevak.kasirpos.activity.TambahBarangActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.HomeActivity"
+            android:name="com.artevak.kasirpos.activity.HomeActivity"
             android:exported="true"
             android:label="@string/title_activity_home" />
         <activity
-            android:name=".activity.RegisterActivity"
+            android:name="com.artevak.kasirpos.activity.RegisterActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.artevak.kasirpos.MainActivity"
             android:exported="true" />
     </application>
 

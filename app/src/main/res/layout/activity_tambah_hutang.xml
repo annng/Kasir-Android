@@ -120,7 +120,7 @@
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
 
-                    <com.tapisdev.penjualankasir.customview.EditText_Roboto_Regular
+                    <com.artevak.kasirpos.customview.EditText_Roboto_Regular
                         android:id="@+id/etHutang"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
