@@ -19,28 +19,28 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
         <activity
-            android:name="com.artevak.kasirpos.activity.DetailHutangActivity"
+            android:name="com.artevak.kasirpos.ui.activity.debt.DetailHutangActivity"
             android:exported="false" />
         <activity
-            android:name="com.artevak.kasirpos.activity.HistoryTransaksiActivity"
+            android:name="com.artevak.kasirpos.ui.activity.transaction.HistoryTransaksiActivity"
             android:exported="true" />
         <activity
-            android:name="com.artevak.kasirpos.activity.TambahHutangSayaActivity"
+            android:name="com.artevak.kasirpos.ui.activity.debt.TambahHutangSayaActivity"
             android:exported="true" />
         <activity
-            android:name="com.artevak.kasirpos.activity.TambahHutangActivity"
+            android:name="com.artevak.kasirpos.ui.activity.debt.TambahHutangActivity"
             android:exported="false" />
         <activity
-            android:name="com.artevak.kasirpos.activity.SelectPelangganActivity"
+            android:name="com.artevak.kasirpos.ui.activity.customer.SelectPelangganActivity"
             android:exported="false" />
         <activity
-            android:name="com.artevak.kasirpos.activity.UbahBarangActivity"
+            android:name="com.artevak.kasirpos.ui.activity.item.UbahBarangActivity"
             android:exported="true" />
         <activity
-            android:name="com.artevak.kasirpos.activity.DetailBarangActivity"
+            android:name="com.artevak.kasirpos.ui.activity.item.DetailBarangActivity"
             android:exported="false" />
         <activity
-            android:name="com.artevak.kasirpos.activity.SplashActivity"
+            android:name="com.artevak.kasirpos.ui.activity.splash.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,23 +49,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.artevak.kasirpos.activity.ProfileActivity"
+            android:name="com.artevak.kasirpos.ui.activity.profile.ProfileActivity"
             android:exported="true" />
         <activity
-            android:name="com.artevak.kasirpos.activity.TambahPelangganActivity"
+            android:name="com.artevak.kasirpos.ui.activity.customer.TambahPelangganActivity"
             android:exported="false" />
         <activity
-            android:name="com.artevak.kasirpos.activity.TambahBarangActivity"
+            android:name="com.artevak.kasirpos.ui.activity.item.TambahBarangActivity"
             android:exported="true" />
         <activity
-            android:name="com.artevak.kasirpos.activity.HomeActivity"
+            android:name="com.artevak.kasirpos.ui.activity.HomeActivity"
             android:exported="true"
             android:label="@string/title_activity_home" />
         <activity
-            android:name="com.artevak.kasirpos.activity.RegisterActivity"
+            android:name="com.artevak.kasirpos.ui.activity.auth.RegisterActivity"
             android:exported="true" />
         <activity
-            android:name="com.artevak.kasirpos.MainActivity"
+            android:name="com.artevak.kasirpos.ui.activity.auth.LoginActivity"
             android:exported="true" />
     </application>
 
