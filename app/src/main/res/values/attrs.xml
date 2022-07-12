@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomSpinner">
+        <attr name="hint" format="string" />
+        <attr name="isEnable" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomEditText">
+        <attr name="titleEditText" format="string" />
+        <attr name="infoEditText" format="string" />
+        <attr name="hintEditText" format="string" />
+        <attr name="valueEditText" format="string" />
+        <attr name="prefixText" format="string" />
+        <attr name="isEnableEditText" format="boolean" />
+        <attr name="suffixIcon" format="reference|color" />
+        <attr name="inputType">
+            <flag name="text" value="1" />
+            <flag name="numeric" value="2" />
+            <flag name="phone" value="3" />
+            <flag name="password" value="4" />
+            <flag name="address" value="5" />
+            <flag name="person" value="6" />
+            <flag name="clickable" value="7" />
+        </attr>
+    </declare-styleable>
+</resources>

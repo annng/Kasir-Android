@@ -30,11 +30,12 @@
             android:textSize="18sp" />
 
         <ImageView
+            android:id="@+id/ivProfil"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/profil"
-            android:id="@+id/ivProfil"
-            android:layout_alignParentEnd="true"/>
+            android:layout_alignParentEnd="true"
+            app:tint="@color/white"
+            android:src="@drawable/profil" />
 
     </RelativeLayout>
 
@@ -55,7 +56,7 @@
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/cera_black"
-                android:text="Produk Terbaru"
+                android:text="@string/title_latest_product"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -106,9 +107,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/cera_black"
-                    android:text="Pelanggan"
                     android:layout_alignParentStart="true"
+                    android:fontFamily="@font/cera_black"
+                    android:text="@string/title_customer"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -169,7 +170,7 @@
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/cera_black"
-                android:text="Grafik Penjualan Bulanan"
+                android:text="@string/title_monthly_sales_chart"
                 android:visibility="visible"
                 android:textColor="@color/black"
                 android:textSize="18sp"

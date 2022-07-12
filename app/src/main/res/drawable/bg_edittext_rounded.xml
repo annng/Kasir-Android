@@ -4,6 +4,8 @@
     android:shape="rectangle"
     android:padding="10dp">
 
+    <stroke android:color="@color/grey_400" android:width="@dimen/divider"/>
+
     <solid android:color="#FFFFFF" />
     <corners
         android:bottomRightRadius="15dp"

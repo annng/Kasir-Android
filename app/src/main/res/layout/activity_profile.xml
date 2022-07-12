@@ -131,13 +131,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="16.7dp"
-                    android:layout_marginTop="16.7dp"
+                    android:layout_marginRight="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_medium"
                     android:fontFamily="sans-serif"
                     android:text="Edit"
+                    android:padding="@dimen/margin_small"
+                    android:clickable="true"
                     android:id="@+id/tvEditProfile"
                     android:textColor="@color/grey_800"
-                    android:textSize="11.7sp"
+                    android:textSize="@dimen/text_small"
                     android:textStyle="normal" />
             </LinearLayout>
 

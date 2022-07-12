@@ -24,20 +24,20 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_toEndOf="@+id/ivBack"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
+            android:layout_toEndOf="@+id/ivBack"
             android:orientation="vertical"
+            android:padding="@dimen/margin_extra_small"
             android:paddingHorizontal="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:layout_marginTop="5dp"
                 android:fontFamily="@font/cera_black"
-                android:text="Daftar Akun"
+                android:text="@string/title_toolbar_register_account"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -56,150 +56,67 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20dp"
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_below="@+id/relaToolbar"
-                app:cardBackgroundColor="@color/grey_200"
                 app:cardCornerRadius="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="@dimen/margin_medium">
 
-                    <com.artevak.kasirpos.customview.EditText_Roboto_Regular
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:fontFamily="sans-serif"
-                        android:hint="No. Handphone"
-                        android:id="@+id/etPhone"
-                        android:paddingBottom="15.7dp"
-                        android:paddingLeft="16.3dp"
-                        android:paddingTop="15.7dp"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey_800"
-                        android:textSize="15sp"
-                        android:textStyle="normal" />
 
-                    <com.artevak.kasirpos.customview.EditText_Roboto_Regular
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:background="@color/white"
-                        android:fontFamily="sans-serif"
-                        android:hint="Email"
+                    <com.artevak.kasirpos.widget.CustomEditText
                         android:id="@+id/etEmail"
-                        android:paddingBottom="15.7dp"
-                        android:paddingLeft="16.3dp"
-                        android:paddingTop="15.7dp"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey_800"
-                        android:textSize="15sp"
-                        android:textStyle="normal" />
-
-                    <com.artevak.kasirpos.customview.EditText_Roboto_Regular
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:background="@color/white"
-                        android:fontFamily="sans-serif"
-                        android:hint="Nama Pemilik"
+                        app:inputType="text"
+                        app:titleEditText="@string/hint_email" />
+
+                    <com.artevak.kasirpos.widget.CustomEditText
                         android:id="@+id/etNamaPemilik"
-                        android:paddingBottom="15.7dp"
-                        android:paddingLeft="16.3dp"
-                        android:paddingTop="15.7dp"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey_800"
-                        android:textSize="15sp"
-                        android:textStyle="normal" />
-
-                    <com.artevak.kasirpos.customview.EditText_Roboto_Regular
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:background="@color/white"
-                        android:fontFamily="sans-serif"
-                        android:hint="Nama UMKM"
+                        app:inputType="person"
+                        app:titleEditText="@string/hint_owner_name" />
+
+                    <com.artevak.kasirpos.widget.CustomEditText
                         android:id="@+id/etNamaUmkm"
-                        android:paddingBottom="15.7dp"
-                        android:paddingLeft="16.3dp"
-                        android:paddingTop="15.7dp"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey_800"
-                        android:textSize="15sp"
-                        android:textStyle="normal" />
-
-                    <com.artevak.kasirpos.customview.EditText_Roboto_Regular
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:background="@color/white"
-                        android:fontFamily="sans-serif"
-                        android:inputType="textMultiLine"
-                        android:lines="3"
-                        android:hint="Alamat UMKM"
-                        android:id="@+id/etAlamat"
-                        android:paddingBottom="15.7dp"
-                        android:paddingLeft="16.3dp"
-                        android:paddingTop="15.7dp"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey_800"
-                        android:textSize="15sp"
-                        android:textStyle="normal" />
+                        app:inputType="person"
+                        app:titleEditText="@string/hint_shop_name" />
 
 
-                    <com.artevak.kasirpos.customview.EditText_Roboto_Regular
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:fontFamily="sans-serif"
-                        android:inputType="textPassword"
-                        android:hint="Password"
-                        android:layout_marginTop="10dp"
+                    <com.artevak.kasirpos.widget.CustomEditText
                         android:id="@+id/etPassword"
-                        android:paddingBottom="15.7dp"
-                        android:paddingLeft="16.3dp"
-                        android:paddingTop="15.7dp"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey_800"
-                        android:textSize="15sp"
-                        android:textStyle="normal" />
-
-                    <com.artevak.kasirpos.customview.EditText_Roboto_Regular
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:fontFamily="sans-serif"
-                        android:inputType="textPassword"
-                        android:hint="Konfirmasi Password"
-                        android:layout_marginTop="10dp"
+                        app:inputType="password"
+                        app:suffixIcon="@drawable/ic_show"
+                        app:titleEditText="@string/hint_password" />
+
+                    <com.artevak.kasirpos.widget.CustomEditText
                         android:id="@+id/etCPassword"
-                        android:paddingBottom="15.7dp"
-                        android:paddingLeft="16.3dp"
-                        android:paddingTop="15.7dp"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey_800"
-                        android:textSize="15sp"
-                        android:textStyle="normal" />
-
-
-                    <Button
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Daftar"
+                        app:inputType="password"
+                        app:suffixIcon="@drawable/ic_show"
+                        app:titleEditText="@string/hint_confirmation_password" />
+
+
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnDaftar"
-                        android:fontFamily="@font/cera_medium"
-                        android:textSize="15sp"
-                        android:background="@color/colorPrimary"
-                        android:textColor="@color/white"
-                        android:layout_marginTop="15dp"/>
+                        style="@style/ButtonPrimary"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="@dimen/margin_large"
+                        android:layout_height="wrap_content"
+                        android:text="@string/action_register" />
 
 
                 </LinearLayout>
@@ -208,9 +125,6 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
-
-
-
 
 
 </RelativeLayout>

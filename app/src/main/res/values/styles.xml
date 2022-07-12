@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MasterButton" parent="Widget.AppCompat.Button">
+        <item name="android:textAllCaps">false</item>
+        <item name="fontFamily">@font/cera_medium</item>
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="android:layout_marginTop">@dimen/margin_medium</item>
+        <item name="android:layout_marginBottom">@dimen/margin_medium</item>
+        <item name="android:layout_marginStart">@dimen/margin_small</item>
+        <item name="android:layout_marginEnd">@dimen/margin_small</item>
+    </style>
+
+    <style name="ButtonPrimary" parent="MasterButton">
+        <item name="android:background">@drawable/bg_fill_rounded_capsule_primary_gradient</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ButtonSecondary" parent="MasterButton">
+        <item name="android:background">@drawable/bg_border_rounded_capsule_primary</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="CustomEditText" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/height_field</item>
+        <item name="android:layout_marginStart">@dimen/margin_medium</item>
+        <item name="android:layout_marginEnd">@dimen/margin_medium</item>
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColor">@color/text_gray</item>
+    </style>
+
+    <style name="Hint" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_marginStart">@dimen/margin_medium</item>
+        <item name="fontFamily">@font/cera_medium</item>
+        <item name="android:layout_marginTop">@dimen/margin_medium</item>
+        <item name="android:layout_marginBottom">@dimen/margin_small</item>
+        <item name="android:textColor">@color/grey_400</item>
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+</resources>

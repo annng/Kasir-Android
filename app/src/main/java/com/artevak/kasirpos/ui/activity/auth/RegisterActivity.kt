@@ -2,6 +2,7 @@ package com.artevak.kasirpos.ui.activity.auth
 
 import android.content.Intent
 import android.os.Bundle
+import com.artevak.kasirpos.R
 import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.databinding.ActivityRegisterBinding
 import com.artevak.kasirpos.model.RegisterInfo
@@ -27,30 +28,25 @@ class RegisterActivity : BaseActivity() {
     }
 
     fun checkValidation(){
-        val name = binding.etNamaPemilik.text.toString()
-        val phone = binding.etPhone.text.toString()
-        val email = binding.etEmail.text.toString()
-        val nama_umkm = binding.etNamaUmkm.text.toString()
-        val alamat = binding.etAlamat.text.toString()
-        val password = binding.etPassword.text.toString()
-        val confirm_password = binding.etCPassword.text.toString()
+        val name = binding.etNamaPemilik.text
+        val email = binding.etEmail.text
+        val nama_umkm = binding.etNamaUmkm.text
+        val password = binding.etPassword.text
+        val confirm_password = binding.etCPassword.text
 
-        if (name.equals("") || name.length == 0){
-            showErrorMessage("Nama Belum diisi")
-        }else  if (phone.equals("") || phone.length == 0){
-            showErrorMessage("Telepon Belum diisi")
-        }else if (email.equals("") || email.length == 0){
-            showErrorMessage("Email Belum diisi")
-        }else if (nama_umkm.equals("") || nama_umkm.length == 0){
-            showErrorMessage("Nama UMKM Belum diisi")
-        }else if (alamat.equals("") || alamat.length == 0){
-            showErrorMessage("Alamat Belum diisi")
-        }else if (password.equals("") || password.length == 0){
-            showErrorMessage("Password Belum diisi")
-        }else if (confirm_password.equals("") || confirm_password.length == 0){
-            showErrorMessage("Konfirmasi Password Belum diisi")
-        }else if (!password.equals(confirm_password)){
-            showErrorMessage("Konfirmasi password tidak valid")
+
+        if (name.isEmpty()){
+            binding.etNamaPemilik.setInfoError(getString(R.string.error_field_required))
+        }else if (email.isEmpty()){
+            binding.etEmail.setInfoError(getString(R.string.error_field_required))
+        }else if (nama_umkm.isEmpty()){
+            binding.etNamaUmkm.setInfoError(getString(R.string.error_field_required))
+        }else if (password.isEmpty()){
+            binding.etPassword.setInfoError(getString(R.string.error_field_required))
+        }else if (confirm_password.isEmpty()){
+            binding.etCPassword.setInfoError(getString(R.string.error_field_required))
+        }else if (password != confirm_password){
+            binding.etNamaPemilik.setInfoError(getString(R.string.error_field_password_not_match))
         }else {
             //TODO register process
             gotoMainPage()

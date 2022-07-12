@@ -24,7 +24,7 @@
             android:layout_centerVertical="true"
             android:layout_marginHorizontal="10dp"
             android:fontFamily="@font/cera_black"
-            android:text="Keuntungan"
+            android:text="@string/title_toolbar_profit"
             android:textColor="@color/white"
             android:textSize="18sp" />
 
@@ -60,7 +60,7 @@
                     android:layout_marginHorizontal="10dp"
                     android:layout_gravity="center_horizontal"
                     android:fontFamily="@font/cera_black"
-                    android:text="Keuntungan"
+                    android:text="@string/title_toolbar_profit"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -109,11 +109,13 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="30dp"
                     android:id="@+id/ivIconHutang"
-                    android:layout_height="30dp"
+                    android:layout_width="@dimen/margin_medium"
+                    android:layout_height="@dimen/margin_medium"
                     android:layout_alignParentLeft="true"
-                    android:src="@drawable/ic_baseline_file_copy_24"/>
+                    android:layout_centerVertical="true"
+                    app:tint="@color/colorPrimary"
+                    android:src="@drawable/ic_baseline_file_copy_24" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -122,13 +124,14 @@
                     android:layout_marginHorizontal="10dp"
                     android:layout_toEndOf="@+id/ivIconHutang"
                     android:fontFamily="@font/cera_medium"
-                    android:text="Laporan Untung"
+                    android:text="@string/title_profit_report"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/text_medium" />
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="@dimen/icon_medium"
+                    android:layout_height="@dimen/icon_medium"
+                    android:padding="@dimen/margin_extra_small"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_baseline_arrow_forward_ios_24"/>

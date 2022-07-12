@@ -24,7 +24,7 @@
             android:layout_centerVertical="true"
             android:layout_marginHorizontal="10dp"
             android:fontFamily="@font/cera_black"
-            android:text="Hutang"
+            android:text="@string/toolbar_title_debt"
             android:textColor="@color/white"
             android:textSize="18sp" />
 
@@ -57,29 +57,33 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="30dp"
                     android:id="@+id/ivIconHutang"
-                    android:layout_height="30dp"
+                    android:layout_width="@dimen/icon_medium"
+                    android:layout_height="@dimen/icon_medium"
                     android:layout_alignParentLeft="true"
-                    android:src="@drawable/ic_baseline_file_copy_24"/>
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/margin_xxs"
+                    android:src="@drawable/ic_baseline_file_copy_24"
+                    app:tint="@color/colorPrimary" />
 
                 <TextView
-                    android:layout_toEndOf="@+id/ivIconHutang"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginHorizontal="10dp"
+                    android:layout_toEndOf="@+id/ivIconHutang"
                     android:fontFamily="@font/cera_medium"
-                    android:text="Laporan Hutang"
+                    android:text="@string/title_debt_report"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="@dimen/icon_medium"
+                    android:layout_height="@dimen/icon_medium"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"/>
+                    android:padding="@dimen/margin_extra_small"
+                    android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
 
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
@@ -87,41 +91,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="2"
             android:orientation="horizontal">
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginHorizontal="5dp"
-                android:text="Tambah Hutang"
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnTambahHutang"
-                android:fontFamily="@font/cera_medium"
-                android:textSize="15sp"
-                android:background="@color/colorPrimary"
-                android:textColor="@color/white"
-                android:layout_marginTop="15dp"/>
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_marginHorizontal="5dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Hutang Saya"
-                android:fontFamily="@font/cera_medium"
-                android:textSize="15sp"
+                android:text="@string/action_add_debt"
+                style="@style/ButtonPrimary"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
                 android:id="@+id/btnHutangSaya"
-                android:background="@color/colorPrimary"
-                android:textColor="@color/white"
-                android:layout_marginTop="15dp"/>
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/title_my_debt"
+                style="@style/ButtonSecondary"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:orientation="horizontal">
 
             <androidx.recyclerview.widget.RecyclerView
@@ -162,7 +155,7 @@
         android:visibility="gone"
         android:src="@drawable/ic_baseline_arrow_circle_down_24"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginRight="30dp"
         android:layout_marginBottom="30dp"
         android:backgroundTint="@color/colorPrimary"

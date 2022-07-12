@@ -1,9 +1,7 @@
 package com.artevak.kasirpos.ui.fragment
 
-import android.R
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,8 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.artevak.kasirpos.R
 import com.artevak.kasirpos.base.BaseFragment
 import com.artevak.kasirpos.databinding.FragmentTransaksiBinding
 import com.artevak.kasirpos.model.*
@@ -39,11 +39,11 @@ class TransaksiFragment : BaseFragment() {
     var listNamaBarang = ArrayList<String>()
     var listKeranjang = ArrayList<Keranjang>()
 
-    var selectedBarang : Barang? = null
-    lateinit var adapter : AdapterBarang
-    lateinit var adapterKeranjang : AdapterKeranjang
-    lateinit var adapterPelanggan : AdapterPelanggan
-    lateinit var pDialogLoading : SweetAlertDialog
+    var selectedBarang: Barang? = null
+    lateinit var adapter: AdapterBarang
+    lateinit var adapterKeranjang: AdapterKeranjang
+    lateinit var adapterPelanggan: AdapterPelanggan
+    lateinit var pDialogLoading: SweetAlertDialog
     lateinit var orderInfo: OrderInfo
 
     val nf = NumberFormat.getNumberInstance(Locale.GERMAN)
@@ -65,7 +65,7 @@ class TransaksiFragment : BaseFragment() {
         _binding = FragmentTransaksiBinding.inflate(inflater, container, false)
         val root: View = binding.root
         adapter = AdapterBarang(listBarang)
-        adapterKeranjang = AdapterKeranjang(listKeranjang,this)
+        adapterKeranjang = AdapterKeranjang(listKeranjang, this)
         adapterPelanggan = AdapterPelanggan(listPelanggan)
 
         val layoutManager =
@@ -74,15 +74,17 @@ class TransaksiFragment : BaseFragment() {
         binding.rvTransaksi.layoutManager = layoutManager
         binding.rvTransaksi.adapter = adapterKeranjang
 
-        val adapterAutcomplete = ArrayAdapter(requireContext(),
-            R.layout.simple_list_item_1, listNamaBarang)
+        val adapterAutcomplete = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_list_item_1, listNamaBarang
+        )
         binding.edSearchBarang.setAdapter(adapterAutcomplete)
         binding.edSearchBarang.setOnItemClickListener { adapterView, view, i, l ->
 
             val selected = adapterView.getItemAtPosition(i) as String
             val pos: Int = listNamaBarang.indexOf(selected)
-            Log.d(TAG_TEXT_AUTOCOMPLETE,"item selected : "+selected)
-            Log.d(TAG_TEXT_AUTOCOMPLETE,"item position : "+pos)
+            Log.d(TAG_TEXT_AUTOCOMPLETE, "item selected : " + selected)
+            Log.d(TAG_TEXT_AUTOCOMPLETE, "item position : " + pos)
 
             selectedBarang = listBarang.get(pos)
             showSelectedBarangInfo(listBarang.get(pos))
@@ -109,7 +111,7 @@ class TransaksiFragment : BaseFragment() {
     @SuppressLint("NotifyDataSetChanged")
     override fun onResume() {
         super.onResume()
-        if (listBarang.size == 0){
+        if (listBarang.size == 0) {
             getDataBarang()
         }
         setPelangganInfo()
@@ -119,77 +121,95 @@ class TransaksiFragment : BaseFragment() {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun saveToCart(keranjang: Keranjang){
+    fun saveToCart(keranjang: Keranjang) {
         listKeranjang.add(keranjang)
         adapterKeranjang.notifyDataSetChanged()
 
         //count total
         totalBayar = 0
-        for (i in 0..listKeranjang.size - 1){
-            totalBayar+=listKeranjang.get(i).subtotal!!
+        for (i in 0 until listKeranjang.size) {
+            totalBayar += listKeranjang.get(i).subtotal!!
         }
-        binding.tvTotal.setText("Rp. "+df.format(totalBayar))
+        binding.tvTotal.text = "Rp. " + df.format(totalBayar)
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun removeFromCart(keranjang: Keranjang){
+    fun removeFromCart(keranjang: Keranjang) {
         listKeranjang.remove(keranjang)
         adapterKeranjang.notifyDataSetChanged()
 
         //count total
         totalBayar = 0
-        for (i in 0..listKeranjang.size - 1){
-            totalBayar+=listKeranjang.get(i).subtotal!!
+        for (i in 0 until listKeranjang.size) {
+            totalBayar += listKeranjang[i].subtotal!!
         }
-        binding.tvTotal.setText("Rp. "+df.format(totalBayar))
+        binding.tvTotal.text = "Rp. " + df.format(totalBayar)
     }
 
-    fun setPelangganInfo(){
-        if (SharedVariable.pelangganType.equals("guest")){
-            binding.tvNamaPelanggan.setText("Pelanggan Guest")
-        }else{
+    fun setPelangganInfo() {
+        if (SharedVariable.pelangganType.equals("guest")) {
+            binding.tvNamaPelanggan.text = "Pelanggan Guest"
+        } else {
             id_pelanggan = SharedVariable.selectedPelanggan?.id!!
-            binding.tvNamaPelanggan.setText(SharedVariable.selectedPelanggan?.name)
+            binding.tvNamaPelanggan.text = SharedVariable.selectedPelanggan?.name
         }
     }
 
-    fun checkValidationTambah(){
+    fun checkValidationTambah() {
         val jmlBeli = binding.etJumlahBeli.text.toString()
+
+        val isTotalEmpty = jmlBeli == "" || jmlBeli.isEmpty()
+        val isSelectedItemEmpty = selectedBarang == null
+
+        if (isTotalEmpty) {
+            Toasty.error(
+                requireContext(),
+                getString(com.artevak.kasirpos.R.string.error_toast_qty_empty),
+                Toast.LENGTH_SHORT,
+                true
+            ).show()
+            return
+        }
+        if (isSelectedItemEmpty) {
+            Toasty.error(requireContext(), getString(com.artevak.kasirpos.R.string.error_toast_item_not_selected), Toast.LENGTH_SHORT, true)
+                .show()
+            return
+        }
+
         val jumlah = jmlBeli.toInt()
-        if (jmlBeli.equals("") || jmlBeli.length == 0){
-            Toasty.error(requireContext(), "Jumlah pembelian belum diiisi", Toast.LENGTH_SHORT, true).show()
-        }else if (selectedBarang == null){
-            Toasty.error(requireContext(), "Anda belum memilih barang", Toast.LENGTH_SHORT, true).show()
-        }else if (jumlah > selectedBarang!!.stok!!){
-            Toasty.error(requireContext(), "Stok barang tidak cukup..", Toast.LENGTH_SHORT, true).show()
+        val isQtyMoreThanStock = jumlah > (selectedBarang?.stok ?: 0)
+        if (isQtyMoreThanStock) {
+            Toasty.error(requireContext(), getString(com.artevak.kasirpos.R.string.error_toast_insufficient_stock), Toast.LENGTH_SHORT, true)
+                .show()
+            return
         }
-        else{
-            val subtotal = jumlah * selectedBarang?.harga_jual!!
-            val subtotal_harga_beli = jumlah * selectedBarang?.harga_beli!!
-            val untung = subtotal - subtotal_harga_beli
 
-            val keranjang = Keranjang(
-                selectedBarang?.name,
-                jumlah,
-                selectedBarang?.harga_jual,
-                selectedBarang?.deskripsi,
-                selectedBarang?.picture,
-                selectedBarang?.satuan,
-                subtotal,
-                selectedBarang?.id,
-                untung
-            )
+        val subtotal = jumlah * selectedBarang?.harga_jual!!
+        val subtotal_harga_beli = jumlah * selectedBarang?.harga_beli!!
+        val untung = subtotal - subtotal_harga_beli
 
-            saveToCart(keranjang)
-            selectedBarang = null
-            resetSelectedBarangInfo()
-        }
+        val keranjang = Keranjang(
+            selectedBarang?.name,
+            jumlah,
+            selectedBarang?.harga_jual,
+            selectedBarang?.deskripsi,
+            selectedBarang?.picture,
+            selectedBarang?.satuan,
+            subtotal,
+            selectedBarang?.id,
+            untung
+        )
+
+        saveToCart(keranjang)
+        selectedBarang = null
+        resetSelectedBarangInfo()
     }
 
-    fun checkValidationOrder(){
-        if (listKeranjang.size == 0){
-            Toasty.error(requireContext(), "Anda belum memilih barang", Toast.LENGTH_SHORT, true).show()
-        }else{
+    fun checkValidationOrder() {
+        if (listKeranjang.size == 0) {
+            Toasty.error(requireContext(), "Anda belum memilih barang", Toast.LENGTH_SHORT, true)
+                .show()
+        } else {
             orderInfo = OrderInfo(
                 id_pelanggan,
                 SharedVariable.pelangganType,
@@ -200,14 +220,14 @@ class TransaksiFragment : BaseFragment() {
         }
     }
 
-    fun saveOrder(){
+    fun saveOrder() {
         showLoading()
         //TODO save order
 
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun resetTransaksi(){
+    fun resetTransaksi() {
         listKeranjang.clear()
         adapterKeranjang.notifyDataSetChanged()
 
@@ -216,20 +236,20 @@ class TransaksiFragment : BaseFragment() {
         SharedVariable.pelangganType = "guest"
 
         totalBayar = 0
-        binding.tvTotal.setText("Rp. 0")
+        binding.tvTotal.text = "Rp. 0"
 
         resetSelectedBarangInfo()
         setPelangganInfo()
     }
 
-    fun showSelectedBarangInfo(barang : Barang){
-        binding.tvNamaBarang.setText(barang.name)
-        binding.tvHargaBarang.setText("Rp. "+df.format(barang.harga_jual))
+    fun showSelectedBarangInfo(barang: Barang) {
+        binding.tvNamaBarang.text = barang.name
+        binding.tvHargaBarang.text = "Rp. " + df.format(barang.harga_jual)
     }
 
-    fun resetSelectedBarangInfo(){
-        binding.tvNamaBarang.setText("- - -")
-        binding.tvHargaBarang.setText("Rp. -")
+    fun resetSelectedBarangInfo() {
+        binding.tvNamaBarang.text = "- - -"
+        binding.tvHargaBarang.text = "Rp. -"
         binding.etJumlahBeli.setText("")
         binding.edSearchBarang.setText("")
         binding.rvTransaksi.requestFocus()
@@ -237,7 +257,7 @@ class TransaksiFragment : BaseFragment() {
         (activity as HomeActivity?)?.hideKeyboard(_binding!!.root)
     }
 
-    fun getDataBarang(){
+    fun getDataBarang() {
         showLoading()
 
         listBarang.add(
@@ -259,21 +279,21 @@ class TransaksiFragment : BaseFragment() {
         _binding = null
     }
 
-    fun showLoading(){
+    fun showLoading() {
         pDialogLoading = SweetAlertDialog(requireContext(), SweetAlertDialog.PROGRESS_TYPE)
-        pDialogLoading.progressHelper.barColor = Color.parseColor("#A5DC86")
-        pDialogLoading.setTitleText("Loading..")
+        pDialogLoading.progressHelper.barColor = ContextCompat.getColor(requireContext(), R.color.colorPrimary)
+        pDialogLoading.titleText = getString(R.string.dialog_title_loading)
         pDialogLoading.setCancelable(false)
 
         pDialogLoading.show()
     }
 
-    fun dismissLoading(){
+    fun dismissLoading() {
         pDialogLoading.dismiss()
     }
 
     companion object {
-        fun newInstance(): TransaksiFragment{
+        fun newInstance(): TransaksiFragment {
             val fragment = TransaksiFragment()
             val args = Bundle()
             fragment.arguments = args

@@ -24,7 +24,7 @@
             android:layout_centerVertical="true"
             android:layout_marginHorizontal="10dp"
             android:fontFamily="@font/cera_black"
-            android:text="Transaksi"
+            android:text="@string/title_toolbar_transaction"
             android:textColor="@color/white"
             android:textSize="18sp" />
 
@@ -79,7 +79,7 @@
                     android:layout_marginHorizontal="10dp"
                     android:layout_gravity="center_horizontal"
                     android:fontFamily="@font/cera_black"
-                    android:text="Total Pembayaran"
+                    android:text="@string/title_total_payment"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -116,11 +116,11 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="30dp"
                     android:id="@+id/ivIconHutang"
+                    android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_alignParentLeft="true"
-                    android:src="@drawable/user"/>
+                    android:src="@drawable/user" />
 
                 <TextView
                     android:id="@+id/tvNamaPelanggan"
@@ -130,7 +130,7 @@
                     android:layout_marginHorizontal="10dp"
                     android:layout_toEndOf="@+id/ivIconHutang"
                     android:fontFamily="@font/cera_medium"
-                    android:text="Pelanggan"
+                    android:text="@string/title_customer"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -191,18 +191,20 @@
                 <AutoCompleteTextView
                     android:id="@+id/edSearchBarang"
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/margin_small"
+                    android:paddingBottom="@dimen/margin_small"
                     android:layout_marginLeft="10sp"
                     android:layout_marginRight="10sp"
                     android:layout_toLeftOf="@+id/ivSearch"
                     android:background="@drawable/bg_editfield"
-                    android:hint="Cari Barang"
-                    android:textColor="@color/black"
+                    android:hint="@string/hint_search_item"
                     android:imeOptions="actionGo"
                     android:inputType="text"
                     android:maxLines="1"
                     android:paddingLeft="10sp"
                     android:paddingRight="10sp"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -226,57 +228,56 @@
                 android:id="@+id/tvNamaBarang"
                 android:text="- - -"
                 android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="@dimen/text_large" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_gravity="left"
-                android:fontFamily="@font/cera_italic"
-                android:id="@+id/tvHargaBarang"
-                android:text="Rp. -"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:background="@color/grey_100"
-                android:padding="5dp"
+                android:padding="@dimen/margin_small"
                 android:orientation="horizontal"
-                android:weightSum="2"
+                android:gravity="center_vertical"
                 android:layout_height="wrap_content">
 
-                <com.artevak.kasirpos.customview.EditText_Roboto_Regular
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:fontFamily="sans-serif"
-                    android:hint="Jumlah Beli"
+                <TextView
+                    android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:id="@+id/etJumlahBeli"
-                    android:paddingBottom="15.7dp"
-                    android:inputType="number"
-                    android:paddingLeft="16.3dp"
-                    android:paddingTop="15.7dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/cera_italic"
+                    android:id="@+id/tvHargaBarang"
+                    android:text="Rp. -"
                     android:textColor="@color/black"
-                    android:textColorHint="@color/grey_800"
-                    android:textSize="15sp"
+                    android:textSize="@dimen/text_large" />
+
+                <com.artevak.kasirpos.customview.EditText_Roboto_Regular
+                    android:layout_width="@dimen/width_field_qty"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_edittext_rounded"
+                    android:gravity="center"
+                    android:fontFamily="sans-serif"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:hint="@string/hint_qty"
+                    android:id="@+id/etJumlahBeli"
+                    android:paddingStart="@dimen/padding_field"
+                    android:paddingEnd="@dimen/padding_field"
+                    android:paddingTop="@dimen/margin_small"
+                    android:paddingBottom="@dimen/margin_small"
+                    android:inputType="number"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_medium"
                     android:textStyle="normal" />
 
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_marginHorizontal="5dp"
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="wrap_content"
+                    android:padding="@dimen/margin_small"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Tambah"
-                    android:drawableTint="@color/white"
-                    android:drawableRight="@drawable/ic_baseline_add_circle_24"
+                    app:tint="@color/white"
+                    android:text="@string/action_add"
                     android:id="@+id/btnTambahBarang"
                     android:fontFamily="@font/cera_medium"
-                    android:textSize="15sp"
-                    android:background="@color/colorPrimary"
+                    android:textSize="@dimen/text_medium"
+                    android:background="@drawable/bg_fill_rounded_primary"
                     android:textColor="@color/white" />
 
             </LinearLayout>
