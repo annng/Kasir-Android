@@ -1,19 +1,11 @@
 package com.artevak.kasirpos.ui.activity.customer
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
-import com.artevak.kasirpos.ui.activity.splash.SplashActivity
 import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.databinding.ActivityTambahPelangganBinding
 import com.artevak.kasirpos.model.PelangganInfo
 import com.artevak.kasirpos.model.UserPreference
-import com.artevak.kasirpos.response.CommonResponse
-import com.artevak.kasirpos.util.ApiMain
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class TambahPelangganActivity : BaseActivity() {
     lateinit var binding : ActivityTambahPelangganBinding

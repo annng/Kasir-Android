@@ -1,19 +1,12 @@
 package com.artevak.kasirpos.ui.activity.debt
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.databinding.ActivityTambahHutangSayaBinding
 import com.artevak.kasirpos.model.HutangInfo
 import com.artevak.kasirpos.model.SharedVariable
 import com.artevak.kasirpos.model.UserPreference
-import com.artevak.kasirpos.response.CommonResponse
-import com.artevak.kasirpos.util.ApiMain
-import es.dmoral.toasty.Toasty
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class TambahHutangSayaActivity : BaseActivity() {
 

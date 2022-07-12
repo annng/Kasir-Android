@@ -11,29 +11,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.artevak.kasirpos.base.BaseFragment
+import com.artevak.kasirpos.databinding.FragmentTransaksiBinding
+import com.artevak.kasirpos.model.*
 import com.artevak.kasirpos.ui.activity.HomeActivity
 import com.artevak.kasirpos.ui.activity.customer.SelectPelangganActivity
 import com.artevak.kasirpos.ui.adapter.AdapterBarang
 import com.artevak.kasirpos.ui.adapter.AdapterKeranjang
 import com.artevak.kasirpos.ui.adapter.AdapterPelanggan
-import com.artevak.kasirpos.databinding.*
-import com.artevak.kasirpos.model.*
-import com.artevak.kasirpos.response.AllBarangResponse
-import com.artevak.kasirpos.response.CommonResponse
-import com.artevak.kasirpos.util.ApiMain
 import es.dmoral.toasty.Toasty
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
-class TransaksiFragment : Fragment() {
+class TransaksiFragment : BaseFragment() {
 
     private var _binding: FragmentTransaksiBinding? = null
 

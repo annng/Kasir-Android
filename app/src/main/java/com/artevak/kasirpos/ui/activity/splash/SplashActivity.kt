@@ -2,18 +2,12 @@ package com.artevak.kasirpos.ui.activity.splash
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.ui.activity.auth.LoginActivity
 import com.artevak.kasirpos.ui.activity.HomeActivity
 import com.artevak.kasirpos.databinding.ActivitySplashBinding
 import com.artevak.kasirpos.model.UserModel
 import com.artevak.kasirpos.model.UserPreference
-import com.artevak.kasirpos.response.DetailUserResponse
-import com.artevak.kasirpos.util.ApiMain
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class SplashActivity : BaseActivity() {
     lateinit var binding : ActivitySplashBinding

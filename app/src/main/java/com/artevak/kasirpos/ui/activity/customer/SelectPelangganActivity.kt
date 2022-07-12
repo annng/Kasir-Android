@@ -1,10 +1,7 @@
 package com.artevak.kasirpos.ui.activity.customer
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.facebook.shimmer.ShimmerFrameLayout
@@ -15,11 +12,6 @@ import com.artevak.kasirpos.databinding.ActivitySelectPelangganBinding
 import com.artevak.kasirpos.model.Pelanggan
 import com.artevak.kasirpos.model.SharedVariable
 import com.artevak.kasirpos.model.UserPreference
-import com.artevak.kasirpos.response.PelangganResponse
-import com.artevak.kasirpos.util.ApiMain
-import es.dmoral.toasty.Toasty
-import retrofit2.Call
-import retrofit2.Response
 
 class SelectPelangganActivity : BaseActivity() {
     lateinit var binding : ActivitySelectPelangganBinding

@@ -2,16 +2,10 @@ package com.artevak.kasirpos.ui.activity.profile
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.ui.activity.auth.LoginActivity
 import com.artevak.kasirpos.databinding.ActivityProfileBinding
 import com.artevak.kasirpos.model.UserPreference
-import com.artevak.kasirpos.response.CommonResponse
-import com.artevak.kasirpos.util.ApiMain
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class ProfileActivity : BaseActivity() {
     lateinit var binding : ActivityProfileBinding

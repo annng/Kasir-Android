@@ -2,17 +2,11 @@ package com.artevak.kasirpos.ui.activity.auth
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import com.artevak.kasirpos.databinding.ActivityLoginBinding
 import com.artevak.kasirpos.model.LoginInfo
 import com.artevak.kasirpos.model.UserPreference
-import com.artevak.kasirpos.response.LoginResponse
 import com.artevak.kasirpos.ui.activity.splash.SplashActivity
-import com.artevak.kasirpos.util.ApiMain
 import com.artevak.kasirpos.base.BaseActivity
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class LoginActivity : BaseActivity() {
     lateinit var binding  : ActivityLoginBinding

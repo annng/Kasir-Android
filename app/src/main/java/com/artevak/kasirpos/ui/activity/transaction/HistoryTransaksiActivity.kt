@@ -1,11 +1,8 @@
 package com.artevak.kasirpos.ui.activity.transaction
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.ui.adapter.AdapterHistoryTransaksi
@@ -13,12 +10,7 @@ import com.artevak.kasirpos.databinding.ActivityHistoryTransaksiBinding
 import com.artevak.kasirpos.model.HistoryTransaksi
 import com.artevak.kasirpos.model.Transaksi
 import com.artevak.kasirpos.model.UserPreference
-import com.artevak.kasirpos.response.HistoryTransaksiResponse
-import com.artevak.kasirpos.util.ApiMain
-import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.fragment_stok.*
-import retrofit2.Call
-import retrofit2.Response
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*

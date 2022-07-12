@@ -1,21 +1,13 @@
 package com.artevak.kasirpos.ui.activity.item
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.artevak.kasirpos.base.BaseActivity
-import com.artevak.kasirpos.BuildConfig
 import com.artevak.kasirpos.databinding.ActivityDetailBarangBinding
 import com.artevak.kasirpos.model.Barang
 import com.artevak.kasirpos.model.UserPreference
-import com.artevak.kasirpos.response.CommonResponse
-import com.artevak.kasirpos.util.ApiMain
-import es.dmoral.toasty.Toasty
-import retrofit2.Call
-import retrofit2.Response
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*
