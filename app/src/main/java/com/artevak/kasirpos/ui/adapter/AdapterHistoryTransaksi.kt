@@ -25,7 +25,7 @@ class AdapterHistoryTransaksi(private val list:ArrayList<HistoryTransaksi>) : Re
         return MyViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = list?.size
+    override fun getItemCount(): Int = list.size
 
 
     class Holder(val view: View) : RecyclerView.ViewHolder(view)
@@ -35,18 +35,18 @@ class AdapterHistoryTransaksi(private val list:ArrayList<HistoryTransaksi>) : Re
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         with(holder){
-            with(list.get(position)){
+            with(list[position]){
                 val nf = NumberFormat.getNumberInstance(Locale.GERMAN)
                 val df = nf as DecimalFormat
 
-                val imageUrl = BuildConfig.BASE_URL+"img/barang/"+list?.get(position).picture
+                val imageUrl = "img/barang/"+ list[position].picture
                // Log.d("imgbarang",""+imageUrl)
                 Glide.with(binding.rlBarang.context)
                     .load(imageUrl)
                     .into(binding.ivBarang)
 
-                binding.tvNamaBarang.setText(""+list?.get(position).nama_barang)
-                binding.tvJumlahBeli.setText("Subtotal Rp. "+df.format(list?.get(position).subtotal))
+                binding.tvNamaBarang.setText(""+ list[position].nama_barang)
+                binding.tvJumlahBeli.setText("Subtotal Rp. "+df.format(list[position].subtotal))
 
                 binding.btnDeleteKeranjang.visibility = View.GONE
 

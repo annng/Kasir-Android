@@ -7,6 +7,7 @@ import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.databinding.ActivityRegisterBinding
 import com.artevak.kasirpos.model.RegisterInfo
 import com.artevak.kasirpos.response.CommonResponse
+import com.artevak.kasirpos.ui.activity.HomeActivity
 import com.artevak.kasirpos.util.ApiMain
 import retrofit2.Call
 import retrofit2.Callback
@@ -57,45 +58,13 @@ class RegisterActivity : BaseActivity() {
         }else if (!password.equals(confirm_password)){
             showErrorMessage("Konfirmasi password tidak valid")
         }else {
-            registerInfo = RegisterInfo(email, password, name, nama_umkm, phone, alamat)
-            sendRegistration(registerInfo)
+            //TODO register process
+            gotoMainPage()
         }
     }
 
-    fun sendRegistration(
-       registerInfo: RegisterInfo
-    ){
-        showLoading(this)
-        Log.d(TAG_DAFTAR,registerInfo.toString())
-
-        ApiMain().services.registerUser(registerInfo).enqueue(
-            object : Callback<CommonResponse> {
-                override fun onFailure(call: Call<CommonResponse>, t: Throwable) {
-                    showErrorMessage("gagal melakukan pendaftaran, coba lagi nanti")
-                    Log.d(TAG_DAFTAR,t.message.toString())
-                    dismissLoading()
-                }
-                override fun onResponse(call: Call<CommonResponse>, response: Response<CommonResponse>) {
-                    val responAPI = response.body()
-                    val responseStatus = response.code()
-
-
-                    dismissLoading()
-                    if(response.code() == 200) {
-                        Log.d(TAG_DAFTAR,"body "+responAPI!!.toString())
-                        Log.d(TAG_DAFTAR,"http code asli "+responseStatus.toString())
-                        Log.d(TAG_DAFTAR,"http code dari API "+responAPI!!.http_status)
-
-                        showSuccessMessage("Pendaftaran berhasil, silahkan login")
-
-                        val i = Intent(this@RegisterActivity, LoginActivity::class.java)
-                        startActivity(i)
-
-                    }else if (response.code() == 202){
-                        showErrorMessage("Pendaftaran gagal, cek kembali koneksi anda")
-                    }
-                }
-            }
-        )
+    private fun gotoMainPage(){
+        val i = Intent(this@RegisterActivity, HomeActivity::class.java)
+        startActivity(i)
     }
 }

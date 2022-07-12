@@ -71,47 +71,22 @@ class SelectPelangganActivity : BaseActivity() {
     fun getDataPelanggan(){
         showLoadingShimmerPelanggan()
 
-        ApiMain().services.getPelanggan(mUserPref.getToken(),CURRENT_PAGE,KATA_KUNCI).enqueue(object :
-            retrofit2.Callback<PelangganResponse> {
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onResponse(call: Call<PelangganResponse>, response: Response<PelangganResponse>) {
-                //Tulis code jika response sukses
-                Log.d(TAG_GET_PELANGGAN,response.toString())
-                Log.d(TAG_GET_PELANGGAN,"http status : "+response.code())
-
-                if(response.code() == 200) {
-                    listPelanggan.clear()
-                    response.body()?.data_pelanggan?.let {
-                        Log.d(TAG_GET_PELANGGAN,"dari API : "+it)
-                        Log.d(TAG_GET_PELANGGAN,"jumlah dari API : "+it.size)
-                        listPelanggan.addAll(it)
-                        adapter.notifyDataSetChanged()
-
-                        hideLoadingShimmerPelanggan()
-                        Log.d(TAG_GET_PELANGGAN,"isi adapter  : "+adapter.itemCount)
-                    }
-
-                    if (listPelanggan.size == 0){
-                        binding.tvInfoEmpty.visibility = View.VISIBLE
-                    }
-
-                }else {
-                    Toasty.error(this@SelectPelangganActivity, "gagal mengambil data", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_GET_PELANGGAN,"err :"+response.message())
-                }
-            }
-            override fun onFailure(call: Call<PelangganResponse>, t: Throwable){
-                //Tulis code jika response fail
-                val errMsg = t.message.toString()
-                if (errMsg.takeLast(6).equals("$.null")){
-                    Log.d(TAG_GET_PELANGGAN,"rusak nya gpapa kok  ")
-                    hideLoadingShimmerPelanggan()
-                }else{
-                    Toasty.error(this@SelectPelangganActivity, "response failure for more data", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_GET_PELANGGAN,"rusak : "+t.message.toString())
-                }
-            }
-        })
+        //TODO get data pelanggan
+        listPelanggan.add(
+            Pelanggan(
+                name = "Anang",
+                phone = "+6285747325450",
+                alamat = "Soka, Lerep"
+            )
+        )
+        listPelanggan.add(
+            Pelanggan(
+                name = "Ardhea",
+                phone = "+6285747123456",
+                alamat = "Banyumanik"
+            )
+        )
+        hideLoadingShimmerPelanggan()
     }
 
     fun showLoadingShimmerPelanggan(){

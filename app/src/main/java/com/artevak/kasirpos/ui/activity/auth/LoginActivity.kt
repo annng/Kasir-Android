@@ -44,43 +44,14 @@ class LoginActivity : BaseActivity() {
         }else if (password.equals("") || password.length == 0){
             showErrorMessage("Password Belum diisi")
         }else {
-            loginInfo = LoginInfo(email, password)
-            signIn(loginInfo)
+            //TODO signin process
+            gotoSplashScreen()
         }
     }
 
-    fun signIn(loginInfo: LoginInfo){
-        showLoading(this)
-        Log.d(TAG_LOGIN,loginInfo.toString())
+    fun gotoSplashScreen(){
+        val i = Intent(this@LoginActivity, SplashActivity::class.java)
+        startActivity(i)
 
-        ApiMain().services.loginUser(loginInfo).enqueue(
-            object : Callback<LoginResponse> {
-                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                    showErrorMessage("gagal melakukan login, coba lagi nanti")
-                    Log.d(TAG_LOGIN,t.message.toString())
-                    dismissLoading()
-                }
-                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                    val responAPI = response.body()
-                    val responseStatus = response.code()
-
-
-                    dismissLoading()
-                    if(response.code() == 200) {
-                        Log.d(TAG_LOGIN,"body "+responAPI!!.toString())
-                        Log.d(TAG_LOGIN,"http code asli "+responseStatus.toString())
-                        Log.d(TAG_LOGIN,"token user "+responAPI!!.token)
-                        Log.d(TAG_LOGIN,"http code dari API "+responAPI!!.http_status)
-                        mUserPref.saveToken(responAPI!!.token)
-
-                        val i = Intent(this@LoginActivity, SplashActivity::class.java)
-                        startActivity(i)
-
-                    }else if (response.code() == 202){
-                        showErrorMessage("Login gagal, cek kembali email dan password anda")
-                    }
-                }
-            }
-        )
     }
 }

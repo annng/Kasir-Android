@@ -9,14 +9,8 @@ import retrofit2.http.*
 
 interface ApiServices {
 
-    @POST("login")
-    fun loginUser(@Body userData: LoginInfo) : Call<LoginResponse>
-
     @GET("logout")
     fun logoutUser(@Query("token") token : String) : Call<CommonResponse>
-
-    @POST("register")
-    fun registerUser(@Body userData: RegisterInfo) : Call<CommonResponse>
 
     @GET("user/detail")
     fun detailUser(@Query("token") token : String) : Call<DetailUserResponse>

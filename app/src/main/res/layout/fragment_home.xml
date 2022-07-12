@@ -90,6 +90,7 @@
                     android:textStyle="bold" />
 
                 <include
+                    android:id="@+id/shimmerHorizontal"
                     layout="@layout/shimmer_horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
@@ -155,6 +156,7 @@
                     android:textStyle="bold" />
 
                 <include
+                    android:id="@+id/shimmerMain"
                     layout="@layout/shimmer_main"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />

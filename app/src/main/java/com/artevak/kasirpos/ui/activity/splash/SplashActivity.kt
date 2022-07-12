@@ -28,7 +28,8 @@ class SplashActivity : BaseActivity() {
 
         mUserPref = UserPreference(this)
         if (mUserPref.getToken().equals("") || mUserPref.getToken() == null){
-            i = Intent(this, LoginActivity::class.java)
+            i = Intent(this, HomeActivity::class.java)
+//            i = Intent(this, LoginActivity::class.java)
             val timer: Thread = object : Thread() {
                 override fun run() {
 
@@ -44,49 +45,8 @@ class SplashActivity : BaseActivity() {
             }
             timer.start()
         }else{
-            Log.d(TAG_DETAIL,"token nya : "+mUserPref.getToken())
-            getDetailUser()
+            //TODO get detail user and goto HomeActivity
         }
-    }
-
-    fun getDetailUser(){
-        ApiMain().services.detailUser(mUserPref.getToken()!!).enqueue(
-            object : Callback<DetailUserResponse> {
-                override fun onFailure(call: Call<DetailUserResponse>, t: Throwable) {
-                    showInfoMessage("gagal mendapatkan data user")
-                    Log.d(TAG_DETAIL,t.message.toString())
-                    goToLogin()
-                }
-                override fun onResponse(call: Call<DetailUserResponse>, response: Response<DetailUserResponse>) {
-                    val responAPI = response.body()
-                    val responseStatus = response.code()
-
-                    Log.d(TAG_DETAIL,"status "+responseStatus.toString())
-
-                    if(response.code() == 200) {
-                        Log.d(TAG_DETAIL,"body "+responAPI!!.toString())
-                        Log.d(TAG_DETAIL,"http code asli "+responseStatus.toString())
-                        Log.d(TAG_DETAIL,"http code dari API "+responAPI!!.http_status)
-
-                        val userModel = responAPI!!.userModel
-                        setSession(userModel)
-
-                        val intentt = Intent(this@SplashActivity, HomeActivity::class.java)
-                        startActivity(intentt)
-                        finish()
-                    }else if (response.code() == 401){
-                        showErrorMessage("Akses token ditolak, silahkan lagin dahulu")
-                        goToLogin()
-                        finish()
-                    }
-                    else{
-                        showErrorMessage("Akses token ditolak, silahkan lagin dahulu")
-                        goToLogin()
-                        finish()
-                    }
-                }
-            }
-        )
     }
 
     fun goToLogin(){

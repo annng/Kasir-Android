@@ -55,7 +55,7 @@ class DetailBarangActivity : BaseActivity() {
         val nf = NumberFormat.getNumberInstance(Locale.GERMAN)
         val df = nf as DecimalFormat
 
-        val imageURl = BuildConfig.BASE_URL+"img/barang/"+barang.picture
+        val imageURl = barang.picture
         Glide.with(this)
             .load(imageURl)
             .into(binding.ivFoto)
@@ -69,36 +69,8 @@ class DetailBarangActivity : BaseActivity() {
     }
 
     fun deleteBarang(id_barang : String){
-        showLoading(this)
-
-        ApiMain().services.deleteBarang(mUserPref.getToken(),id_barang).enqueue(object :
-            retrofit2.Callback<CommonResponse> {
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onResponse(call: Call<CommonResponse>, response: Response<CommonResponse>) {
-                dismissLoading()
-                //Tulis code jika response sukses
-                Log.d(TAG_DELETE,response.toString())
-                Log.d(TAG_DELETE,"http status : "+response.code())
-
-                if(response.code() == 200) {
-                    showSuccessMessage("Hapus barang berhasil !")
-                    onBackPressed()
-                }else {
-                    Toasty.error(this@DetailBarangActivity, "hapus barang gagal", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_DELETE,"err :"+response.message())
-                }
-            }
-            override fun onFailure(call: Call<CommonResponse>, t: Throwable){
-                //Tulis code jika response fail
-                dismissLoading()
-                val errMsg = t.message.toString()
-                if (errMsg.takeLast(6).equals("$.null")){
-                    Log.d(TAG_DELETE,"rusak nya gpapa kok  ")
-                }else{
-                    Toasty.error(this@DetailBarangActivity, "response failure for more data", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_DELETE,"rusak : "+t.message.toString())
-                }
-            }
-        })
+        //TODO delete barang
+        Toast.makeText(this, "Delete Barang", Toast.LENGTH_SHORT).show()
+        onBackPressed()
     }
 }

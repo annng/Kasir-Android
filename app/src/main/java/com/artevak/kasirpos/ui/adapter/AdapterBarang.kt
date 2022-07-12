@@ -22,7 +22,7 @@ class AdapterBarang(private val list:ArrayList<Barang>) : RecyclerView.Adapter<A
         return MyViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = list?.size
+    override fun getItemCount(): Int = list.size
 
 
     class Holder(val view: View) : RecyclerView.ViewHolder(view)
@@ -34,15 +34,15 @@ class AdapterBarang(private val list:ArrayList<Barang>) : RecyclerView.Adapter<A
         with(holder){
             with(list.get(position)){
 
-                val imageUrl = BuildConfig.BASE_URL+"img/barang/"+list?.get(position).picture
+                val imageUrl = ""+ list.get(position).picture
                // Log.d("imgbarang",""+imageUrl)
                 Glide.with(binding.rlBarang.context)
                     .load(imageUrl)
                     .into(binding.ivBarang)
 
-                binding.tvNamaBarang.setText(""+list?.get(position).name)
-                binding.tvStok.setText("Sisa Stok "+list?.get(position).stok+" "+list?.get(position).satuan)
-                binding.tvDeskripsi.setText(list?.get(position).deskripsi)
+                binding.tvNamaBarang.setText(""+ list.get(position).name)
+                binding.tvStok.setText("Sisa Stok "+ list.get(position).stok +" "+ list.get(position).satuan)
+                binding.tvDeskripsi.setText(list.get(position).deskripsi)
 
                 binding.rlBarang.setOnClickListener {
                     val i  = Intent(binding.rlBarang.context, DetailBarangActivity::class.java)

@@ -5,8 +5,8 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Pelanggan(
-    var id: String? = "",
-    var name: String? = "",
-    var phone: String? = "",
-    var alamat: String? = "",
+    val id: String? = "",
+    val name: String? = "",
+    val phone: String? = "",
+    val alamat: String? = "",
 ) : Parcelable

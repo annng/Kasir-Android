@@ -25,7 +25,7 @@ class ApiMain : Application() {
         .writeTimeout(30, TimeUnit.SECONDS)
         .build()
     private val retrofit = Retrofit.Builder()
-        .baseUrl(BuildConfig.BASE_URL)
+        .baseUrl("")
         .client(client)
         .addConverterFactory(GsonConverterFactory.create())
         .build()

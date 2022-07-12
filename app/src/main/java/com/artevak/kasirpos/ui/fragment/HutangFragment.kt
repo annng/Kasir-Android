@@ -41,10 +41,11 @@ class HutangFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
     //lateinit var binding_shimmer : ShimmerSuratBinding
-    lateinit var shimmerFrameLayout : ShimmerFrameLayout
-    lateinit var mUserPref : UserPreference
-    lateinit var adapter : AdapterHutang
+    lateinit var shimmerFrameLayout: ShimmerFrameLayout
+    lateinit var mUserPref: UserPreference
+    lateinit var adapter: AdapterHutang
 
     var listHutang = ArrayList<Hutang>()
     val nf = NumberFormat.getNumberInstance(Locale.GERMAN)
@@ -90,17 +91,7 @@ class HutangFragment : Fragment() {
             showDialogFilter()
         }
         binding.fabDownload.setOnClickListener {
-            if (listHutang.size > 0){
-                val base_url = BuildConfig.BASE_URL+"hutang/report/print?token="
-                val token = mUserPref.getToken()
-                val downloadURL = base_url+token+"&dari="+dari+"&sampai="+sampai
-
-                val i = Intent(Intent.ACTION_VIEW)
-                i.data = Uri.parse(downloadURL)
-                startActivity(i)
-            }else{
-                Toasty.error(requireContext(), "data hutang masih kosong", Toast.LENGTH_SHORT, true).show()
-            }
+            //TODO download hutang
         }
 
 
@@ -109,7 +100,7 @@ class HutangFragment : Fragment() {
         return root
     }
 
-    fun showDialogFilter(){
+    fun showDialogFilter() {
         val dialog = BottomSheetDialog(requireContext())
         val view = layoutInflater.inflate(R.layout.bottom_sheet_select_time_hutang, null)
 
@@ -126,31 +117,43 @@ class HutangFragment : Fragment() {
         val etTanggalAkhir = view.findViewById<EditText>(R.id.etTanggalAkhir)
 
         btnPilihAwal.setOnClickListener {
-            val dpd = DatePickerDialog(requireActivity(), DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            val dpd = DatePickerDialog(
+                requireActivity(),
+                DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
 
-                // Display Selected date in textbox
-                etTanggalAwal.setText("" + dayOfMonth + "/" + (monthOfYear + 1 ) + "/" + year)
-                //selected_tgl_awal = ""+dayOfMonth+"/"+(monthOfYear+1)+"/"+year
-                selected_tgl_awal = ""+year+"-"+(monthOfYear+1)+"-"+dayOfMonth
+                    // Display Selected date in textbox
+                    etTanggalAwal.setText("" + dayOfMonth + "/" + (monthOfYear + 1) + "/" + year)
+                    //selected_tgl_awal = ""+dayOfMonth+"/"+(monthOfYear+1)+"/"+year
+                    selected_tgl_awal = "" + year + "-" + (monthOfYear + 1) + "-" + dayOfMonth
 
-            }, year, month, day)
+                },
+                year,
+                month,
+                day
+            )
 
             dpd.show()
         }
         btnPilihAkhir.setOnClickListener {
-            val dpd = DatePickerDialog(requireActivity(), DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            val dpd = DatePickerDialog(
+                requireActivity(),
+                DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
 
-                // Display Selected date in textbox
-                etTanggalAkhir.setText("" + dayOfMonth + "/" + (monthOfYear + 1 ) + "/" + year)
-                //selected_tgl_akhir = ""+dayOfMonth+"/"+(monthOfYear+1)+"/"+year
-                selected_tgl_akhir = ""+year+"-"+(monthOfYear+1)+"-"+dayOfMonth
+                    // Display Selected date in textbox
+                    etTanggalAkhir.setText("" + dayOfMonth + "/" + (monthOfYear + 1) + "/" + year)
+                    //selected_tgl_akhir = ""+dayOfMonth+"/"+(monthOfYear+1)+"/"+year
+                    selected_tgl_akhir = "" + year + "-" + (monthOfYear + 1) + "-" + dayOfMonth
 
-            }, year, month, day)
+                },
+                year,
+                month,
+                day
+            )
 
             dpd.show()
         }
         btnFilter.setOnClickListener {
-            filterDataHutang(selected_tgl_awal,selected_tgl_akhir)
+            filterDataHutang(selected_tgl_awal, selected_tgl_akhir)
             dialog.dismiss()
         }
 
@@ -159,112 +162,43 @@ class HutangFragment : Fragment() {
         dialog.show()
     }
 
-    fun filterDataHutang(tgl_mulai : String,tgl_akhir : String){
-        Log.d(TAG_GET_REPORT," tgl_mulai "+tgl_mulai+ " dan tgl akir "+tgl_akhir)
-        resetPagination()
-        showLoadingShimmer()
-
-        ApiMain().services.getReportHutang(mUserPref.getToken(),tgl_mulai,tgl_akhir).enqueue(object :
-            retrofit2.Callback<HutangResponse> {
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onResponse(call: Call<HutangResponse>, response: Response<HutangResponse>) {
-                //Tulis code jika response sukses
-                Log.d(TAG_GET_REPORT,response.toString())
-                Log.d(TAG_GET_REPORT,"http status : "+response.code())
-
-                if(response.code() == 200) {
-                    listHutang.clear()
-                    response.body()?.data_hutang?.let {
-                        Log.d(TAG_GET_REPORT,"dari API : "+it)
-                        Log.d(TAG_GET_REPORT,"jumlah dari API : "+it.size)
-                        listHutang.addAll(it)
-                        adapter.notifyDataSetChanged()
-
-                        hideLoadingShimmer()
-                        Log.d(TAG_GET_REPORT,"isi adapter  : "+adapter.itemCount)
-                    }
-
-                    if (listHutang.size == 0){
-                        Toasty.info(requireContext(), "Belum ada data untuk rentang waktu ini..", Toast.LENGTH_SHORT, true).show()
-                        binding.tvInfoEmpty.visibility = View.VISIBLE
-                    }else{
-                        dari = tgl_mulai
-                        sampai = tgl_akhir
-                        binding.fabDownload.visibility = View.VISIBLE
-                    }
-
-                }else {
-                    Toasty.error(requireContext(), "gagal mengambil data", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_GET_REPORT,"err :"+response.message())
-                }
-            }
-            override fun onFailure(call: Call<HutangResponse>, t: Throwable){
-                //Tulis code jika response fail
-                val errMsg = t.message.toString()
-                if (errMsg.takeLast(6).equals("$.null")){
-                    Log.d(TAG_GET_REPORT,"rusak nya gpapa kok  ")
-                    hideLoadingShimmer()
-                }else{
-                    Toasty.error(requireContext(), "response failure for more data", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_GET_REPORT,"rusak : "+t.message.toString())
-                }
-            }
-        })
+    fun filterDataHutang(tgl_mulai: String, tgl_akhir: String) {
+       //TODO filter hutang by start & end date
     }
 
-    fun resetPagination(){
+    fun resetPagination() {
         CURRENT_PAGE = 1
         NEXT_PAGE = CURRENT_PAGE + 1
     }
 
-    fun getDataHutang(){
+    fun getDataHutang() {
         showLoadingShimmer()
         resetPagination()
 
-        ApiMain().services.getDataHutang(mUserPref.getToken(),CURRENT_PAGE,TIPE_HUTANG).enqueue(object :
-            retrofit2.Callback<HutangResponse> {
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onResponse(call: Call<HutangResponse>, response: Response<HutangResponse>) {
-                //Tulis code jika response sukses
-                Log.d(TAG_GET_HUTANG,response.toString())
-                Log.d(TAG_GET_HUTANG,"http status : "+response.code())
-
-                if(response.code() == 200) {
-                    listHutang.clear()
-                    response.body()?.data_hutang?.let {
-                        Log.d(TAG_GET_HUTANG,"dari API : "+it)
-                        Log.d(TAG_GET_HUTANG,"jumlah dari API : "+it.size)
-                        listHutang.addAll(it)
-                        adapter.notifyDataSetChanged()
-
-                        hideLoadingShimmer()
-                        Log.d(TAG_GET_HUTANG,"isi adapter  : "+adapter.itemCount)
-                    }
-
-                    if (listHutang.size == 0){
-                        binding.tvInfoEmpty.visibility = View.VISIBLE
-                    }
-
-                }else {
-                    Toasty.error(requireContext(), "gagal mengambil data", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_GET_HUTANG,"err :"+response.message())
-                }
-            }
-            override fun onFailure(call: Call<HutangResponse>, t: Throwable){
-                //Tulis code jika response fail
-                val errMsg = t.message.toString()
-                if (errMsg.takeLast(6).equals("$.null")){
-                    Log.d(TAG_GET_HUTANG,"rusak nya gpapa kok  ")
-                    hideLoadingShimmer()
-                }else{
-                    Toasty.error(requireContext(), "response failure for more data", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_GET_HUTANG,"rusak : "+t.message.toString())
-                }
-            }
+        listHutang.clear()
+        listHutang.add(Hutang().apply {
+            id = "12"
+            id_pelanggan = "23"
+            nama_pelanggan = "Anang"
+            hutang = 50000
+            status = "Lunas"
+            tgl_hutang = "2022-07-21"
+            hutang_type = "Kredit"
+            deskripsi = "Hutang buat biaya sekolah anak"
         })
+
+        adapter.notifyDataSetChanged()
+
+        hideLoadingShimmer()
+
+
+        if (listHutang.size == 0) {
+            binding.tvInfoEmpty.visibility = View.VISIBLE
+        }
     }
 
-    fun showLoadingShimmer(){
+
+    fun showLoadingShimmer() {
         shimmerFrameLayout.visibility = View.VISIBLE
         shimmerFrameLayout.startShimmerAnimation()
 
@@ -272,8 +206,8 @@ class HutangFragment : Fragment() {
         binding.tvInfoEmpty.visibility = View.GONE
     }
 
-    fun hideLoadingShimmer(){
-        if (shimmerFrameLayout.isVisible){
+    fun hideLoadingShimmer() {
+        if (shimmerFrameLayout.isVisible) {
             shimmerFrameLayout.stopShimmerAnimation()
             shimmerFrameLayout.clearAnimation()
             shimmerFrameLayout.visibility = View.GONE
@@ -293,7 +227,7 @@ class HutangFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(): HutangFragment{
+        fun newInstance(): HutangFragment {
             val fragment = HutangFragment()
             val args = Bundle()
             fragment.arguments = args
