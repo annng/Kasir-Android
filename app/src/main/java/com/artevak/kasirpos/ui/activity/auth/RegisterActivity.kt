@@ -2,16 +2,10 @@ package com.artevak.kasirpos.ui.activity.auth
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.databinding.ActivityRegisterBinding
 import com.artevak.kasirpos.model.RegisterInfo
-import com.artevak.kasirpos.response.CommonResponse
 import com.artevak.kasirpos.ui.activity.HomeActivity
-import com.artevak.kasirpos.util.ApiMain
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class RegisterActivity : BaseActivity() {
     lateinit var binding : ActivityRegisterBinding

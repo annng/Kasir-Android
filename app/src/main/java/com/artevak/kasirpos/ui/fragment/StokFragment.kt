@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.artevak.kasirpos.R
+import com.artevak.kasirpos.base.BaseFragment
 import com.artevak.kasirpos.databinding.FragmentStokBinding
 import com.artevak.kasirpos.model.Barang
 import com.artevak.kasirpos.model.UserPreference
@@ -20,7 +21,7 @@ import com.artevak.kasirpos.ui.activity.item.TambahBarangActivity
 import com.artevak.kasirpos.ui.adapter.AdapterBarang
 import com.facebook.shimmer.ShimmerFrameLayout
 
-class StokFragment : Fragment() {
+class StokFragment : BaseFragment() {
 
     private var _binding: FragmentStokBinding? = null
 
@@ -30,7 +31,6 @@ class StokFragment : Fragment() {
     lateinit var shimmerFrameLayout: ShimmerFrameLayout
     lateinit var adapter: AdapterBarang
     lateinit var i: Intent
-    lateinit var mUserPref: UserPreference
     var listBarang = ArrayList<Barang>()
 
     var CURRENT_PAGE = 1
@@ -53,7 +53,6 @@ class StokFragment : Fragment() {
         val root: View = binding.root
 
         shimmerFrameLayout = root.findViewById(R.id.sflMain)
-        mUserPref = UserPreference(requireContext())
         adapter = AdapterBarang(listBarang)
 
         val layoutManager =

@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.artevak.kasirpos.R
+import com.artevak.kasirpos.base.BaseFragment
 import com.artevak.kasirpos.databinding.FragmentHomeBinding
 import com.artevak.kasirpos.model.Barang
 import com.artevak.kasirpos.model.DataChartPenjualan
@@ -26,7 +27,7 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
 
     private var _binding: FragmentHomeBinding? = null
 
@@ -37,7 +38,6 @@ class HomeFragment : Fragment() {
     //lateinit var binding_shimmer : ShimmerSuratBinding
     lateinit var shimmerFrameLayout: ShimmerFrameLayout
     lateinit var sflBarang: ShimmerFrameLayout
-    lateinit var mUserPref: UserPreference
     lateinit var adapter: AdapterPelanggan
     lateinit var adapterBarang: AdapterBarang
     var listPelanggan = ArrayList<Pelanggan>()
@@ -69,7 +69,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         shimmerFrameLayout = binding.shimmerHorizontal.sflHorizontal
         sflBarang = binding.shimmerHorizontal.sflHorizontal
-        mUserPref = UserPreference(requireContext())
         adapter = AdapterPelanggan(listPelanggan)
         adapterBarang = AdapterBarang(listBarang)
 

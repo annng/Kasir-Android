@@ -2,21 +2,12 @@ package com.artevak.kasirpos.ui.activity.debt
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
-import com.artevak.kasirpos.ui.activity.splash.SplashActivity
 import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.databinding.ActivityDetailHutangBinding
 import com.artevak.kasirpos.model.Hutang
 import com.artevak.kasirpos.model.UserPreference
-import com.artevak.kasirpos.response.CommonResponse
-import com.artevak.kasirpos.util.ApiMain
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*
