@@ -44,30 +44,6 @@ class ProfileActivity : BaseActivity() {
     }
 
     fun sendLogoutRequest(){
-        ApiMain().services.logoutUser(mUserPref.getToken()!!).enqueue(
-            object : Callback<CommonResponse> {
-                override fun onFailure(call: Call<CommonResponse>, t: Throwable) {
-                    showInfoMessage("gagal logout user")
-                    Log.d(TAG_LOGOUT,t.message.toString())
-                }
-                override fun onResponse(call: Call<CommonResponse>, response: Response<CommonResponse>) {
-                    val responAPI = response.body()
-                    val responseStatus = response.code()
-
-                    Log.d(TAG_LOGOUT,"status "+responseStatus.toString())
-
-                    if(response.code() == 200) {
-                        Log.d(TAG_LOGOUT,"body "+responAPI!!.toString())
-                        Log.d(TAG_LOGOUT,"http code asli "+responseStatus.toString())
-                        Log.d(TAG_LOGOUT,"http code dari API "+responAPI!!.http_status)
-                        Log.d(TAG_LOGOUT,"Logout request berhasil ")
-
-                    }
-                    else{
-                        Log.d(TAG_LOGOUT,"Logout request gagal ")
-                    }
-                }
-            }
-        )
+        //TODO logout
     }
 }

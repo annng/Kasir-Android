@@ -211,35 +211,7 @@ class TransaksiFragment : Fragment() {
 
     fun saveOrder(){
         showLoading()
-        Log.d(TAG_ORDER,orderInfo.toString())
-
-        ApiMain().services.saveTransaksi(mUserPref.getToken(),orderInfo).enqueue(
-            object : Callback<CommonResponse> {
-                override fun onFailure(call: Call<CommonResponse>, t: Throwable) {
-                    Toasty.error(requireContext(), "gagal simpan transaksi, coba lagi nanti", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_ORDER,t.message.toString())
-                    dismissLoading()
-                }
-                override fun onResponse(call: Call<CommonResponse>, response: Response<CommonResponse>) {
-                    val responAPI = response.body()
-                    val responseStatus = response.code()
-
-
-                    dismissLoading()
-                    if(response.code() == 200) {
-                        Log.d(TAG_ORDER,"body "+responAPI!!.toString())
-                        Log.d(TAG_ORDER,"http code asli "+responseStatus.toString())
-                        Log.d(TAG_ORDER,"http code dari API "+responAPI!!.http_status)
-
-                        Toasty.success(requireContext(), "Transaksi berhasil !", Toast.LENGTH_SHORT, true).show()
-                        resetTransaksi()
-
-                    }else if (response.code() == 202){
-                        Toasty.error(requireContext(), "gagal simpan transaksi, coba lagi nanti", Toast.LENGTH_SHORT, true).show()
-                    }
-                }
-            }
-        )
+        //TODO save order
 
     }
 
@@ -277,50 +249,17 @@ class TransaksiFragment : Fragment() {
     fun getDataBarang(){
         showLoading()
 
-        ApiMain().services.getAllBarang(mUserPref.getToken()).enqueue(object :
-            retrofit2.Callback<AllBarangResponse> {
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onResponse(call: Call<AllBarangResponse>, response: Response<AllBarangResponse>) {
-                //Tulis code jika response sukses
-                Log.d(TAG_GET_BARANG,response.toString())
-                Log.d(TAG_GET_BARANG,"http status : "+response.code())
+        listBarang.add(
+            Barang(
+                name = "Macbook Pro 2020",
+                harga_beli = 210000,
+                harga_jual = 2500000,
+                deskripsi = "Mahal boss"
+            )
+        )
+        adapter.notifyDataSetChanged()
 
-                if(response.code() == 200) {
-                    listBarang.clear()
-                    listNamaBarang.clear()
-                    response.body()?.data_barang?.let {
-                        Log.d(TAG_GET_BARANG,"dari API : "+it)
-                        Log.d(TAG_GET_BARANG,"jumlah dari API : "+it.size)
-                        listBarang.addAll(it)
-                        adapter.notifyDataSetChanged()
-
-                        Log.d(TAG_GET_BARANG,"isi adapter  : "+adapter.itemCount)
-                    }
-
-                    for (c in 0 until listBarang.size){
-                        val barang  = listBarang.get(c)
-                        listNamaBarang.add(barang.name.toString())
-                    }
-
-                    dismissLoading()
-
-                }else {
-                    Toasty.error(requireContext(), "gagal mengambil data", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_GET_BARANG,"err :"+response.message())
-                }
-            }
-            override fun onFailure(call: Call<AllBarangResponse>, t: Throwable){
-                //Tulis code jika response fail
-                val errMsg = t.message.toString()
-                if (errMsg.takeLast(6).equals("$.null")){
-                    Log.d(TAG_GET_BARANG,"rusak nya gpapa kok  ")
-                    dismissLoading()
-                }else{
-                    Toasty.error(requireContext(), "response failure for more data", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_GET_BARANG,"rusak : "+t.message.toString())
-                }
-            }
-        })
+        dismissLoading()
 
     }
 

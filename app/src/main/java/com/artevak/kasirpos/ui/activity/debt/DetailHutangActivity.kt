@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.artevak.kasirpos.ui.activity.splash.SplashActivity
 import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.databinding.ActivityDetailHutangBinding
@@ -43,12 +44,12 @@ class DetailHutangActivity : BaseActivity() {
             onBackPressed()
         }
         binding.rbSudahLunas.setOnCheckedChangeListener { compoundButton, b ->
-            if (b == true){
+            if (b){
                 hutang.status = "lunas"
             }
         }
         binding.rbBelumLunas.setOnCheckedChangeListener { compoundButton, b ->
-            if (b == true){
+            if (b){
                 hutang.status = "belum lunas"
             }
         }
@@ -96,43 +97,8 @@ class DetailHutangActivity : BaseActivity() {
     }
 
     fun updateHutang(){
-        showLoading(this)
+        Toast.makeText(this, "Updating Hutang", Toast.LENGTH_SHORT).show()
 
-        val builder =
-            MultipartBody.Builder().setType(MultipartBody.FORM)
-        builder.addFormDataPart("id_hutang",hutang.id!!)
-        builder.addFormDataPart("deskripsi",hutang.deskripsi!!)
-        builder.addFormDataPart("status",hutang.status!!)
-        val requestBody: RequestBody = builder.build()
-
-        ApiMain().services.editHutang(mUserPref.getToken(),requestBody).enqueue(
-            object : Callback<CommonResponse> {
-                override fun onFailure(call: Call<CommonResponse>, t: Throwable) {
-                    showErrorMessage("gagal melakukan simpan data, coba lagi nanti")
-                    Log.d(TAG_UPDATE_HUTANG,t.message.toString())
-                    dismissLoading()
-                }
-                override fun onResponse(call: Call<CommonResponse>, response: Response<CommonResponse>) {
-                    val apiResponse = response.body()
-                    val responseInfo = response.code()
-                    Log.d(TAG_UPDATE_HUTANG,"body "+apiResponse!!.toString())
-                    Log.d(TAG_UPDATE_HUTANG,"code "+responseInfo.toString())
-
-                    dismissLoading()
-                    if(response.code() == 200) {
-                        showSuccessMessage(apiResponse.message)
-                        onBackPressed()
-
-                    }else if (response.code() == 202){
-                        showErrorMessage(apiResponse.message)
-                    }else if (response.code() == 401){
-                        showErrorMessage("terjadi error pada token, login kembali..")
-                        logout()
-                        val i = Intent(this@DetailHutangActivity, SplashActivity::class.java)
-                        startActivity(i)
-                    }
-                }
-            }
-        )
+        //TODO update hutang
     }
 }

@@ -10,6 +10,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.BuildConfig
@@ -137,46 +138,9 @@ class UbahBarangActivity : BaseActivity(), PermissionHelper.PermissionListener {
         if (fotoBitmap != null){
             builder.addFormDataPart(key_picture,"fotoupload.bmp",RequestBody.create(MultipartBody.FORM,bos.toByteArray()))
         }
-        builder.addFormDataPart("id_barang",barang.id!!)
-        builder.addFormDataPart("name",name)
-        builder.addFormDataPart("harga_beli",harga_beli)
-        builder.addFormDataPart("harga_jual",harga_jual)
-        builder.addFormDataPart("stok",stok)
-        builder.addFormDataPart("deskripsi",deskripsi)
-        builder.addFormDataPart("satuan",satuan)
-        val requestBody: RequestBody = builder.build()
-
-        ApiMain().services.editBarang(mUserPref.getToken(),requestBody).enqueue(
-            object : Callback<CommonResponse> {
-                override fun onFailure(call: Call<CommonResponse>, t: Throwable) {
-                    showErrorMessage("gagal melakukan simpan data, coba lagi nanti")
-                    Log.d(TAG_UPDATE_BARANG,t.message.toString())
-                    dismissLoading()
-                }
-                override fun onResponse(call: Call<CommonResponse>, response: Response<CommonResponse>) {
-                    val apiResponse = response.body()
-                    val responseInfo = response.code()
-                    Log.d(TAG_UPDATE_BARANG,"body "+apiResponse!!.toString())
-                    Log.d(TAG_UPDATE_BARANG,"code "+responseInfo.toString())
-
-                    dismissLoading()
-                    if(response.code() == 200) {
-                        showSuccessMessage(apiResponse.message)
-
-                        SharedVariable.nextFragment = "stok"
-                        val i = Intent(this@UbahBarangActivity, HomeActivity::class.java)
-                        startActivity(i)
-                    }else if (response.code() == 202){
-                        showErrorMessage(apiResponse.message)
-                    }else if (response.code() == 401){
-                        showErrorMessage("terjadi error pada token, login kembali..")
-                        logout()
-                        val i = Intent(this@UbahBarangActivity, SplashActivity::class.java)
-                        startActivity(i)
-                    }
-                }
-            }
-        )
+        //TODO update barang
+        Toast.makeText(this, "Update barang", Toast.LENGTH_SHORT).show()
+        onBackPressed()
 
     }
 
@@ -204,7 +168,7 @@ class UbahBarangActivity : BaseActivity(), PermissionHelper.PermissionListener {
 
         selectedSatuan = barang.satuan!!
 
-        val imageURl = BuildConfig.BASE_URL+"img/barang/"+barang.picture
+        val imageURl = barang.picture
         Glide.with(this)
             .load(imageURl)
             .into(binding.ivBarang)
@@ -253,7 +217,6 @@ class UbahBarangActivity : BaseActivity(), PermissionHelper.PermissionListener {
                 e.printStackTrace()
                 showErrorMessage("terjadi kesalahan, coba lagi nanti")
             }
-
 
         }
 

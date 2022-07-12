@@ -22,7 +22,7 @@ class AdapterKeranjang(private val list:ArrayList<Keranjang>,private val fragmen
         return MyViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = list?.size
+    override fun getItemCount(): Int = list.size
 
 
     class Holder(val view: View) : RecyclerView.ViewHolder(view)
@@ -34,17 +34,17 @@ class AdapterKeranjang(private val list:ArrayList<Keranjang>,private val fragmen
         with(holder){
             with(list.get(position)){
 
-                val imageUrl = BuildConfig.BASE_URL+"img/barang/"+list?.get(position).picture
+                val imageUrl = list.get(position).picture
                // Log.d("imgbarang",""+imageUrl)
                 Glide.with(binding.rlBarang.context)
                     .load(imageUrl)
                     .into(binding.ivBarang)
 
-                binding.tvNamaBarang.setText(""+list?.get(position).nama_barang)
-                binding.tvJumlahBeli.setText(""+list?.get(position).jumlah_beli+" "+list?.get(position).satuan)
+                binding.tvNamaBarang.setText(""+ list[position].nama_barang)
+                binding.tvJumlahBeli.setText(""+ list[position].jumlah_beli+" "+ list[position].satuan)
 
                 binding.btnDeleteKeranjang.setOnClickListener {
-                    (fragment as TransaksiFragment).removeFromCart(list?.get(position))
+                    (fragment as TransaksiFragment).removeFromCart(list[position])
                 }
 
             }

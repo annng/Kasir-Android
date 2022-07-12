@@ -3,6 +3,7 @@ package com.artevak.kasirpos.ui.activity.customer
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.artevak.kasirpos.ui.activity.splash.SplashActivity
 import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.databinding.ActivityTambahPelangganBinding
@@ -52,39 +53,9 @@ class TambahPelangganActivity : BaseActivity() {
     }
 
     fun savePelanggan(pelangganInfo: PelangganInfo){
-        showLoading(this)
+        Toast.makeText(this, "Save data pelanggan", Toast.LENGTH_SHORT).show()
+        onBackPressed()
 
-        ApiMain().services.savePelanggan(mUserPref.getToken(),pelangganInfo).enqueue(
-            object : Callback<CommonResponse> {
-                override fun onFailure(call: Call<CommonResponse>, t: Throwable) {
-                    showErrorMessage("gagal melakukan login, coba lagi nanti")
-                    Log.d(TAG_SAVE,t.message.toString())
-                    dismissLoading()
-                }
-                override fun onResponse(call: Call<CommonResponse>, response: Response<CommonResponse>) {
-                    val responAPI = response.body()
-                    val responseStatus = response.code()
-
-
-                    dismissLoading()
-                    if(response.code() == 200) {
-                        Log.d(TAG_SAVE,"body "+responAPI!!.toString())
-                        Log.d(TAG_SAVE,"http code asli "+responseStatus.toString())
-                        Log.d(TAG_SAVE,"http code dari API "+responAPI!!.http_status)
-
-                        showSuccessMessage(responAPI.message)
-                        onBackPressed()
-
-                    }else if (response.code() == 202){
-                        showErrorMessage(responAPI!!.message)
-                    }else if (response.code() == 401){
-                        showErrorMessage("Terjadi eror pada token, login kembali...")
-                        logout()
-                        val i = Intent(this@TambahPelangganActivity, SplashActivity::class.java)
-                        startActivity(i)
-                    }
-                }
-            }
-        )
+        //TODO save pelanggan info
     }
 }

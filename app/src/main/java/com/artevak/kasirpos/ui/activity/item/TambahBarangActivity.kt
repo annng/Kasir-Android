@@ -10,6 +10,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
+import android.widget.Toast
 import com.artevak.kasirpos.ui.activity.splash.SplashActivity
 import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.databinding.ActivityTambahBarangBinding
@@ -120,46 +121,8 @@ class TambahBarangActivity : BaseActivity(),PermissionHelper.PermissionListener 
         showLoading(this)
         val key_picture = "picture"
 
-        val builder =
-            MultipartBody.Builder().setType(MultipartBody.FORM)
-        builder.addFormDataPart(key_picture,"fotoupload.bmp",RequestBody.create(MultipartBody.FORM,bos.toByteArray()))
-        builder.addFormDataPart("name",name)
-        builder.addFormDataPart("harga_beli",harga_beli)
-        builder.addFormDataPart("harga_jual",harga_jual)
-        builder.addFormDataPart("stok",stok)
-        builder.addFormDataPart("deskripsi",deskripsi)
-        builder.addFormDataPart("satuan",satuan)
-        val requestBody: RequestBody = builder.build()
-
-        ApiMain().services.addBarang(mUserPref.getToken(),requestBody).enqueue(
-            object : Callback<CommonResponse> {
-                override fun onFailure(call: Call<CommonResponse>, t: Throwable) {
-                    showErrorMessage("gagal melakukan simpan data, coba lagi nanti")
-                    Log.d(TAG_SAVE_BARANG,t.message.toString())
-                    dismissLoading()
-                }
-                override fun onResponse(call: Call<CommonResponse>, response: Response<CommonResponse>) {
-                    val updateResponse = response.body()
-                    val responseInfo = response.code()
-                    Log.d(TAG_SAVE_BARANG,"body "+updateResponse!!.toString())
-                    Log.d(TAG_SAVE_BARANG,"code "+responseInfo.toString())
-
-                    dismissLoading()
-                    if(response.code() == 200) {
-                        showSuccessMessage("Tambah barang berhasil")
-                        onBackPressed()
-
-                    }else if (response.code() == 202){
-                        showErrorMessage("gagal melakukan penambahan data, coba lagi nanti")
-                    }else if (response.code() == 401){
-                        showErrorMessage("terjadi error pada token, login kembali..")
-                        logout()
-                        val i = Intent(this@TambahBarangActivity, SplashActivity::class.java)
-                        startActivity(i)
-                    }
-                }
-            }
-        )
+        Toast.makeText(this, "Tambah barang", Toast.LENGTH_SHORT).show()
+        onBackPressed()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

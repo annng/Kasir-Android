@@ -73,36 +73,9 @@ class TambahHutangActivity : BaseActivity() {
     }
 
     fun saveHutang(){
-        showLoading(this)
-        Log.d(TAG_HUTANG," "+hutangInfo.toString())
-
-        ApiMain().services.saveHutang(mUserPref.getToken(),hutangInfo).enqueue(
-            object : Callback<CommonResponse> {
-                override fun onFailure(call: Call<CommonResponse>, t: Throwable) {
-                    Toasty.error(this@TambahHutangActivity, "gagal simpan transaksi, coba lagi nanti", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_HUTANG,t.message.toString())
-                    dismissLoading()
-                }
-                override fun onResponse(call: Call<CommonResponse>, response: Response<CommonResponse>) {
-                    val responAPI = response.body()
-                    val responseStatus = response.code()
-
-
-                    dismissLoading()
-                    if(response.code() == 200) {
-                        Log.d(TAG_HUTANG,"body "+responAPI!!.toString())
-                        Log.d(TAG_HUTANG,"http code asli "+responseStatus.toString())
-                        Log.d(TAG_HUTANG,"http code dari API "+responAPI!!.http_status)
-
-                        Toasty.success(this@TambahHutangActivity, "Tambah hutang berhasil !", Toast.LENGTH_SHORT, true).show()
-                        onBackPressed()
-
-                    }else if (response.code() == 202){
-                        Toasty.error(this@TambahHutangActivity, "gagal simpan transaksi, coba lagi nanti", Toast.LENGTH_SHORT, true).show()
-                    }
-                }
-            }
-        )
+        //TODO save hutang
+        Toast.makeText(this, "Save hutang", Toast.LENGTH_SHORT).show()
+        onBackPressed()
     }
 
     fun setPelangganInfo(){

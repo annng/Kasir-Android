@@ -1,40 +1,30 @@
 package com.artevak.kasirpos.ui.fragment
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.DashPathEffect
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.facebook.shimmer.ShimmerFrameLayout
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.artevak.kasirpos.R
-import com.artevak.kasirpos.ui.activity.profile.ProfileActivity
-import com.artevak.kasirpos.ui.activity.customer.TambahPelangganActivity
-import com.artevak.kasirpos.ui.adapter.AdapterBarang
-import com.artevak.kasirpos.ui.adapter.AdapterPelanggan
 import com.artevak.kasirpos.databinding.FragmentHomeBinding
 import com.artevak.kasirpos.model.Barang
 import com.artevak.kasirpos.model.DataChartPenjualan
 import com.artevak.kasirpos.model.Pelanggan
 import com.artevak.kasirpos.model.UserPreference
-import com.artevak.kasirpos.response.BarangResponse
-import com.artevak.kasirpos.response.ChartTransaksiResponse
-import com.artevak.kasirpos.response.PelangganResponse
-import com.artevak.kasirpos.util.ApiMain
-import es.dmoral.toasty.Toasty
-import retrofit2.Call
-import retrofit2.Response
+import com.artevak.kasirpos.ui.activity.customer.TambahPelangganActivity
+import com.artevak.kasirpos.ui.activity.profile.ProfileActivity
+import com.artevak.kasirpos.ui.adapter.AdapterBarang
+import com.artevak.kasirpos.ui.adapter.AdapterPelanggan
+import com.facebook.shimmer.ShimmerFrameLayout
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 
 class HomeFragment : Fragment() {
 
@@ -43,12 +33,13 @@ class HomeFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
     //lateinit var binding_shimmer : ShimmerSuratBinding
-    lateinit var shimmerFrameLayout : ShimmerFrameLayout
-    lateinit var sflBarang : ShimmerFrameLayout
-    lateinit var mUserPref : UserPreference
-    lateinit var adapter : AdapterPelanggan
-    lateinit var adapterBarang : AdapterBarang
+    lateinit var shimmerFrameLayout: ShimmerFrameLayout
+    lateinit var sflBarang: ShimmerFrameLayout
+    lateinit var mUserPref: UserPreference
+    lateinit var adapter: AdapterPelanggan
+    lateinit var adapterBarang: AdapterBarang
     var listPelanggan = ArrayList<Pelanggan>()
     var listBarang = ArrayList<Barang>()
     var listDataChart = ArrayList<DataChartPenjualan>()
@@ -71,8 +62,13 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        shimmerFrameLayout = root.findViewById(R.id.sflMain)
-        sflBarang = root.findViewById(R.id.sflHorizontal)
+        return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        shimmerFrameLayout = binding.shimmerHorizontal.sflHorizontal
+        sflBarang = binding.shimmerHorizontal.sflHorizontal
         mUserPref = UserPreference(requireContext())
         adapter = AdapterPelanggan(listPelanggan)
         adapterBarang = AdapterBarang(listBarang)
@@ -105,23 +101,28 @@ class HomeFragment : Fragment() {
         getDataBarang()
         getDataChart()
         configChartModel()
-        return root
     }
 
-    fun updateUI(){
-        binding.tvNamaUmkm.setText(mUserPref.getNamaUmkm())
+    fun updateUI() {
+        binding.tvNamaUmkm.text = mUserPref.getNamaUmkm()
     }
 
-    fun configChartModel(){
+    fun configChartModel() {
         binding.chart.setBackgroundColor(Color.WHITE)
         binding.chart.setDrawGridBackground(false)
         binding.chart.setMaxVisibleValueCount(60)
         binding.chart.setPinchZoom(true)
-        binding.chart.getDescription().setEnabled(false)
+        binding.chart.description.isEnabled = false
 
         val values = ArrayList<Entry>()
-        for (i in 0  until listDataChart.size){
-            values.add(Entry(i.toFloat(), listDataChart.get(i).jumlah!!.toFloat(), resources.getDrawable(R.drawable.star)))
+        for (i in 0 until listDataChart.size) {
+            values.add(
+                Entry(
+                    i.toFloat(),
+                    listDataChart.get(i).jumlah!!.toFloat(),
+                    resources.getDrawable(R.drawable.star)
+                )
+            )
         }
 
         // create a dataset and give it a type
@@ -148,146 +149,95 @@ class HomeFragment : Fragment() {
         binding.chart.animateX(1500)
     }
 
-    fun resetPagination(){
+    fun resetPagination() {
         CURRENT_PAGE = 1
         NEXT_PAGE = CURRENT_PAGE + 1
     }
 
-    fun getDataPelanggan(){
-        showLoadingShimmerPelanggan()
-        resetPagination()
+    fun getDataPelanggan() {
+        //loading
+//        showLoadingShimmerPelanggan()
+//        resetPagination()
 
-        ApiMain().services.getPelanggan(mUserPref.getToken(),CURRENT_PAGE,KATA_KUNCI).enqueue(object :
-            retrofit2.Callback<PelangganResponse> {
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onResponse(call: Call<PelangganResponse>, response: Response<PelangganResponse>) {
-                //Tulis code jika response sukses
-                Log.d(TAG_GET_PELANGGAN,response.toString())
-                Log.d(TAG_GET_PELANGGAN,"http status : "+response.code())
+        listPelanggan.clear()
+        listPelanggan.add(
+            Pelanggan(
+                name = "Anang",
+                phone = "+6285747325450",
+                alamat = "Soka, Lerep"
+            )
+        )
+        listPelanggan.add(
+            Pelanggan(
+                name = "Ardhea",
+                phone = "+6285747123456",
+                alamat = "Banyumanik"
+            )
+        )
+        adapter.notifyDataSetChanged()
 
-                if(response.code() == 200) {
-                    listPelanggan.clear()
-                    response.body()?.data_pelanggan?.let {
-                        Log.d(TAG_GET_PELANGGAN,"dari API : "+it)
-                        Log.d(TAG_GET_PELANGGAN,"jumlah dari API : "+it.size)
-                        listPelanggan.addAll(it)
-                        adapter.notifyDataSetChanged()
+        hideLoadingShimmerPelanggan()
 
-                        hideLoadingShimmerPelanggan()
-                        Log.d(TAG_GET_PELANGGAN,"isi adapter  : "+adapter.itemCount)
-                    }
 
-                    if (listPelanggan.size == 0){
-                        binding.tvInfoEmpty.visibility = View.VISIBLE
-                    }
 
-                }else {
-                    Toasty.error(requireContext(), "gagal mengambil data", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_GET_PELANGGAN,"err :"+response.message())
-                }
-            }
-            override fun onFailure(call: Call<PelangganResponse>, t: Throwable){
-                //Tulis code jika response fail
-                val errMsg = t.message.toString()
-                if (errMsg.takeLast(6).equals("$.null")){
-                    Log.d(TAG_GET_PELANGGAN,"rusak nya gpapa kok  ")
-                    hideLoadingShimmerPelanggan()
-                }else{
-                    Toasty.error(requireContext(), "response failure for more data", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_GET_PELANGGAN,"rusak : "+t.message.toString())
-                }
-            }
-        })
+        if (listPelanggan.size == 0) {
+            binding.tvInfoEmpty.visibility = View.VISIBLE
+        }
+
+
+        //when failed
+//        Toasty.error(requireContext(), "gagal mengambil data", Toast.LENGTH_SHORT, true).show()
+        hideLoadingShimmerPelanggan()
+
     }
 
-    fun getDataBarang(){
+    fun getDataBarang() {
         showLoadingShimmerBarang()
         resetPagination()
 
-        ApiMain().services.getBarang(mUserPref.getToken(),CURRENT_PAGE,KATA_KUNCI).enqueue(object :
-            retrofit2.Callback<BarangResponse> {
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onResponse(call: Call<BarangResponse>, response: Response<BarangResponse>) {
-                //Tulis code jika response sukses
-                Log.d(TAG_GET_BARANG,response.toString())
-                Log.d(TAG_GET_BARANG,"http status : "+response.code())
 
-                if(response.code() == 200) {
-                    listBarang.clear()
-                    response.body()?.data_barang?.let {
-                        Log.d(TAG_GET_BARANG,"dari API : "+it)
-                        Log.d(TAG_GET_BARANG,"jumlah dari API : "+it.size)
-                        listBarang.addAll(it)
-                        adapterBarang.notifyDataSetChanged()
 
-                        hideLoadingShimmerBarang()
-                        Log.d(TAG_GET_BARANG,"isi adapter  : "+adapterBarang.itemCount)
-                    }
+        listBarang.clear()
+        listBarang.add(
+            Barang(
+                name = "Samsung S21",
+                harga_beli = 180000,
+                harga_jual = 200000,
+                deskripsi = "Ram 8/256"
+            )
+        )
+        listBarang.add(
+            Barang(
+                name = "Macbook Pro 2020",
+                harga_beli = 210000,
+                harga_jual = 2500000,
+                deskripsi = "Mahal boss"
+            )
+        )
 
-                    if (listBarang.size == 0){
-                        binding.tvInfoEmpty.visibility = View.VISIBLE
-                    }
+        adapterBarang.notifyDataSetChanged()
 
-                }else {
-                    Toasty.error(requireContext(), "gagal mengambil data", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_GET_BARANG,"err :"+response.message())
-                }
-            }
-            override fun onFailure(call: Call<BarangResponse>, t: Throwable){
-                //Tulis code jika response fail
-                val errMsg = t.message.toString()
-                if (errMsg.takeLast(6).equals("$.null")){
-                    Log.d(TAG_GET_BARANG,"rusak nya gpapa kok  ")
-                    hideLoadingShimmerBarang()
-                }else{
-                    Toasty.error(requireContext(), "response failure for more data", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_GET_BARANG,"rusak : "+t.message.toString())
-                }
-            }
-        })
+        hideLoadingShimmerBarang()
+
+        if (listBarang.size == 0) {
+            binding.tvInfoEmpty.visibility = View.VISIBLE
+        }
+
+        hideLoadingShimmerBarang()
     }
 
-    fun getDataChart(){
+    fun getDataChart() {
 
-        ApiMain().services.getDataChart(mUserPref.getToken()).enqueue(object :
-            retrofit2.Callback<ChartTransaksiResponse> {
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onResponse(call: Call<ChartTransaksiResponse>, response: Response<ChartTransaksiResponse>) {
-                //Tulis code jika response sukses
-                Log.d(TAG_GET_CHART,response.toString())
-                Log.d(TAG_GET_CHART,"http status : "+response.code())
+        listDataChart.clear()
+        listDataChart.add(DataChartPenjualan("Barang", 20))
+        listDataChart.add(DataChartPenjualan("Pelanggan", 12))
 
-                if(response.code() == 200) {
-                    listDataChart.clear()
-                    response.body()?.data_chart?.let {
-                        Log.d(TAG_GET_CHART,"dari API : "+it)
-                        Log.d(TAG_GET_CHART,"jumlah dari API : "+it.size)
-                        listDataChart.addAll(it)
-                    }
-                    configChartModel()
+        configChartModel()
 
-
-                }else {
-                    Toasty.error(requireContext(), "gagal mengambil data chart", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_GET_CHART,"err :"+response.message())
-                }
-            }
-            override fun onFailure(call: Call<ChartTransaksiResponse>, t: Throwable){
-                //Tulis code jika response fail
-                val errMsg = t.message.toString()
-                if (errMsg.takeLast(6).equals("$.null")){
-                    Log.d(TAG_GET_CHART,"rusak nya gpapa kok  ")
-                    hideLoadingShimmerBarang()
-                }else{
-                    Toasty.error(requireContext(), "response failure for more data", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_GET_CHART,"rusak : "+t.message.toString())
-                }
-            }
-        })
     }
 
 
-    fun showLoadingShimmerPelanggan(){
+    fun showLoadingShimmerPelanggan() {
         shimmerFrameLayout.visibility = View.VISIBLE
         shimmerFrameLayout.startShimmerAnimation()
 
@@ -295,8 +245,8 @@ class HomeFragment : Fragment() {
         binding.tvInfoEmpty.visibility = View.GONE
     }
 
-    fun hideLoadingShimmerPelanggan(){
-        if (shimmerFrameLayout.isVisible){
+    fun hideLoadingShimmerPelanggan() {
+        if (shimmerFrameLayout.isVisible) {
             shimmerFrameLayout.stopShimmerAnimation()
             shimmerFrameLayout.clearAnimation()
             shimmerFrameLayout.visibility = View.GONE
@@ -305,7 +255,7 @@ class HomeFragment : Fragment() {
         binding.rvPelanggan.visibility = View.VISIBLE
     }
 
-    fun showLoadingShimmerBarang(){
+    fun showLoadingShimmerBarang() {
         sflBarang.visibility = View.VISIBLE
         sflBarang.startShimmerAnimation()
 
@@ -313,8 +263,8 @@ class HomeFragment : Fragment() {
         binding.tvInfoEmptyBarang.visibility = View.GONE
     }
 
-    fun hideLoadingShimmerBarang(){
-        if (sflBarang.isVisible){
+    fun hideLoadingShimmerBarang() {
+        if (sflBarang.isVisible) {
             sflBarang.stopShimmerAnimation()
             sflBarang.clearAnimation()
             sflBarang.visibility = View.GONE
@@ -335,7 +285,7 @@ class HomeFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(): HomeFragment{
+        fun newInstance(): HomeFragment {
             val fragment = HomeFragment()
             val args = Bundle()
             fragment.arguments = args

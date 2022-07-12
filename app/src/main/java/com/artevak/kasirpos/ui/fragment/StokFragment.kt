@@ -8,23 +8,17 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.facebook.shimmer.ShimmerFrameLayout
 import com.artevak.kasirpos.R
-import com.artevak.kasirpos.ui.activity.item.TambahBarangActivity
-import com.artevak.kasirpos.ui.adapter.AdapterBarang
 import com.artevak.kasirpos.databinding.FragmentStokBinding
 import com.artevak.kasirpos.model.Barang
 import com.artevak.kasirpos.model.UserPreference
-import com.artevak.kasirpos.response.BarangResponse
-import com.artevak.kasirpos.util.ApiMain
-import es.dmoral.toasty.Toasty
-import retrofit2.Call
-import retrofit2.Response
+import com.artevak.kasirpos.ui.activity.item.TambahBarangActivity
+import com.artevak.kasirpos.ui.adapter.AdapterBarang
+import com.facebook.shimmer.ShimmerFrameLayout
 
 class StokFragment : Fragment() {
 
@@ -33,10 +27,10 @@ class StokFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    lateinit var shimmerFrameLayout : ShimmerFrameLayout
-    lateinit var adapter : AdapterBarang
-    lateinit var i : Intent
-    lateinit var mUserPref : UserPreference
+    lateinit var shimmerFrameLayout: ShimmerFrameLayout
+    lateinit var adapter: AdapterBarang
+    lateinit var i: Intent
+    lateinit var mUserPref: UserPreference
     var listBarang = ArrayList<Barang>()
 
     var CURRENT_PAGE = 1
@@ -83,11 +77,11 @@ class StokFragment : Fragment() {
                 super.onScrollStateChanged(recyclerView, newState)
 
                 if (!recyclerView.canScrollVertically(1)) {
-                    Log.d("rvBarang"," ini terakir")
+                    Log.d("rvBarang", " ini terakir")
                     //next page
-                    if (isFilterStokMenipis){
+                    if (isFilterStokMenipis) {
                         getMoreDataBarangStokMenipis()
-                    }else{
+                    } else {
                         getMoreDataBarang()
                     }
 
@@ -96,11 +90,11 @@ class StokFragment : Fragment() {
         })
         binding.etSearch.setOnKeyListener { view, i, keyEvent ->
 
-            if (keyEvent.action == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER ){
-                if (binding.etSearch.text.toString().length != 0){
+            if (keyEvent.action == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
+                if (binding.etSearch.text.toString().isNotEmpty()) {
                     KATA_KUNCI = binding.etSearch.text.toString()
                     getDataBarang()
-                }else{
+                } else {
                     //action ketika search dikosongkan
                     KATA_KUNCI = ""
                     getDataBarang()
@@ -117,222 +111,90 @@ class StokFragment : Fragment() {
         return root
     }
 
-    fun resetPagination(){
+    fun resetPagination() {
         CURRENT_PAGE = 1
         NEXT_PAGE = CURRENT_PAGE + 1
     }
 
-    fun getDataBarang(){
+    fun getDataBarang() {
         showLoadingShimmer()
         isFilterStokMenipis = false
         resetPagination()
 
-        ApiMain().services.getBarang(mUserPref.getToken(),CURRENT_PAGE,KATA_KUNCI).enqueue(object :
-            retrofit2.Callback<BarangResponse> {
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onResponse(call: Call<BarangResponse>, response: Response<BarangResponse>) {
-                //Tulis code jika response sukses
-                Log.d(TAG_GET_BARANG,response.toString())
-                Log.d(TAG_GET_BARANG,"http status : "+response.code())
+        listBarang.clear()
+        listBarang.add(
+            Barang(
+                name = "Macbook Pro 2020",
+                harga_beli = 210000,
+                harga_jual = 2500000,
+                deskripsi = "Mahal boss"
+            )
+        )
+        adapter.notifyDataSetChanged()
 
-                if(response.code() == 200) {
-                    listBarang.clear()
-                    response.body()?.data_barang?.let {
-                        Log.d(TAG_GET_BARANG,"dari API : "+it)
-                        Log.d(TAG_GET_BARANG,"jumlah dari API : "+it.size)
-                        listBarang.addAll(it)
-                        adapter.notifyDataSetChanged()
+        hideLoadingShimmer()
 
-                        hideLoadingShimmer()
-                        Log.d(TAG_GET_BARANG,"isi adapter  : "+adapter.itemCount)
-                    }
-
-                    if (listBarang.size == 0){
-                        binding.tvInfoEmpty.visibility = View.VISIBLE
-                    }
-
-                }else {
-                    Toasty.error(requireContext(), "gagal mengambil data", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_GET_BARANG,"err :"+response.message())
-                }
-            }
-            override fun onFailure(call: Call<BarangResponse>, t: Throwable){
-                //Tulis code jika response fail
-                val errMsg = t.message.toString()
-                if (errMsg.takeLast(6).equals("$.null")){
-                    Log.d(TAG_GET_BARANG,"rusak nya gpapa kok  ")
-                    hideLoadingShimmer()
-                }else{
-                    Toasty.error(requireContext(), "response failure for more data", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_GET_BARANG,"rusak : "+t.message.toString())
-                }
-            }
-        })
+        if (listBarang.size == 0) {
+            binding.tvInfoEmpty.visibility = View.VISIBLE
+        }
     }
 
-    fun getMoreDataBarang(){
+    fun getMoreDataBarang() {
         binding.progressBar.visibility = View.VISIBLE
 
-        ApiMain().services.getBarang(mUserPref.getToken(),NEXT_PAGE,KATA_KUNCI).enqueue(object :
-            retrofit2.Callback<BarangResponse> {
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onResponse(call: Call<BarangResponse>, response: Response<BarangResponse>) {
-                //Tulis code jika response sukses
-                Log.d(TAG_GET_MORE_BARANG,response.toString())
-                Log.d(TAG_GET_MORE_BARANG,"http status : "+response.code())
-                binding.progressBar.visibility = View.GONE
+        binding.progressBar.visibility = View.GONE
 
-                if(response.code() == 200) {
-                    //listLowongan.clear()
-                    response.body()?.data_barang?.let {
-                        Log.d(TAG_GET_MORE_BARANG,"dari API : "+it)
-                        Log.d(TAG_GET_MORE_BARANG,"jumlah dari API : "+it.size)
+        listBarang.add(
+            Barang(
+                name = "Macbook Pro 2020",
+                harga_beli = 210000,
+                harga_jual = 2500000,
+                deskripsi = "Mahal boss"
+            )
+        )
+        adapter.notifyDataSetChanged()
 
-                        if (response.body()?.data_barang?.size != 0){
-                            listBarang.addAll(it)
-                            adapter.notifyDataSetChanged()
-                        }
 
-                        Log.d(TAG_GET_MORE_BARANG,"isi adapter  : "+adapter.itemCount)
-                        Log.d(TAG_GET_MORE_BARANG,"isi more data  : "+response.body()?.data_barang?.size)
-                    }
-
-                    if (response.body()?.data_barang?.size == 0){
-                        Log.d(TAG_GET_MORE_BARANG,"more data kosong ")
-                    }else{
-                        CURRENT_PAGE++
-                        NEXT_PAGE++
-                    }
-                    Log.d(TAG_GET_MORE_BARANG,"current page  : "+CURRENT_PAGE)
-                    Log.d(TAG_GET_MORE_BARANG,"next page  : "+NEXT_PAGE)
-
-                }else {
-                    Toasty.error(requireContext(), "gagal mengambil data baru", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_GET_MORE_BARANG,"err :"+response.message())
-                    binding.progressBar.visibility = View.GONE
-                }
-            }
-            override fun onFailure(call: Call<BarangResponse>, t: Throwable){
-                //Tulis code jika response fail
-                val errMsg = t.message.toString()
-                if (errMsg.takeLast(6).equals("$.null")){
-                    Log.d(TAG_GET_MORE_BARANG,"rusak nya gpapa kok  ")
-                }else{
-                    Toasty.error(requireContext(), "response failure for more data", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_GET_MORE_BARANG,"rusak : "+t.message.toString())
-                }
-
-                binding.progressBar.visibility = View.GONE
-            }
-        })
     }
 
-    fun getDataBarangStokMenipis(){
+    fun getDataBarangStokMenipis() {
         showLoadingShimmer()
         resetPagination()
 
-        ApiMain().services.getBarangStokTipis(mUserPref.getToken(),CURRENT_PAGE,KATA_KUNCI).enqueue(object :
-            retrofit2.Callback<BarangResponse> {
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onResponse(call: Call<BarangResponse>, response: Response<BarangResponse>) {
-                //Tulis code jika response sukses
-                Log.d(TAG_GET_BARANG,response.toString())
-                Log.d(TAG_GET_BARANG,"http status : "+response.code())
+        binding.progressBar.visibility = View.VISIBLE
+        binding.progressBar.visibility = View.GONE
 
-                if(response.code() == 200) {
-                    listBarang.clear()
-                    response.body()?.data_barang?.let {
-                        Log.d(TAG_GET_BARANG,"dari API : "+it)
-                        Log.d(TAG_GET_BARANG,"jumlah dari API : "+it.size)
-                        listBarang.addAll(it)
-                        adapter.notifyDataSetChanged()
+        listBarang.add(
+            Barang(
+                name = "Macbook Pro 2020",
+                harga_beli = 210000,
+                harga_jual = 2500000,
+                deskripsi = "Mahal boss"
+            )
+        )
+        adapter.notifyDataSetChanged()
 
-                        hideLoadingShimmer()
-                        Log.d(TAG_GET_BARANG,"isi adapter  : "+adapter.itemCount)
-                    }
-
-                    if (listBarang.size == 0){
-                        binding.tvInfoEmpty.visibility = View.VISIBLE
-                    }
-
-                }else {
-                    Toasty.error(requireContext(), "gagal mengambil data", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_GET_BARANG,"err :"+response.message())
-                }
-            }
-            override fun onFailure(call: Call<BarangResponse>, t: Throwable){
-                //Tulis code jika response fail
-                val errMsg = t.message.toString()
-                if (errMsg.takeLast(6).equals("$.null")){
-                    Log.d(TAG_GET_BARANG,"rusak nya gpapa kok  ")
-                    hideLoadingShimmer()
-                }else{
-                    Toasty.error(requireContext(), "response failure for more data", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_GET_BARANG,"rusak : "+t.message.toString())
-                }
-            }
-        })
+        hideLoadingShimmer()
     }
 
-    fun getMoreDataBarangStokMenipis(){
+    fun getMoreDataBarangStokMenipis() {
         binding.progressBar.visibility = View.VISIBLE
 
-        ApiMain().services.getBarangStokTipis(mUserPref.getToken(),NEXT_PAGE,KATA_KUNCI).enqueue(object :
-            retrofit2.Callback<BarangResponse> {
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onResponse(call: Call<BarangResponse>, response: Response<BarangResponse>) {
-                //Tulis code jika response sukses
-                Log.d(TAG_GET_MORE_BARANG,response.toString())
-                Log.d(TAG_GET_MORE_BARANG,"http status : "+response.code())
-                binding.progressBar.visibility = View.GONE
+        binding.progressBar.visibility = View.GONE
 
-                if(response.code() == 200) {
-                    //listLowongan.clear()
-                    response.body()?.data_barang?.let {
-                        Log.d(TAG_GET_MORE_BARANG,"dari API : "+it)
-                        Log.d(TAG_GET_MORE_BARANG,"jumlah dari API : "+it.size)
-
-                        if (response.body()?.data_barang?.size != 0){
-                            listBarang.addAll(it)
-                            adapter.notifyDataSetChanged()
-                        }
-
-                        Log.d(TAG_GET_MORE_BARANG,"isi adapter  : "+adapter.itemCount)
-                        Log.d(TAG_GET_MORE_BARANG,"isi more data  : "+response.body()?.data_barang?.size)
-                    }
-
-                    if (response.body()?.data_barang?.size == 0){
-                        Log.d(TAG_GET_MORE_BARANG,"more data kosong ")
-                    }else{
-                        CURRENT_PAGE++
-                        NEXT_PAGE++
-                    }
-                    Log.d(TAG_GET_MORE_BARANG,"current page  : "+CURRENT_PAGE)
-                    Log.d(TAG_GET_MORE_BARANG,"next page  : "+NEXT_PAGE)
-
-                }else {
-                    Toasty.error(requireContext(), "gagal mengambil data baru", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_GET_MORE_BARANG,"err :"+response.message())
-                    binding.progressBar.visibility = View.GONE
-                }
-            }
-            override fun onFailure(call: Call<BarangResponse>, t: Throwable){
-                //Tulis code jika response fail
-                val errMsg = t.message.toString()
-                if (errMsg.takeLast(6).equals("$.null")){
-                    Log.d(TAG_GET_MORE_BARANG,"rusak nya gpapa kok  ")
-                }else{
-                    Toasty.error(requireContext(), "response failure for more data", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_GET_MORE_BARANG,"rusak : "+t.message.toString())
-                }
-
-                binding.progressBar.visibility = View.GONE
-            }
-        })
+        listBarang.add(
+            Barang(
+                name = "Macbook Pro 2020",
+                harga_beli = 210000,
+                harga_jual = 2500000,
+                deskripsi = "Mahal boss"
+            )
+        )
+        adapter.notifyDataSetChanged()
     }
 
 
-    fun showLoadingShimmer(){
+    fun showLoadingShimmer() {
         shimmerFrameLayout.visibility = View.VISIBLE
         shimmerFrameLayout.startShimmerAnimation()
 
@@ -340,8 +202,8 @@ class StokFragment : Fragment() {
         binding.tvInfoEmpty.visibility = View.GONE
     }
 
-    fun hideLoadingShimmer(){
-        if (shimmerFrameLayout.isVisible){
+    fun hideLoadingShimmer() {
+        if (shimmerFrameLayout.isVisible) {
             shimmerFrameLayout.stopShimmerAnimation()
             shimmerFrameLayout.clearAnimation()
             shimmerFrameLayout.visibility = View.GONE
@@ -362,7 +224,7 @@ class StokFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(): StokFragment{
+        fun newInstance(): StokFragment {
             val fragment = StokFragment()
             val args = Bundle()
             fragment.arguments = args

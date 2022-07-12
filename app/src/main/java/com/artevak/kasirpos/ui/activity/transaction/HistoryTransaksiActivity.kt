@@ -72,44 +72,8 @@ class HistoryTransaksiActivity : BaseActivity() {
     fun getDataTransaksi(){
         binding.progressBar.visibility = View.VISIBLE
 
-        ApiMain().services.getHistoryTransaksi(mUserPref.getToken(),transaksi.id).enqueue(object :
-            retrofit2.Callback<HistoryTransaksiResponse> {
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onResponse(call: Call<HistoryTransaksiResponse>, response: Response<HistoryTransaksiResponse>) {
-                //Tulis code jika response sukses
-                Log.d(TAG_GET_HISTORY,response.toString())
-                Log.d(TAG_GET_HISTORY,"http status : "+response.code())
-
-                if(response.code() == 200) {
-                    listHistoryTransaksi.clear()
-                    response.body()?.data_history?.let {
-                        Log.d(TAG_GET_HISTORY,"dari API : "+it)
-                        Log.d(TAG_GET_HISTORY,"jumlah dari API : "+it.size)
-                        listHistoryTransaksi.addAll(it)
-                        adapter.notifyDataSetChanged()
-
-                        hideLoadingPG()
-                        Log.d(TAG_GET_HISTORY,"isi adapter  : "+adapter.itemCount)
-                    }
-
-
-                }else {
-                    Toasty.error(this@HistoryTransaksiActivity, "gagal mengambil data", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_GET_HISTORY,"err :"+response.message())
-                }
-            }
-            override fun onFailure(call: Call<HistoryTransaksiResponse>, t: Throwable){
-                //Tulis code jika response fail
-                val errMsg = t.message.toString()
-                if (errMsg.takeLast(6).equals("$.null")){
-                    Log.d(TAG_GET_HISTORY,"rusak nya gpapa kok  ")
-                    hideLoadingPG()
-                }else{
-                    Toasty.error(this@HistoryTransaksiActivity, "response failure for more data", Toast.LENGTH_SHORT, true).show()
-                    Log.d(TAG_GET_HISTORY,"rusak : "+t.message.toString())
-                }
-            }
-        })
+        //TODO get data transaksi
+        hideLoadingPG()
     }
 
     fun hideLoadingPG(){
