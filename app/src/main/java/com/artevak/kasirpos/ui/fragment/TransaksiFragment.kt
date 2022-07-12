@@ -43,7 +43,6 @@ class TransaksiFragment : BaseFragment() {
     lateinit var adapter : AdapterBarang
     lateinit var adapterKeranjang : AdapterKeranjang
     lateinit var adapterPelanggan : AdapterPelanggan
-    lateinit var mUserPref : UserPreference
     lateinit var pDialogLoading : SweetAlertDialog
     lateinit var orderInfo: OrderInfo
 
@@ -65,7 +64,6 @@ class TransaksiFragment : BaseFragment() {
 
         _binding = FragmentTransaksiBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        mUserPref = UserPreference(requireContext())
         adapter = AdapterBarang(listBarang)
         adapterKeranjang = AdapterKeranjang(listKeranjang,this)
         adapterPelanggan = AdapterPelanggan(listPelanggan)

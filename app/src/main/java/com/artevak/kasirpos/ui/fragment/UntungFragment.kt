@@ -33,7 +33,6 @@ class UntungFragment : BaseFragment() {
     private val binding get() = _binding!!
     //lateinit var binding_shimmer : ShimmerSuratBinding
     lateinit var shimmerFrameLayout : ShimmerFrameLayout
-    lateinit var mUserPref : UserPreference
     lateinit var adapter : AdapterTransaksi
 
     var listTransaksi = ArrayList<Transaksi>()
@@ -61,7 +60,6 @@ class UntungFragment : BaseFragment() {
         val root: View = binding.root
 
         shimmerFrameLayout = root.findViewById(R.id.sflMain)
-        mUserPref = UserPreference(requireContext())
         adapter = AdapterTransaksi(listTransaksi)
 
         val layoutManager =

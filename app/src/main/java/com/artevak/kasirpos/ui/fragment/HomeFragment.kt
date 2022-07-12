@@ -38,7 +38,6 @@ class HomeFragment : BaseFragment() {
     //lateinit var binding_shimmer : ShimmerSuratBinding
     lateinit var shimmerFrameLayout: ShimmerFrameLayout
     lateinit var sflBarang: ShimmerFrameLayout
-    lateinit var mUserPref: UserPreference
     lateinit var adapter: AdapterPelanggan
     lateinit var adapterBarang: AdapterBarang
     var listPelanggan = ArrayList<Pelanggan>()
@@ -70,7 +69,6 @@ class HomeFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         shimmerFrameLayout = binding.shimmerHorizontal.sflHorizontal
         sflBarang = binding.shimmerHorizontal.sflHorizontal
-        mUserPref = UserPreference(requireContext())
         adapter = AdapterPelanggan(listPelanggan)
         adapterBarang = AdapterBarang(listBarang)
 

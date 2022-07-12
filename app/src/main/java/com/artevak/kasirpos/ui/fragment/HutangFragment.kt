@@ -35,7 +35,6 @@ class HutangFragment : BaseFragment() {
 
     //lateinit var binding_shimmer : ShimmerSuratBinding
     lateinit var shimmerFrameLayout: ShimmerFrameLayout
-    lateinit var mUserPref: UserPreference
     lateinit var adapter: AdapterHutang
 
     var listHutang = ArrayList<Hutang>()
@@ -61,7 +60,6 @@ class HutangFragment : BaseFragment() {
         val root: View = binding.root
 
         shimmerFrameLayout = root.findViewById(R.id.sflMain)
-        mUserPref = UserPreference(requireContext())
         adapter = AdapterHutang(listHutang)
 
         val layoutManager =

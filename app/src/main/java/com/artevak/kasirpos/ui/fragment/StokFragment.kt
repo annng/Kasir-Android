@@ -31,7 +31,6 @@ class StokFragment : BaseFragment() {
     lateinit var shimmerFrameLayout: ShimmerFrameLayout
     lateinit var adapter: AdapterBarang
     lateinit var i: Intent
-    lateinit var mUserPref: UserPreference
     var listBarang = ArrayList<Barang>()
 
     var CURRENT_PAGE = 1
@@ -54,7 +53,6 @@ class StokFragment : BaseFragment() {
         val root: View = binding.root
 
         shimmerFrameLayout = root.findViewById(R.id.sflMain)
-        mUserPref = UserPreference(requireContext())
         adapter = AdapterBarang(listBarang)
 
         val layoutManager =
