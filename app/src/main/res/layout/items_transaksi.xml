@@ -32,6 +32,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/text_dark"
             android:textSize="16sp"
+            android:fontFamily="@font/cera_medium"
             android:textStyle="bold" />
 
         <TextView
@@ -40,6 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:fontFamily="@font/cera_light"
             android:textColor="@color/text_dark"
             android:textSize="13sp"
             android:textStyle="bold" />
@@ -48,6 +50,7 @@
             android:id="@+id/tvTanggal"
             android:text="tanggal transaski"
             android:layout_width="wrap_content"
+            android:fontFamily="@font/cera_light"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:textColor="@color/black"

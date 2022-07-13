@@ -10,7 +10,6 @@
         android:id="@+id/relaToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
         android:elevation="5dp"
         android:padding="8dp">
 
@@ -19,8 +18,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_margin="@dimen/margin_small"
             android:src="@drawable/ic_baseline_arrow_back_24"
-            app:tint="@color/white" />
+            app:tint="@color/colorPrimary" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,16 +32,6 @@
             android:padding="@dimen/margin_extra_small"
             android:paddingHorizontal="10dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:fontFamily="@font/cera_black"
-                android:text="@string/title_toolbar_register_account"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
 
         </LinearLayout>
 
@@ -51,6 +41,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/btnDaftar"
         android:layout_below="@+id/relaToolbar">
 
         <LinearLayout
@@ -58,73 +49,88 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:text="@string/title_create_a_new_account"
+                android:textSize="@dimen/title_large"
+                android:textColor="@color/black"
+                android:layout_marginStart="@dimen/margin_large"
+                android:fontFamily="@font/cera_black"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginStart="@dimen/margin_large"
+                android:text="@string/info_create_a_new_account"
+                style="@style/Description"/>
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/relaToolbar"
-                app:cardCornerRadius="10dp">
+                android:orientation="vertical"
+                android:padding="@dimen/margin_medium">
 
-                <LinearLayout
+
+                <com.artevak.kasirpos.widget.CustomEditText
+                    android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/margin_medium">
+                    app:inputType="text"
+                    app:titleEditText="@string/hint_email" />
+
+                <com.artevak.kasirpos.widget.CustomEditText
+                    android:id="@+id/etNamaPemilik"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:inputType="person"
+                    app:titleEditText="@string/hint_owner_name" />
+
+                <com.artevak.kasirpos.widget.CustomEditText
+                    android:id="@+id/etNamaUmkm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:inputType="person"
+                    app:titleEditText="@string/hint_shop_name" />
 
 
-                    <com.artevak.kasirpos.widget.CustomEditText
-                        android:id="@+id/etEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:inputType="text"
-                        app:titleEditText="@string/hint_email" />
+                <com.artevak.kasirpos.widget.CustomEditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:inputType="password"
+                    app:suffixIcon="@drawable/ic_show"
+                    app:titleEditText="@string/hint_password" />
 
-                    <com.artevak.kasirpos.widget.CustomEditText
-                        android:id="@+id/etNamaPemilik"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:inputType="person"
-                        app:titleEditText="@string/hint_owner_name" />
-
-                    <com.artevak.kasirpos.widget.CustomEditText
-                        android:id="@+id/etNamaUmkm"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:inputType="person"
-                        app:titleEditText="@string/hint_shop_name" />
+                <com.artevak.kasirpos.widget.CustomEditText
+                    android:id="@+id/etCPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:inputType="password"
+                    app:suffixIcon="@drawable/ic_show"
+                    app:titleEditText="@string/hint_confirmation_password" />
 
 
-                    <com.artevak.kasirpos.widget.CustomEditText
-                        android:id="@+id/etPassword"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:inputType="password"
-                        app:suffixIcon="@drawable/ic_show"
-                        app:titleEditText="@string/hint_password" />
-
-                    <com.artevak.kasirpos.widget.CustomEditText
-                        android:id="@+id/etCPassword"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:inputType="password"
-                        app:suffixIcon="@drawable/ic_show"
-                        app:titleEditText="@string/hint_confirmation_password" />
-
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btnDaftar"
-                        style="@style/ButtonPrimary"
-                        android:layout_width="match_parent"
-                        android:layout_marginTop="@dimen/margin_large"
-                        android:layout_height="wrap_content"
-                        android:text="@string/action_register" />
-
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </LinearLayout>
 
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnDaftar"
+        style="@style/ButtonPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginEnd="@dimen/margin_large"
+        android:layout_marginBottom="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:text="@string/action_register" />
 
 
 </RelativeLayout>

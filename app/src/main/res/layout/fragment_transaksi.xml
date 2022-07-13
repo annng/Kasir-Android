@@ -192,8 +192,6 @@
                     android:id="@+id/edSearchBarang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/margin_small"
-                    android:paddingBottom="@dimen/margin_small"
                     android:layout_marginLeft="10sp"
                     android:layout_marginRight="10sp"
                     android:layout_toLeftOf="@+id/ivSearch"
@@ -203,14 +201,16 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:paddingLeft="10sp"
+                    android:paddingTop="@dimen/margin_small"
                     android:paddingRight="10sp"
+                    android:paddingBottom="@dimen/margin_small"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <ImageView
+                    android:id="@+id/ivSearch"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:id="@+id/ivSearch"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_baseline_search_24" />
@@ -249,7 +249,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_large" />
 
-                <com.artevak.kasirpos.customview.EditText_Roboto_Regular
+                <androidx.appcompat.widget.AppCompatEditText
                     android:layout_width="@dimen/width_field_qty"
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_edittext_rounded"

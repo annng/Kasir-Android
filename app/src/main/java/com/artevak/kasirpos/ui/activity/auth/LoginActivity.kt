@@ -23,15 +23,14 @@ class LoginActivity : BaseActivity() {
         binding.btnLogin.setOnClickListener {
             checkValidation()
         }
-        binding.tvKeRegister.setOnClickListener {
-            val i = Intent(this, RegisterActivity::class.java)
-            startActivity(i)
+        binding.btnRegister.setOnClickListener {
+            gotoRegister()
         }
     }
 
     fun checkValidation(){
-        val email = binding.etEmail.text.toString()
-        val password = binding.etPassword.text.toString()
+        val email = binding.etEmail.text
+        val password = binding.etPassword.text
 
         if (email.equals("") || email.length == 0){
             showErrorMessage("Email Belum diisi")
@@ -45,6 +44,12 @@ class LoginActivity : BaseActivity() {
 
     fun gotoSplashScreen(){
         val i = Intent(this@LoginActivity, SplashActivity::class.java)
+        startActivity(i)
+
+    }
+
+    fun gotoRegister(){
+        val i = Intent(this@LoginActivity, RegisterActivity::class.java)
         startActivity(i)
 
     }
