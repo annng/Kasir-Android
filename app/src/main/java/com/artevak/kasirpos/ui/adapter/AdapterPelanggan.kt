@@ -19,7 +19,7 @@ class AdapterPelanggan(private val list:ArrayList<Pelanggan>) : RecyclerView.Ada
         return MyViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = list?.size
+    override fun getItemCount(): Int = list.size
 
 
     class Holder(val view: View) : RecyclerView.ViewHolder(view)
@@ -31,14 +31,16 @@ class AdapterPelanggan(private val list:ArrayList<Pelanggan>) : RecyclerView.Ada
         with(holder){
             with(list.get(position)){
 
-                binding.tvNamaPelanggan.setText(""+list?.get(position).name)
-                binding.tvPhone.setText(""+list?.get(position).phone)
-                binding.tvAlamat.setText(list?.get(position).alamat)
+                binding.tvNamaPelanggan.text = ""+ list[position].name
+                binding.tvPhone.text = ""+ list[position].phone
+                binding.tvAlamat.text = list[position].alamat
 
                 binding.rlPelanggan.setOnClickListener {
 
                     if (binding.rlPelanggan.context is SelectPelangganActivity) {
-                        (binding.rlPelanggan.context as SelectPelangganActivity).setSelectedPelanggan(list?.get(position))
+                        (binding.rlPelanggan.context as SelectPelangganActivity).setSelectedPelanggan(
+                            list[position]
+                        )
                     }
 
                    /* val i  = Intent(binding.rlPelanggan.context,DetailBarangActivity::class.java)

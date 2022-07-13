@@ -24,7 +24,7 @@ class AdapterTransaksi(private val list:ArrayList<Transaksi>) : RecyclerView.Ada
         return MyViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = list?.size
+    override fun getItemCount(): Int = list.size
 
 
     class Holder(val view: View) : RecyclerView.ViewHolder(view)
@@ -39,20 +39,21 @@ class AdapterTransaksi(private val list:ArrayList<Transaksi>) : RecyclerView.Ada
                 val df = nf as DecimalFormat
 
                 var nama_pelanggan = ""
-                if (list?.get(position).nama_pelanggan == null || list?.get(position).nama_pelanggan.equals("")){
-                    nama_pelanggan = "Guest"
+                nama_pelanggan = if (list[position].nama_pelanggan == null || list.get(position).nama_pelanggan.equals("")){
+                    "Guest"
                 }else{
-                    nama_pelanggan = list?.get(position).nama_pelanggan!!
+                    list[position].nama_pelanggan!!
                 }
 
-                binding.tvNamaPelanggan.setText(nama_pelanggan)
-                binding.tvTanggal.setText(""+list?.get(position).tgl_transaksi)
-                binding.tvTotalBayar.setText("Total bayar Rp. "+df.format(list?.get(position).total_bayar)+" -  Untung "+df.format(list?.get(position).total_untung))
+                binding.tvNamaPelanggan.text = nama_pelanggan
+                binding.tvTanggal.text = ""+ list[position].tgl_transaksi
+                binding.tvTotalBayar.text = "Total bayar Rp. "+df.format(list[position].total_bayar)+" -  Untung "+df.format(
+                    list.get(position).total_untung)
 
                 binding.rlTransaksi.setOnClickListener {
 
                     val i  = Intent(binding.rlTransaksi.context, HistoryTransaksiActivity::class.java)
-                    i.putExtra("transaksi",list?.get(position))
+                    i.putExtra("transaksi", list[position])
                     binding.rlTransaksi.context.startActivity(i)
                 }
 

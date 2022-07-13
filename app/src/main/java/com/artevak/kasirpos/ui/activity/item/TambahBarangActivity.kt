@@ -29,7 +29,6 @@ class TambahBarangActivity : BaseActivity(),PermissionHelper.PermissionListener 
     private val PICK_IMAGE_REQUEST = 71
     private var filePath: Uri? = null
 
-    lateinit var  permissionHelper : PermissionHelper
     var fotoBitmap : Bitmap? = null
     lateinit var bos : ByteArrayOutputStream
     private var fileUri: Uri? = null
@@ -47,7 +46,6 @@ class TambahBarangActivity : BaseActivity(),PermissionHelper.PermissionListener 
         setContentView(view)
         mUserPref = UserPreference(this)
 
-        permissionHelper = PermissionHelper(this)
         permissionHelper.setPermissionListener(this)
 
         binding.ivBack.setOnClickListener {

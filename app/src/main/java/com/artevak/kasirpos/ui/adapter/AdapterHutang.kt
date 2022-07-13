@@ -24,7 +24,7 @@ class AdapterHutang(private val list:ArrayList<Hutang>) : RecyclerView.Adapter<A
         return MyViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = list?.size
+    override fun getItemCount(): Int = list.size
 
 
     class Holder(val view: View) : RecyclerView.ViewHolder(view)
@@ -39,25 +39,24 @@ class AdapterHutang(private val list:ArrayList<Hutang>) : RecyclerView.Adapter<A
                 val df = nf as DecimalFormat
 
                 var nama_pelanggan = ""
-                if (list?.get(position).nama_pelanggan == null || list?.get(position).nama_pelanggan.equals("")){
-                    nama_pelanggan = "Guest"
-                }
-                else{
-                    nama_pelanggan = list?.get(position).nama_pelanggan!!
+                nama_pelanggan = if (list[position].nama_pelanggan == null || list[position].nama_pelanggan.equals("")){
+                    "Guest"
+                } else{
+                    list[position].nama_pelanggan!!
                 }
 
-                if (list?.get(position).hutang_type.equals("saya")){
-                    binding.tvNamaPelanggan.setText(list?.get(position).deskripsi)
+                if (list[position].hutang_type.equals("saya")){
+                    binding.tvNamaPelanggan.text = list[position].deskripsi
                 }else{
-                    binding.tvNamaPelanggan.setText(nama_pelanggan)
+                    binding.tvNamaPelanggan.text = nama_pelanggan
                 }
-                binding.tvTanggal.setText(""+list?.get(position).tgl_hutang)
-                binding.tvTotalBayar.setText("Hutang Rp. "+df.format(list?.get(position).hutang))
-                binding.tvStatusHutang.setText(list?.get(position).status)
+                binding.tvTanggal.text = ""+ list[position].tgl_hutang
+                binding.tvTotalBayar.text = "Hutang Rp. "+df.format(list[position].hutang)
+                binding.tvStatusHutang.text = list[position].status
 
                 binding.rlTransaksi.setOnClickListener {
                     val i = Intent(binding.rlTransaksi.context, DetailHutangActivity::class.java)
-                    i.putExtra("hutang",list?.get(position))
+                    i.putExtra("hutang", list.get(position))
                     binding.rlTransaksi.context.startActivity(i)
                 }
 

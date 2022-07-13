@@ -8,6 +8,7 @@ import com.artevak.kasirpos.ui.activity.HomeActivity
 import com.artevak.kasirpos.databinding.ActivitySplashBinding
 import com.artevak.kasirpos.model.UserModel
 import com.artevak.kasirpos.model.UserPreference
+import com.artevak.kasirpos.ui.activity.transaction.print.TransactionPrintActivity
 
 class SplashActivity : BaseActivity() {
     lateinit var binding : ActivitySplashBinding
@@ -22,7 +23,6 @@ class SplashActivity : BaseActivity() {
 
         mUserPref = UserPreference(this)
         if (mUserPref.getToken().equals("") || mUserPref.getToken() == null){
-//            i = Intent(this, HomeActivity::class.java)
             i = Intent(this, LoginActivity::class.java)
             val timer: Thread = object : Thread() {
                 override fun run() {

@@ -1,21 +1,39 @@
 package com.artevak.kasirpos.base
 
+import android.app.Instrumentation
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
+import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.artevak.kasirpos.model.UserPreference
+import com.artevak.kasirpos.util.PermissionHelper
 import es.dmoral.toasty.Toasty
 import java.text.SimpleDateFormat
 
 
 open class BaseActivity : AppCompatActivity() {
 
+    lateinit var  permissionHelper : PermissionHelper
+
     lateinit var pDialogLoading : SweetAlertDialog
     lateinit var mUserPref : UserPreference
 
+    private var activityLauncherCallback: ((ActivityResult) -> Unit)? = null
+    private val activityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        activityLauncherCallback?.invoke(it)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        permissionHelper = PermissionHelper(this)
+    }
 
     override fun setContentView(view: View?) {
         super.setContentView(view)
@@ -93,6 +111,11 @@ open class BaseActivity : AppCompatActivity() {
         val output = formatter.format(parser.parse(tanggal))
 
         return output
+    }
+
+    fun startActivity(intent: Intent, result: (ActivityResult) -> Unit) {
+        activityLauncherCallback = result
+        activityLauncher.launch(intent)
     }
 
     override fun onStart() {
