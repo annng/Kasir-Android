@@ -36,7 +36,7 @@
     <string name="error_field_password_not_match">Password doesn\'t match</string>
     <string name="action_register">Register</string>
     <string name="title_create_a_new_account">Create a new account</string>
-    <string name="info_create_a_new_account">Please put your information below to create anew account for using app.</string>
+    <string name="info_create_a_new_account">Please put your information below to create a new account for using app.</string>
     <string name="action_login">Login</string>
     <string name="title_toolbar_add_item">Add Item</string>
     <string name="title_toolbar_add_customer">Add Customer</string>

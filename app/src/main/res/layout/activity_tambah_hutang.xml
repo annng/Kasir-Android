@@ -153,7 +153,7 @@
                                 android:padding="@dimen/margin_medium"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/grey_800"
-                                android:textSize="15sp"
+                                android:textSize="@dimen/text_medium"
                                 android:textStyle="normal" />
 
 
