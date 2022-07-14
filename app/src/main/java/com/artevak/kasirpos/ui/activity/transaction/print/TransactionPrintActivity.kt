@@ -23,7 +23,7 @@ class TransactionPrintActivity : BaseActivity(), PermissionHelper.PermissionList
         checkPermission()
     }
 
-    private fun gotoBluetooth(){
+    private fun gotoBluetooth() {
         startActivityForResult(
             Intent(this, ConnectBluetoothActivity::class.java),
             ConnectBluetoothActivity.CONNECT_BLUETOOTH
@@ -33,20 +33,30 @@ class TransactionPrintActivity : BaseActivity(), PermissionHelper.PermissionList
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(resultCode == Activity.RESULT_OK && requestCode == ConnectBluetoothActivity.CONNECT_BLUETOOTH){
+        if (resultCode == Activity.RESULT_OK && requestCode == ConnectBluetoothActivity.CONNECT_BLUETOOTH) {
             // ThermalPrinter is ready
-            ThermalPrinter.instance
-                .write("Hello world", PrintAlignment.CENTER, PrintFont.LARGE)
+            val print = ThermalPrinter.instance
+
+            //header
+            print.write("Hello world", PrintAlignment.CENTER, PrintFont.LARGE)
                 .fillLineWith('-')
-                .write("Let's eat","some tacos")
-                .write("Price","0.5 USD")
-                .writeImage(BitmapFactory.decodeResource(resources, R.drawable.ic_baseline_account_circle_24))
-                .print()
+
+            //price
+            print.write("Price", "0.5 USD")
+
+            //items
+            for (i in 0 until 3) {
+                print.write("You Buy ($i)", "\$ ${(i + 3)}.00")
+            }
+
+            print.print()
+
+
         }
     }
 
 
-    fun checkPermission(){
+    fun checkPermission() {
         val listPermissions: MutableList<String> = java.util.ArrayList()
         listPermissions.add(Manifest.permission.BLUETOOTH_CONNECT)
         listPermissions.add(Manifest.permission.BLUETOOTH_SCAN)

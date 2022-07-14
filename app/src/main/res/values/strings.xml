@@ -38,14 +38,35 @@
     <string name="title_create_a_new_account">Create a new account</string>
     <string name="info_create_a_new_account">Please put your information below to create anew account for using app.</string>
     <string name="action_login">Login</string>
+    <string name="title_toolbar_add_item">Add Item</string>
+    <string name="title_toolbar_add_customer">Add Customer</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_address">Address</string>
+    <string name="action_save">Save</string>
+    <string name="hint_amount_nominal">Amount Nominal</string>
+    <string name="title_toolbar_add_debt">Add Debt</string>
+    <string name="title_record_debt">Record Debt</string>
+    <string name="info_record_debt">Make list people owe to me</string>
+    <string name="hint_purchase_price">Purchase price</string>
+    <string name="hint_selling_price">Selling Price</string>
+    <string name="hint_item_name">Item name</string>
+    <string name="hint_stock">Stock</string>
+    <string name="hint_description">Description</string>
+    <string name="hint_item_picture">Select Picture</string>
+    <string name="hint_unit">Unit</string>
+    <string name="title_toolbar_edit_item">Edit Item</string>
+    <string name="action_save_changes">Save Changes</string>
+    <string name="action_delete">Hapus</string>
     <string-array name="satuan">
         <item>Pcs</item>
         <item>Kg</item>
-        <item>Gram</item>
-        <item>Ons</item>
-        <item>Dus</item>
-        <item>Lusin</item>
+        <item>Grams</item>
+        <item>Ounce</item>
+        //ons
+        <item>Box</item>
+        //dus
+        <item>Dozen</item>
+        //lusin
         <item>Liter</item>
-        <item>Dus</item>
     </string-array>
 </resources>

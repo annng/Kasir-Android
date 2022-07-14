@@ -83,6 +83,9 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.4.1'
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.1'
 
+    //currency
+    implementation 'com.github.BlacKCaT27:CurrencyEditText:2.0.2'
+
     implementation "com.github.isradeleon:ThermalPrinter:1.0.3"
 
     //firebase

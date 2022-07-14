@@ -23,7 +23,7 @@ class SplashActivity : BaseActivity() {
 
         mUserPref = UserPreference(this)
         if (mUserPref.getToken().equals("") || mUserPref.getToken() == null){
-            i = Intent(this, LoginActivity::class.java)
+            i = Intent(this, HomeActivity::class.java)
             val timer: Thread = object : Thread() {
                 override fun run() {
 

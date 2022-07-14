@@ -17,6 +17,7 @@ import com.artevak.kasirpos.databinding.ActivityUbahBarangBinding
 import com.artevak.kasirpos.model.Barang
 import com.artevak.kasirpos.model.UserPreference
 import com.artevak.kasirpos.util.PermissionHelper
+import com.artevak.kasirpos.util.ext.dashIfEmpty
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -162,9 +163,9 @@ class UbahBarangActivity : BaseActivity(), PermissionHelper.PermissionListener {
             .load(imageURl)
             .into(binding.ivBarang)
 
-        binding.etNamaBarang.setText(barang.name)
-        binding.etStokAwal.setText(""+barang.stok)
-        binding.etDeskripsi.setText(barang.deskripsi)
+        binding.etNamaBarang.text = barang.name.dashIfEmpty()
+        binding.etStokAwal.text = barang.stok.toString()
+        binding.etDeskripsi.text = barang.deskripsi.dashIfEmpty()
         binding.etHargaBeli.setText(""+barang.harga_beli)
         binding.etHargaJual.setText(""+barang.harga_jual)
 

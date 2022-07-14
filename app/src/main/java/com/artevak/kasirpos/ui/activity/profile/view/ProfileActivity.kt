@@ -1,4 +1,4 @@
-package com.artevak.kasirpos.ui.activity.profile
+package com.artevak.kasirpos.ui.activity.profile.view
 
 import android.content.Intent
 import android.os.Bundle
