@@ -1,58 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/rlPelanggan"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="2dp"
-    android:background="@color/white"
-    android:padding="5dp">
+    android:layout_height="wrap_content">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/ivPelanggan"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/user">
-
-
-    </de.hdodenhof.circleimageview.CircleImageView>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="15dp"
-        android:layout_toEndOf="@id/ivPelanggan"
-        android:orientation="vertical">
+        app:cardCornerRadius="@dimen/margin_small"
+        app:cardElevation="@dimen/margin_xxs"
+        android:layout_margin="@dimen/margin_small">
 
-        <TextView
-            android:id="@+id/tvNamaPelanggan"
-            android:text="Name"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/rlPelanggan"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_dark"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:layout_marginBottom="2dp"
+            android:background="@color/white"
+            android:padding="@dimen/margin_small">
 
-        <TextView
-            android:id="@+id/tvPhone"
-            android:text="stok"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/text_dark"
-            android:textSize="13sp"
-            android:textStyle="bold" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivPelanggan"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_centerVertical="true"
+                android:src="@drawable/user">
 
-        <TextView
-            android:id="@+id/tvAlamat"
-            android:text="alamat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/black"
-            android:textSize="13sp" />
 
-    </LinearLayout>
+            </de.hdodenhof.circleimageview.CircleImageView>
 
-</RelativeLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:layout_toEndOf="@id/ivPelanggan"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvNamaPelanggan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:textColor="@color/text_dark"
+                    android:textSize="@dimen/text_big"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:text="stok"
+                    android:textColor="@color/text_dark"
+                    android:textSize="@dimen/text_medium"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvAlamat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="alamat"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_small" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</FrameLayout>

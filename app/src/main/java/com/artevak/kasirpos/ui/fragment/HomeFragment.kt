@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.artevak.kasirpos.R
 import com.artevak.kasirpos.base.BaseFragment
@@ -16,9 +15,8 @@ import com.artevak.kasirpos.databinding.FragmentHomeBinding
 import com.artevak.kasirpos.model.Barang
 import com.artevak.kasirpos.model.DataChartPenjualan
 import com.artevak.kasirpos.model.Pelanggan
-import com.artevak.kasirpos.model.UserPreference
 import com.artevak.kasirpos.ui.activity.customer.TambahPelangganActivity
-import com.artevak.kasirpos.ui.activity.profile.ProfileActivity
+import com.artevak.kasirpos.ui.activity.profile.view.ProfileActivity
 import com.artevak.kasirpos.ui.adapter.AdapterBarang
 import com.artevak.kasirpos.ui.adapter.AdapterPelanggan
 import com.facebook.shimmer.ShimmerFrameLayout

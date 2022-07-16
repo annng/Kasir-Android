@@ -12,34 +12,36 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:elevation="5dp"
-        android:padding="8dp">
+        android:padding="@dimen/margin_small">
 
         <ImageView
             android:id="@+id/ivBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_small"
             android:src="@drawable/ic_baseline_arrow_back_24"
             app:tint="@color/white" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_toEndOf="@+id/ivBack"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
+            android:layout_toEndOf="@+id/ivBack"
+            android:gravity="center_vertical"
             android:orientation="vertical"
-            android:paddingHorizontal="10dp">
+            android:paddingHorizontal="@dimen/margin_medium">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_marginTop="5dp"
                 android:fontFamily="@font/cera_black"
-                android:text="Tambah Hutang"
+                android:text="@string/title_toolbar_add_debt"
                 android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textSize="@dimen/title_small"
                 android:textStyle="bold" />
 
 
@@ -60,103 +62,146 @@
             android:padding="10dp">
 
 
-            <androidx.cardview.widget.CardView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:cardBackgroundColor="@color/grey_200"
-                app:cardCornerRadius="10dp">
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardPelanggan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_medium"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="10dp">
+
+
+                    <RelativeLayout
+                        android:id="@+id/rlLaporanUntung"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_medium"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/ivIconHutang"
+                            android:layout_width="@dimen/icon_medium"
+                            android:layout_height="@dimen/icon_medium"
+                            android:layout_alignParentLeft="true"
+                            android:src="@drawable/user" />
+
+                        <TextView
+                            android:id="@+id/tvNamaPelanggan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginHorizontal="@dimen/margin_medium"
+                            android:layout_toEndOf="@+id/ivIconHutang"
+                            android:fontFamily="@font/cera_medium"
+                            android:text="Pelanggan"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
                     android:orientation="vertical">
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
+                    <TextView
+                        style="@style/Hint"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:id="@+id/cardPelanggan"
-                        android:clickable="true"
-                        app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="10dp"
-                        android:focusable="true">
+                        android:text="@string/hint_amount_nominal" />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
 
-                        <RelativeLayout
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:id="@+id/rlLaporanUntung"
+                            android:layout_marginStart="@dimen/margin_medium"
+                            android:layout_marginEnd="@dimen/margin_medium"
+                            android:background="@drawable/bg_corner_rounded_fill_field"
+                            android:gravity="center_vertical"
                             android:orientation="horizontal">
 
-                            <ImageView
-                                android:layout_width="30dp"
-                                android:id="@+id/ivIconHutang"
-                                android:layout_height="30dp"
-                                android:layout_alignParentLeft="true"
-                                android:src="@drawable/user"/>
 
-                            <TextView
-                                android:layout_width="wrap_content"
+                            <com.blackcat.currencyedittext.CurrencyEditText
+                                android:id="@+id/etHutang"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:layout_marginHorizontal="10dp"
-                                android:layout_toEndOf="@+id/ivIconHutang"
-                                android:fontFamily="@font/cera_medium"
-                                android:text="Pelanggan"
-                                android:id="@+id/tvNamaPelanggan"
+                                android:background="@android:color/transparent"
+                                android:fontFamily="sans-serif"
+                                android:hint="@string/hint_amount_nominal"
+                                android:inputType="number"
+                                android:padding="@dimen/margin_medium"
                                 android:textColor="@color/black"
-                                android:textSize="14sp" />
+                                android:textColorHint="@color/grey_800"
+                                android:textSize="@dimen/text_medium"
+                                android:textStyle="normal" />
+
 
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
-                                android:layout_alignParentEnd="true"
-                                android:layout_centerVertical="true"
-                                android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+                                android:id="@+id/ivSuffixIcon"
+                                android:layout_width="@dimen/icon_medium"
+                                android:layout_height="@dimen/icon_medium"
+                                android:layout_marginEnd="@dimen/margin_medium" />
 
-                        </RelativeLayout>
-                    </androidx.cardview.widget.CardView>
+                        </LinearLayout>
 
-                    <com.artevak.kasirpos.customview.EditText_Roboto_Regular
-                        android:id="@+id/etHutang"
-                        android:layout_width="match_parent"
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/tvInfo"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:background="@color/white"
-                        android:fontFamily="sans-serif"
-                        android:hint="Nominal Hutang"
-                        android:inputType="number"
-                        android:paddingLeft="16.3dp"
-                        android:paddingTop="15.7dp"
-                        android:paddingBottom="15.7dp"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/grey_800"
-                        android:textSize="15sp"
-                        android:textStyle="normal" />
-
-
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:background="@color/colorPrimary"
-                        android:fontFamily="@font/cera_medium"
-                        android:text="Simpan"
-                        android:id="@+id/btnSimpan"
-                        android:textColor="@color/white"
-                        android:textSize="15sp" />
+                        android:layout_marginStart="@dimen/margin_medium"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:layout_marginBottom="@dimen/margin_small"
+                        android:textColor="@color/grey_800"
+                        android:textSize="14sp"
+                        android:textStyle="normal"
+                        android:visibility="gone"
+                        app:fontFamily="@font/cera_light" />
 
 
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnSimpan"
+                    style="@style/ButtonPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:text="@string/action_save" />
+
+
+            </LinearLayout>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
+                android:visibility="gone"
                 app:cardBackgroundColor="@color/grey_200"
                 app:cardCornerRadius="10dp">
 
@@ -178,16 +223,13 @@
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnKeTambahHutangSaya"
+                        style="@style/ButtonSecondary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        android:background="@color/colorPrimary"
-                        android:fontFamily="@font/cera_medium"
-                        android:text="Tambah Hutang Pribadi"
-                        android:id="@+id/btnKeTambahHutangSaya"
-                        android:textColor="@color/white"
-                        android:textSize="15sp" />
+                        android:text="Tambah Hutang Pribadi" />
 
 
                 </LinearLayout>

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="5dp"
-        android:padding="8dp">
+        android:padding="@dimen/margin_small">
 
         <ImageView
             android:id="@+id/ivBack"
@@ -75,26 +75,24 @@
                 android:padding="@dimen/margin_medium">
 
 
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/title_medium"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:text="User"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_marginStart="@dimen/margin_medium"
+                    android:fontFamily="@font/cera_medium"/>
+
                 <com.artevak.kasirpos.widget.CustomEditText
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:inputType="text"
                     app:titleEditText="@string/hint_email" />
-
-                <com.artevak.kasirpos.widget.CustomEditText
-                    android:id="@+id/etNamaPemilik"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:inputType="person"
-                    app:titleEditText="@string/hint_owner_name" />
-
-                <com.artevak.kasirpos.widget.CustomEditText
-                    android:id="@+id/etNamaUmkm"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:inputType="person"
-                    app:titleEditText="@string/hint_shop_name" />
 
 
                 <com.artevak.kasirpos.widget.CustomEditText
@@ -113,6 +111,29 @@
                     app:suffixIcon="@drawable/ic_show"
                     app:titleEditText="@string/hint_confirmation_password" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/title_medium"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:text="Shop"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_marginStart="@dimen/margin_medium"
+                    android:fontFamily="@font/cera_medium"/>
+
+                <com.artevak.kasirpos.widget.CustomEditText
+                    android:id="@+id/etNamaPemilik"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:inputType="person"
+                    app:titleEditText="@string/hint_owner_name" />
+
+                <com.artevak.kasirpos.widget.CustomEditText
+                    android:id="@+id/etNamaUmkm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:inputType="person"
+                    app:titleEditText="@string/hint_shop_name" />
 
             </LinearLayout>
 

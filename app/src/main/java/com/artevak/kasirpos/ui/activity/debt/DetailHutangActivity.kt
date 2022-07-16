@@ -8,6 +8,7 @@ import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.databinding.ActivityDetailHutangBinding
 import com.artevak.kasirpos.model.Hutang
 import com.artevak.kasirpos.model.UserPreference
+import com.artevak.kasirpos.util.ext.parseString
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*
@@ -53,7 +54,7 @@ class DetailHutangActivity : BaseActivity() {
 
     fun updateUI(){
         binding.etHutang.isEnabled = false
-        binding.etHutang.setText("Rp. "+df.format(hutang.hutang))
+        binding.etHutang.setText(hutang.hutang.parseString())
 
         var nama_pelanggan = ""
         if (hutang.nama_pelanggan == null || hutang.nama_pelanggan.equals("")){

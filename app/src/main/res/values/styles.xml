@@ -30,6 +30,19 @@
         <item name="android:textColor">@color/text_gray</item>
     </style>
 
+    <style name="CustomCurrencyEditText" parent="android:Widget.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/height_field</item>
+        <item name="android:layout_marginStart">@dimen/margin_medium</item>
+        <item name="android:layout_marginEnd">@dimen/margin_medium</item>
+        <item name="android:paddingStart">@dimen/margin_small</item>
+        <item name="android:paddingEnd">@dimen/margin_small</item>
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="android:background">@drawable/bg_corner_rounded_fill_field</item>
+        <item name="android:textColor">@color/text_gray</item>
+    </style>
+
+
     <style name="Hint" parent="Widget.AppCompat.TextView">
         <item name="android:layout_marginStart">@dimen/margin_medium</item>
         <item name="fontFamily">@font/cera_medium</item>

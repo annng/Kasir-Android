@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_small"
+    app:cardElevation="@dimen/margin_xxs"
+    app:cardCornerRadius="@dimen/margin_small">
+
+<RelativeLayout
     android:id="@+id/rlTransaksi"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="2dp"
     android:background="@color/white"
-    android:padding="10dp">
+    android:padding="@dimen/margin_medium">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ivBarang"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_centerVertical="true"
         android:src="@drawable/user">
 
 
@@ -21,42 +30,43 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="@dimen/margin_medium"
         android:layout_toEndOf="@id/ivBarang"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tvNamaPelanggan"
-            android:text="nama pelanggan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_dark"
-            android:textSize="16sp"
             android:fontFamily="@font/cera_medium"
+            android:text="nama pelanggan"
+            android:textColor="@color/text_dark"
+            android:textSize="@dimen/text_big"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvTotalBayar"
-            android:text="total bayar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="@dimen/margin_small"
             android:fontFamily="@font/cera_light"
+            android:text="total bayar"
             android:textColor="@color/text_dark"
-            android:textSize="13sp"
+            android:textSize="@dimen/text_medium"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvTanggal"
-            android:text="tanggal transaski"
             android:layout_width="wrap_content"
-            android:fontFamily="@font/cera_light"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:fontFamily="@font/cera_light"
+            android:text="tanggal transaski"
             android:textColor="@color/black"
-            android:textSize="13sp" />
+            android:textSize="@dimen/text_small" />
 
     </LinearLayout>
 
 
 </RelativeLayout>
+</androidx.cardview.widget.CardView>
