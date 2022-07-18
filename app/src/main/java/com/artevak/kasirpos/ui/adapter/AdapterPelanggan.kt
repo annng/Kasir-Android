@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.artevak.kasirpos.ui.activity.customer.SelectPelangganActivity
 import com.artevak.kasirpos.databinding.ItemsPelangganBinding
-import com.artevak.kasirpos.model.Pelanggan
+import com.artevak.kasirpos.data.model.Pelanggan
 
 class AdapterPelanggan(private val list:ArrayList<Pelanggan>) : RecyclerView.Adapter<AdapterPelanggan.MyViewHolder>(){
 

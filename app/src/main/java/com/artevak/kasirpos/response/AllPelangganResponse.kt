@@ -1,7 +1,7 @@
 package com.artevak.kasirpos.response
 
 import com.google.gson.annotations.SerializedName
-import com.artevak.kasirpos.model.Pelanggan
+import com.artevak.kasirpos.data.model.Pelanggan
 
 data class AllPelangganResponse(
     @SerializedName("message")

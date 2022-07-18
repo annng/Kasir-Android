@@ -1,7 +1,7 @@
 package com.artevak.kasirpos.response
 
 import com.google.gson.annotations.SerializedName
-import com.artevak.kasirpos.model.Keranjang
+import com.artevak.kasirpos.data.model.Keranjang
 
 data class TransaksiResponse(
     @SerializedName("current_page")

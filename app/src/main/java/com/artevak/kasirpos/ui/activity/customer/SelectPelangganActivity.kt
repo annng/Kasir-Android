@@ -9,9 +9,9 @@ import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.R
 import com.artevak.kasirpos.ui.adapter.AdapterPelanggan
 import com.artevak.kasirpos.databinding.ActivitySelectPelangganBinding
-import com.artevak.kasirpos.model.Pelanggan
-import com.artevak.kasirpos.model.SharedVariable
-import com.artevak.kasirpos.model.UserPreference
+import com.artevak.kasirpos.data.model.Pelanggan
+import com.artevak.kasirpos.data.model.SharedVariable
+import com.artevak.kasirpos.data.model.UserPreference
 
 class SelectPelangganActivity : BaseActivity() {
     lateinit var binding : ActivitySelectPelangganBinding

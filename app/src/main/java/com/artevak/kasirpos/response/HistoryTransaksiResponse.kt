@@ -1,7 +1,7 @@
 package com.artevak.kasirpos.response
 
 import com.google.gson.annotations.SerializedName
-import com.artevak.kasirpos.model.HistoryTransaksi
+import com.artevak.kasirpos.data.model.HistoryTransaksi
 
 data class HistoryTransaksiResponse(
     @SerializedName("message")

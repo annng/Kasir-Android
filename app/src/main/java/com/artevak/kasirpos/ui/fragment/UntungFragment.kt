@@ -14,8 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.artevak.kasirpos.R
 import com.artevak.kasirpos.base.BaseFragment
 import com.artevak.kasirpos.databinding.FragmentUntungBinding
-import com.artevak.kasirpos.model.Transaksi
-import com.artevak.kasirpos.model.UserPreference
+import com.artevak.kasirpos.data.model.Transaksi
 import com.artevak.kasirpos.ui.adapter.AdapterTransaksi
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.bottomsheet.BottomSheetDialog

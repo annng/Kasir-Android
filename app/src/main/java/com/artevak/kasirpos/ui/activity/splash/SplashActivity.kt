@@ -3,12 +3,11 @@ package com.artevak.kasirpos.ui.activity.splash
 import android.content.Intent
 import android.os.Bundle
 import com.artevak.kasirpos.base.BaseActivity
-import com.artevak.kasirpos.ui.activity.auth.LoginActivity
+import com.artevak.kasirpos.ui.activity.auth.login.LoginActivity
 import com.artevak.kasirpos.ui.activity.HomeActivity
 import com.artevak.kasirpos.databinding.ActivitySplashBinding
-import com.artevak.kasirpos.model.UserModel
-import com.artevak.kasirpos.model.UserPreference
-import com.artevak.kasirpos.ui.activity.transaction.print.TransactionPrintActivity
+import com.artevak.kasirpos.data.model.UserModel
+import com.artevak.kasirpos.data.model.UserPreference
 
 class SplashActivity : BaseActivity() {
     lateinit var binding : ActivitySplashBinding

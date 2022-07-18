@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.widget.Toast
 import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.databinding.ActivityTambahPelangganBinding
-import com.artevak.kasirpos.model.PelangganInfo
-import com.artevak.kasirpos.model.UserPreference
+import com.artevak.kasirpos.data.model.PelangganInfo
+import com.artevak.kasirpos.data.model.UserPreference
 
 class TambahPelangganActivity : BaseActivity() {
     lateinit var binding : ActivityTambahPelangganBinding

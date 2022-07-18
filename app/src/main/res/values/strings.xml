@@ -25,6 +25,7 @@
     <string name="error_toast_insufficient_stock">Insufficient stock. Please check your stock`s amount</string>
     <string name="dialog_title_loading">Loading..</string>
     <string name="hint_phone_number">Phone Number</string>
+    <string name="hint_username">Username</string>
     <string name="hint_email">Email</string>
     <string name="hint_owner_name">Owner Name</string>
     <string name="hint_shop_name">Shop Name</string>

@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.artevak.kasirpos.R
 import com.artevak.kasirpos.base.BaseFragment
 import com.artevak.kasirpos.databinding.FragmentHomeBinding
-import com.artevak.kasirpos.model.Barang
-import com.artevak.kasirpos.model.DataChartPenjualan
-import com.artevak.kasirpos.model.Pelanggan
+import com.artevak.kasirpos.data.model.Barang
+import com.artevak.kasirpos.data.model.DataChartPenjualan
+import com.artevak.kasirpos.data.model.Pelanggan
 import com.artevak.kasirpos.ui.activity.customer.TambahPelangganActivity
 import com.artevak.kasirpos.ui.activity.profile.view.ProfileActivity
 import com.artevak.kasirpos.ui.adapter.AdapterBarang

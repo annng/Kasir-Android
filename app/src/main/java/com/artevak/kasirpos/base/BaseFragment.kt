@@ -3,7 +3,7 @@ package com.artevak.kasirpos.base
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.artevak.kasirpos.model.UserPreference
+import com.artevak.kasirpos.data.model.UserPreference
 
 abstract class BaseFragment : Fragment(){
 

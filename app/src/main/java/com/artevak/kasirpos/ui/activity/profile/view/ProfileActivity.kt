@@ -3,9 +3,9 @@ package com.artevak.kasirpos.ui.activity.profile.view
 import android.content.Intent
 import android.os.Bundle
 import com.artevak.kasirpos.base.BaseActivity
-import com.artevak.kasirpos.ui.activity.auth.LoginActivity
+import com.artevak.kasirpos.ui.activity.auth.login.LoginActivity
 import com.artevak.kasirpos.databinding.ActivityProfileBinding
-import com.artevak.kasirpos.model.UserPreference
+import com.artevak.kasirpos.data.model.UserPreference
 
 class ProfileActivity : BaseActivity() {
     lateinit var binding : ActivityProfileBinding

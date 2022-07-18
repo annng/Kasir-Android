@@ -1,6 +1,5 @@
 package com.artevak.kasirpos.base
 
-import android.app.Instrumentation
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -11,8 +10,8 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import cn.pedant.SweetAlert.SweetAlertDialog
-import com.artevak.kasirpos.model.UserPreference
-import com.artevak.kasirpos.util.PermissionHelper
+import com.artevak.kasirpos.data.model.UserPreference
+import com.artevak.kasirpos.common.util.PermissionHelper
 import es.dmoral.toasty.Toasty
 import java.text.SimpleDateFormat
 

@@ -10,8 +10,8 @@ import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.R
 import com.artevak.kasirpos.databinding.ActivityHomeBinding
 import com.artevak.kasirpos.ui.fragment.*
-import com.artevak.kasirpos.model.SharedVariable
-import com.artevak.kasirpos.model.UserPreference
+import com.artevak.kasirpos.data.model.SharedVariable
+import com.artevak.kasirpos.data.model.UserPreference
 
 
 class HomeActivity : BaseActivity() {

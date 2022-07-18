@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.artevak.kasirpos.ui.activity.debt.DetailHutangActivity
 import com.artevak.kasirpos.databinding.ItemsHutangBinding
-import com.artevak.kasirpos.model.Hutang
+import com.artevak.kasirpos.data.model.Hutang
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*

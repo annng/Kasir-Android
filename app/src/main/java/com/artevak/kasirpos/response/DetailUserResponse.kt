@@ -1,7 +1,7 @@
 package com.artevak.kasirpos.response
 
 import com.google.gson.annotations.SerializedName
-import com.artevak.kasirpos.model.UserModel
+import com.artevak.kasirpos.data.model.UserModel
 
 data class DetailUserResponse(
     @SerializedName("message")

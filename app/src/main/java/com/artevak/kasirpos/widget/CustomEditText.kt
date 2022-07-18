@@ -10,8 +10,8 @@ import android.view.View
 import android.widget.*
 import androidx.core.content.ContextCompat
 import com.artevak.kasirpos.R
-import com.artevak.kasirpos.util.ext.hide
-import com.artevak.kasirpos.util.ext.show
+import com.artevak.kasirpos.common.util.ext.hide
+import com.artevak.kasirpos.common.util.ext.show
 
 class CustomEditText(context: Context, val attrs: AttributeSet) : RelativeLayout(context, attrs) {
     val mView: View

@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.ui.adapter.AdapterHistoryTransaksi
 import com.artevak.kasirpos.databinding.ActivityHistoryTransaksiBinding
-import com.artevak.kasirpos.model.HistoryTransaksi
-import com.artevak.kasirpos.model.Transaksi
-import com.artevak.kasirpos.model.UserPreference
+import com.artevak.kasirpos.data.model.HistoryTransaksi
+import com.artevak.kasirpos.data.model.Transaksi
+import com.artevak.kasirpos.data.model.UserPreference
 import kotlinx.android.synthetic.main.fragment_stok.*
 import java.text.DecimalFormat
 import java.text.NumberFormat
