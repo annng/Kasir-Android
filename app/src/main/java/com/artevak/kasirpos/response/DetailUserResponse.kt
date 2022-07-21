@@ -1,7 +1,7 @@
 package com.artevak.kasirpos.response
 
 import com.google.gson.annotations.SerializedName
-import com.artevak.kasirpos.data.model.UserModel
+import com.artevak.kasirpos.data.model.User
 
 data class DetailUserResponse(
     @SerializedName("message")
@@ -9,6 +9,6 @@ data class DetailUserResponse(
     @SerializedName("http_status")
     val http_status: String,
     @SerializedName("data")
-    val userModel : UserModel
+    val userModel : User
 
 )

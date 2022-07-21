@@ -14,26 +14,36 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:elevation="5dp"
-        android:padding="8dp">
+        android:padding="@dimen/margin_small">
 
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            app:tint="@color/white" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
+            android:layout_toEndOf="@+id/ivBack"
+            android:gravity="center_vertical"
             android:orientation="vertical"
-            android:paddingHorizontal="10dp">
+            android:paddingHorizontal="@dimen/margin_medium">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_marginTop="5dp"
                 android:fontFamily="@font/cera_black"
-                android:text="Profil Pengguna"
+                android:text="@string/title_toolbar_profile"
                 android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textSize="@dimen/title_small"
                 android:textStyle="bold" />
 
 
@@ -65,13 +75,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:gravity="center"
                     android:background="@drawable/circle">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="17.3dp"
                         android:fontFamily="sans-serif"
                         android:text="G"
                         android:id="@+id/tvInisial"
@@ -99,32 +109,32 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/cera_medium"
-                        android:text="Glory"
+                        android:text="-"
                         android:id="@+id/tvName"
                         android:textColor="@color/black"
-                        android:textSize="15sp"
+                        android:textSize="@dimen/text_big"
                         android:textStyle="normal" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8.3dp"
+                        android:layout_marginTop="@dimen/margin_small"
                         android:id="@+id/tvEmail"
                         android:fontFamily="@font/cera_medium"
-                        android:text="glory@lampungprov.go.id"
+                        android:text="-"
                         android:textColor="@color/grey_800"
-                        android:textSize="11.7sp"
+                        android:textSize="@dimen/text_small"
                         android:textStyle="normal" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="3.3dp"
+                        android:layout_marginTop="@dimen/margin_extra_small"
                         android:fontFamily="@font/cera_medium"
-                        android:text="089662240052"
+                        android:text="-"
                         android:id="@+id/tvPhone"
                         android:textColor="@color/grey_800"
-                        android:textSize="11.7sp"
+                        android:textSize="@dimen/text_small"
                         android:textStyle="normal" />
                 </LinearLayout>
 
@@ -132,16 +142,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/margin_medium"
-                    android:layout_marginTop="@dimen/margin_medium"
-                    android:fontFamily="sans-serif"
-                    android:text="Edit"
+                    android:fontFamily="@font/cera_black"
+                    android:text="@string/action_edit"
                     android:padding="@dimen/margin_small"
+                    android:layout_gravity="center_vertical"
                     android:clickable="true"
+                    android:foreground="?selectableItemBackground"
                     android:id="@+id/tvEditProfile"
-                    android:textColor="@color/grey_800"
-                    android:textSize="@dimen/text_small"
-                    android:textStyle="normal" />
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_medium"
+                    />
             </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_bluetooth_device"/>
 
 
             <LinearLayout

@@ -8,7 +8,6 @@ import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.databinding.ActivityTambahHutangBinding
 import com.artevak.kasirpos.data.model.HutangInfo
 import com.artevak.kasirpos.data.model.SharedVariable
-import com.artevak.kasirpos.data.model.UserPreference
 
 class TambahHutangActivity : BaseActivity() {
     lateinit var binding : ActivityTambahHutangBinding
@@ -21,7 +20,6 @@ class TambahHutangActivity : BaseActivity() {
         binding = ActivityTambahHutangBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        mUserPref = UserPreference(this)
 
         binding.ivBack.setOnClickListener {
             onBackPressed()

@@ -8,117 +8,107 @@
     tools:context=".ui.activity.auth.login.LoginActivity">
 
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:orientation="vertical">
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_medium"
-            android:layout_marginStart="@dimen/margin_medium"
-            android:layout_marginEnd="@dimen/margin_medium"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_weight="1"
-                android:fontFamily="@font/cera_black"
-                android:text="Welcome to eCashier"
-                android:textColor="@color/black"
-                android:textSize="30sp" />
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/animation_view"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/analyze" />
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginTop="30dp"
             android:orientation="vertical">
 
-
-            <com.artevak.kasirpos.widget.CustomEditText
-                android:id="@+id/etEmail"
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:inputType="address"
-                app:titleEditText="@string/hint_email" />
-
-
-            <com.artevak.kasirpos.widget.CustomEditText
-                android:id="@+id/etPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:inputType="password"
-                app:suffixIcon="@drawable/ic_show"
-                app:titleEditText="@string/hint_password" />
-
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnLogin"
-                style="@style/ButtonPrimary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_big"
                 android:layout_marginStart="@dimen/margin_medium"
                 android:layout_marginEnd="@dimen/margin_medium"
-                android:text="@string/action_login" />
+                android:layout_marginBottom="@dimen/margin_medium"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tvKeRegister"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:layout_gravity="center_horizontal"
-                android:fontFamily="@font/cera_light"
-                android:text="Doesn\'t have account?"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_medium"
-                android:textStyle="bold"
-                tools:ignore="RtlHardcoded" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/cera_black"
+                    android:text="Welcome to eCashier"
+                    android:textColor="@color/black"
+                    android:textSize="30sp" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnRegister"
-                style="@style/ButtonSecondary"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:layout_marginStart="@dimen/margin_medium"
-                android:layout_marginEnd="@dimen/margin_medium"
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animation_view"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/analyze" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/action_register" />
+                android:layout_marginTop="@dimen/margin_medium"
+                android:orientation="vertical">
+
+
+                <com.artevak.kasirpos.widget.CustomEditText
+                    android:id="@+id/etUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:inputType="person"
+                    app:titleEditText="@string/hint_username" />
+
+
+                <com.artevak.kasirpos.widget.CustomEditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:inputType="password"
+                    app:suffixIcon="@drawable/ic_show"
+                    app:titleEditText="@string/hint_password" />
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnLogin"
+                    style="@style/ButtonPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_big"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:text="@string/action_login" />
+
+                <TextView
+                    android:id="@+id/tvKeRegister"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:fontFamily="@font/cera_light"
+                    android:text="Doesn\'t have account?"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_medium"
+                    android:textStyle="bold"
+                    tools:ignore="RtlHardcoded" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnRegister"
+                    style="@style/ButtonSecondary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_medium"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:text="@string/action_register" />
+
+            </LinearLayout>
 
 
         </LinearLayout>
 
-
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/cera_light"
-        android:gravity="center_horizontal"
-        android:padding="10dp"
-        android:text="@string/text_aggrement"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        android:textStyle="bold" />
+    </ScrollView>
 
 </RelativeLayout>

@@ -13,7 +13,6 @@ import android.widget.AdapterView
 import android.widget.Toast
 import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.databinding.ActivityTambahBarangBinding
-import com.artevak.kasirpos.data.model.UserPreference
 import com.artevak.kasirpos.common.util.PermissionHelper
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -44,7 +43,6 @@ class TambahBarangActivity : BaseActivity(),PermissionHelper.PermissionListener 
         binding = ActivityTambahBarangBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        mUserPref = UserPreference(this)
 
         permissionHelper.setPermissionListener(this)
 

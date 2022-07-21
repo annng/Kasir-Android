@@ -4,7 +4,7 @@ const val TAG = "FamilyTree"
 class DBConst {
 
     object DB{
-        const val URL = "https://family-tree-dbd2a-default-rtdb.firebaseio.com"
+        const val URL = "https://ecommerce-pos-4371b-default-rtdb.firebaseio.com/"
     }
     object TABLE {
         const val DEMO = "demo"

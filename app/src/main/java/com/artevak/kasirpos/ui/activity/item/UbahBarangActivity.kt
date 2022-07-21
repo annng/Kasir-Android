@@ -15,7 +15,6 @@ import com.bumptech.glide.Glide
 import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.databinding.ActivityUbahBarangBinding
 import com.artevak.kasirpos.data.model.Barang
-import com.artevak.kasirpos.data.model.UserPreference
 import com.artevak.kasirpos.common.util.PermissionHelper
 import com.artevak.kasirpos.common.util.ext.dashIfEmpty
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -55,7 +54,6 @@ class UbahBarangActivity : BaseActivity(), PermissionHelper.PermissionListener {
         binding = ActivityUbahBarangBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        mUserPref = UserPreference(this)
 
         permissionHelper.setPermissionListener(this)
 

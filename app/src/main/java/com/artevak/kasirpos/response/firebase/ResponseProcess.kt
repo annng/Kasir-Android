@@ -1,3 +1,3 @@
 package com.artevak.kasirpos.response.firebase
 
-data class ResponseProcess<ITEM : Any?>(var data : ITEM, var status : StatusRequest)
+data class ResponseProcess<ITEM : Any?>(var data : ITEM, var status : StatusRequest, var message : String? = null)

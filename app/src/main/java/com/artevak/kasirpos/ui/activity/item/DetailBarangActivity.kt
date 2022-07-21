@@ -7,7 +7,6 @@ import com.bumptech.glide.Glide
 import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.databinding.ActivityDetailBarangBinding
 import com.artevak.kasirpos.data.model.Barang
-import com.artevak.kasirpos.data.model.UserPreference
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*
@@ -23,7 +22,6 @@ class DetailBarangActivity : BaseActivity() {
         binding = ActivityDetailBarangBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        mUserPref = UserPreference(this)
 
         i = intent
         barang = i.getParcelableExtra("barang")!!

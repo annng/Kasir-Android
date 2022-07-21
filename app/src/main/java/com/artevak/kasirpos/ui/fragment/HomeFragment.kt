@@ -93,15 +93,10 @@ class HomeFragment : BaseFragment() {
             startActivity(i)
         }
 
-        updateUI()
         getDataPelanggan()
         getDataBarang()
         getDataChart()
-        configChartModel()
-    }
-
-    fun updateUI() {
-        binding.tvNamaUmkm.text = mUserPref.getNamaUmkm()
+//        configChartModel()
     }
 
     fun configChartModel() {
@@ -229,7 +224,7 @@ class HomeFragment : BaseFragment() {
         listDataChart.add(DataChartPenjualan("Barang", 20))
         listDataChart.add(DataChartPenjualan("Pelanggan", 12))
 
-        configChartModel()
+//        configChartModel()
 
     }
 
@@ -270,11 +265,6 @@ class HomeFragment : BaseFragment() {
         binding.rvBarang.visibility = View.VISIBLE
     }
 
-    override fun onResume() {
-        super.onResume()
-        getDataPelanggan()
-        getDataChart()
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -58,6 +58,7 @@ inline fun <reified ITEM : Any> FirebaseDatabase.getData(
                 for (brandSnap in dataSnapshot.children) {
                     val dataSnap = brandSnap.value
                     val json = Gson().toJson(dataSnap).toString()
+                    Log.e("data", json)
                     brandSnap.key?.let {
                         item = ResponseData(json.getObject(), it)
                         results(item)

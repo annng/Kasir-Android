@@ -34,8 +34,8 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
-            app:tint="@color/white"
-            android:src="@drawable/profil" />
+            android:src="@drawable/profil"
+            app:tint="@color/white" />
 
     </RelativeLayout>
 

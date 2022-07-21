@@ -11,7 +11,6 @@ import com.artevak.kasirpos.ui.adapter.AdapterPelanggan
 import com.artevak.kasirpos.databinding.ActivitySelectPelangganBinding
 import com.artevak.kasirpos.data.model.Pelanggan
 import com.artevak.kasirpos.data.model.SharedVariable
-import com.artevak.kasirpos.data.model.UserPreference
 
 class SelectPelangganActivity : BaseActivity() {
     lateinit var binding : ActivitySelectPelangganBinding
@@ -30,7 +29,6 @@ class SelectPelangganActivity : BaseActivity() {
         binding = ActivitySelectPelangganBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        mUserPref = UserPreference(this)
 
         shimmerFrameLayout = view.findViewById(R.id.sflMain)
         adapter = AdapterPelanggan(listPelanggan)

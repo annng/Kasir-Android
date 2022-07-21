@@ -10,7 +10,6 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import cn.pedant.SweetAlert.SweetAlertDialog
-import com.artevak.kasirpos.data.model.UserPreference
 import com.artevak.kasirpos.common.util.PermissionHelper
 import es.dmoral.toasty.Toasty
 import java.text.SimpleDateFormat
@@ -21,7 +20,6 @@ open class BaseActivity : AppCompatActivity() {
     lateinit var  permissionHelper : PermissionHelper
 
     lateinit var pDialogLoading : SweetAlertDialog
-    lateinit var mUserPref : UserPreference
 
     private var activityLauncherCallback: ((ActivityResult) -> Unit)? = null
     private val activityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -93,14 +91,7 @@ open class BaseActivity : AppCompatActivity() {
 
 
     fun logout(){
-        mUserPref.saveName("")
-        mUserPref.saveNIK("")
-        mUserPref.saveEmail("")
-        mUserPref.saveJenisUser("")
-        mUserPref.savePhone("")
-        mUserPref.saveAvatar("")
-        mUserPref.saveUsername("")
-        mUserPref.saveToken("")
+        //TODO logout
     }
 
     fun convertDate(tanggal : String): String {
