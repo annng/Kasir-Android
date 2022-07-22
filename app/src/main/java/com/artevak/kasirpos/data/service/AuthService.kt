@@ -6,10 +6,7 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.artevak.kasirpos.R
 import com.artevak.kasirpos.common.const.DBConst
-import com.artevak.kasirpos.common.util.ext.addCustomKey
-import com.artevak.kasirpos.common.util.ext.getAllData
-import com.artevak.kasirpos.common.util.ext.getData
-import com.artevak.kasirpos.common.util.ext.isExist
+import com.artevak.kasirpos.common.util.ext.*
 import com.artevak.kasirpos.data.model.User
 import com.artevak.kasirpos.data.model.param.LoginParam
 import com.artevak.kasirpos.response.firebase.ResponseData
@@ -126,4 +123,9 @@ class AuthService(val context: Context, val db: FirebaseDatabase) {
         })
 
     }
+
+    fun updateUser(user: User) {
+        db.updateData(DBConst.TABLE.USER, user.username, user)
+    }
+
 }

@@ -53,7 +53,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnSave"
         app:layout_constraintTop_toBottomOf="@+id/relaToolbar">
 
         <LinearLayout
@@ -77,7 +78,7 @@
                 android:id="@+id/etUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:inputType="text"
+                app:inputType="clickable"
                 app:titleEditText="@string/hint_username" />
 
 
@@ -108,18 +109,32 @@
                 android:textSize="@dimen/title_medium" />
 
             <com.artevak.kasirpos.widget.CustomEditText
-                android:id="@+id/etNamaPemilik"
+                android:id="@+id/etOwnerName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:inputType="person"
                 app:titleEditText="@string/hint_owner_name" />
 
             <com.artevak.kasirpos.widget.CustomEditText
-                android:id="@+id/etNamaUmkm"
+                android:id="@+id/etShopName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:inputType="person"
                 app:titleEditText="@string/hint_shop_name" />
+
+            <com.artevak.kasirpos.widget.CustomEditText
+                android:id="@+id/etShopAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:inputType="text"
+                app:titleEditText="@string/hint_shop_address" />
+
+            <com.artevak.kasirpos.widget.CustomEditText
+                android:id="@+id/etShopPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:inputType="phone"
+                app:titleEditText="@string/hint_phone_number" />
 
         </LinearLayout>
 

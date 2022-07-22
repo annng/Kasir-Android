@@ -27,6 +27,7 @@ class ProfileActivity : BaseActivity() {
             val i = Intent(this, LoginActivity::class.java)
             startActivity(i)
         }
+
         binding.tvEditProfile.setOnClickListener {
             ProfileEditActivity.generateIntent(this)
         }
@@ -41,7 +42,7 @@ class ProfileActivity : BaseActivity() {
         }
     }
 
-    fun updateUI(user: User){
+    private fun updateUI(user: User){
         val firstChara = user.name.take(1)
         binding.tvInisial.text = firstChara
         binding.tvName.text = user.name.dashIfEmpty()

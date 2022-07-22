@@ -15,7 +15,7 @@ class LoginViewModel(val useCase : LoginUseCase) : BaseViewModel() {
         useCase.login(loginParam, _user)
     }
 
-    fun saveSession(username : String){
-        useCase.saveSession(username)
+    fun saveSession(username : String, password : String){
+        useCase.saveSession(username, password)
     }
 }

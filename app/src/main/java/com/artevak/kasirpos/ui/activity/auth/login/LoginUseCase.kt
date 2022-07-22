@@ -8,5 +8,5 @@ import com.artevak.kasirpos.response.firebase.ResponseProcess
 
 class LoginUseCase (private val userRepository: UserRepository){
     fun login(loginParam: LoginParam, response : MutableLiveData<ResponseProcess<User?>>) = userRepository.login(loginParam, response)
-    fun saveSession(username : String) = userRepository.saveUsername(username)
+    fun saveSession(username : String, password : String) = userRepository.saveUsername(username, password)
 }

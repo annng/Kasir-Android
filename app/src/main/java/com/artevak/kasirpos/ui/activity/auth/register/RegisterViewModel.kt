@@ -14,4 +14,5 @@ class RegisterViewModel(val registerUseCase: RegisterUseCase) : BaseViewModel() 
     }
 
     fun saveUsername(username : String) = registerUseCase.saveUsername(username)
+    fun savePassword(password : String) = registerUseCase.savePassword(password)
 }

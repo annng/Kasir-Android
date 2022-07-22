@@ -26,6 +26,7 @@ open class SharedPref constructor(context: Context) {
 
     // All Shared Preferences Keys
     private val KEY_USERNAME = "username"
+    private val KEY_PASSWORD = "password"
 
     private val IS_LOGIN = "is_login"
 
@@ -65,8 +66,17 @@ open class SharedPref constructor(context: Context) {
         return pref.getString(KEY_USERNAME, "") ?: ""
     }
 
+    fun getPassword(): String {
+        return pref.getString(KEY_PASSWORD, "") ?: ""
+    }
+
     fun setUsername(username: String) {
         editor.putString(KEY_USERNAME, username)
+        editor.commit()
+    }
+
+    fun setPassword(password: String) {
+        editor.putString(KEY_PASSWORD, password)
         editor.commit()
     }
 }

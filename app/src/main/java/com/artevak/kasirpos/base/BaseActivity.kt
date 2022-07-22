@@ -56,6 +56,21 @@ open class BaseActivity : AppCompatActivity() {
         pDialogLoading.dismiss()
     }
 
+    open fun initUI(){
+
+    }
+
+    open fun initListener(){
+
+    }
+
+    open fun setUI(){
+
+    }
+
+    open fun initAdapter(){
+
+    }
 
 
     fun showSweetInfo(message : String){

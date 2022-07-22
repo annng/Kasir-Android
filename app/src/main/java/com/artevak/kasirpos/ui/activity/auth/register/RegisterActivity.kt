@@ -83,6 +83,7 @@ class RegisterActivity : BaseActivity() {
 
     private fun saveUser(user: User) {
         viewModel.saveUsername(user.username)
+        viewModel.savePassword(user.password)
         gotoMainPage()
     }
 

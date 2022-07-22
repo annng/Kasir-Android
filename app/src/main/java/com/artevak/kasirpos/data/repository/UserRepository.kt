@@ -28,9 +28,17 @@ class UserRepository(
     fun addUser(user: User, response: MutableLiveData<ResponseProcess<String>>) =
         authService.addUser(user, response)
 
-    fun saveUsername(username: String) {
+    fun saveUsername(username: String, password: String) {
         sharedPref.setUsername(username)
+        sharedPref.setPassword(password)
     }
 
     fun getUsername() = sharedPref.getUsername()
+
+    fun savePassword(password: String) {
+        sharedPref.setPassword(password)
+    }
+
+    fun getPassword() = sharedPref.getPassword()
+    fun updateAccount(user : User) = authService.updateUser(user)
 }

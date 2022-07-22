@@ -8,4 +8,5 @@ import com.artevak.kasirpos.response.firebase.ResponseProcess
 class RegisterUseCase (private val userRepository: UserRepository){
     fun addUser(user: User, response : MutableLiveData<ResponseProcess<String>>) = userRepository.addUser(user, response)
     fun saveUsername(username :String) = userRepository.saveUsername(username)
+    fun savePassword(password :String) = userRepository.savePassword(password)
 }
