@@ -3,8 +3,6 @@ package com.artevak.kasirpos.ui.activity.transaction.print
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import android.graphics.BitmapFactory
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.application.isradeleon.thermalprinter.ConnectBluetoothActivity
 import com.application.isradeleon.thermalprinter.models.PrintAlignment
@@ -12,7 +10,7 @@ import com.application.isradeleon.thermalprinter.models.PrintFont
 import com.application.isradeleon.thermalprinter.models.ThermalPrinter
 import com.artevak.kasirpos.R
 import com.artevak.kasirpos.base.BaseActivity
-import com.artevak.kasirpos.util.PermissionHelper
+import com.artevak.kasirpos.common.util.PermissionHelper
 
 class TransactionPrintActivity : BaseActivity(), PermissionHelper.PermissionListener {
     override fun onCreate(savedInstanceState: Bundle?) {

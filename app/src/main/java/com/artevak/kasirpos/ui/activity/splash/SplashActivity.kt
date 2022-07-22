@@ -3,15 +3,14 @@ package com.artevak.kasirpos.ui.activity.splash
 import android.content.Intent
 import android.os.Bundle
 import com.artevak.kasirpos.base.BaseActivity
-import com.artevak.kasirpos.ui.activity.auth.LoginActivity
-import com.artevak.kasirpos.ui.activity.HomeActivity
 import com.artevak.kasirpos.databinding.ActivitySplashBinding
-import com.artevak.kasirpos.model.UserModel
-import com.artevak.kasirpos.model.UserPreference
-import com.artevak.kasirpos.ui.activity.transaction.print.TransactionPrintActivity
+import com.artevak.kasirpos.ui.activity.HomeActivity
+import com.artevak.kasirpos.ui.activity.auth.login.LoginActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SplashActivity : BaseActivity() {
     lateinit var binding : ActivitySplashBinding
+    private val viewModel : SplashViewModel by viewModel()
     lateinit var i : Intent
     var TAG_DETAIL = "detailuser"
 
@@ -21,9 +20,8 @@ class SplashActivity : BaseActivity() {
         val view = binding.root
         setContentView(view)
 
-        mUserPref = UserPreference(this)
-        if (mUserPref.getToken().equals("") || mUserPref.getToken() == null){
-            i = Intent(this, HomeActivity::class.java)
+        if (viewModel.getUsername().isEmpty()){
+            i = Intent(this, LoginActivity::class.java)
             val timer: Thread = object : Thread() {
                 override fun run() {
 
@@ -39,20 +37,13 @@ class SplashActivity : BaseActivity() {
             }
             timer.start()
         }else{
-            //TODO get detail user and goto HomeActivity
+            gotoHome()
         }
     }
 
-    fun goToLogin(){
-        i = Intent(this, LoginActivity::class.java)
+    private fun gotoHome(){
+        i = Intent(this, HomeActivity::class.java)
         startActivity(i)
-    }
-
-    fun setSession(userModel : UserModel){
-        mUserPref.saveEmail(userModel.email!!)
-        mUserPref.saveNamaUmkm(userModel.nama_umkm!!)
-        mUserPref.saveAlamat(userModel.alamat!!)
-        mUserPref.saveName(userModel.name!!)
-        mUserPref.savePhone(userModel.phone!!)
+        finish()
     }
 }

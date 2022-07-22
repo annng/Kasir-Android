@@ -1,7 +1,7 @@
 package com.artevak.kasirpos.response
 
 import com.google.gson.annotations.SerializedName
-import com.artevak.kasirpos.model.DataChartPenjualan
+import com.artevak.kasirpos.data.model.DataChartPenjualan
 
 data class ChartTransaksiResponse(
     @SerializedName("message")

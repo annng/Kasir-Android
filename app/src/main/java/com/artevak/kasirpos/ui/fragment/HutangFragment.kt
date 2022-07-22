@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -18,8 +17,7 @@ import com.artevak.kasirpos.base.BaseFragment
 import com.artevak.kasirpos.ui.activity.debt.TambahHutangActivity
 import com.artevak.kasirpos.ui.adapter.AdapterHutang
 import com.artevak.kasirpos.databinding.FragmentHutangBinding
-import com.artevak.kasirpos.model.Hutang
-import com.artevak.kasirpos.model.UserPreference
+import com.artevak.kasirpos.data.model.Hutang
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*

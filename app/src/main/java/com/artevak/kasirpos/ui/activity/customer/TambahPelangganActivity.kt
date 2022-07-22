@@ -4,8 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.databinding.ActivityTambahPelangganBinding
-import com.artevak.kasirpos.model.PelangganInfo
-import com.artevak.kasirpos.model.UserPreference
+import com.artevak.kasirpos.data.model.PelangganInfo
 
 class TambahPelangganActivity : BaseActivity() {
     lateinit var binding : ActivityTambahPelangganBinding
@@ -17,7 +16,6 @@ class TambahPelangganActivity : BaseActivity() {
         binding = ActivityTambahPelangganBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        mUserPref = UserPreference(this)
 
         binding.ivBack.setOnClickListener {
             onBackPressed()

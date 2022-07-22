@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.auth.RegisterActivity">
+    tools:context=".ui.activity.auth.register.RegisterActivity">
 
     <RelativeLayout
         android:id="@+id/relaToolbar"
@@ -88,11 +88,11 @@
                     android:fontFamily="@font/cera_medium"/>
 
                 <com.artevak.kasirpos.widget.CustomEditText
-                    android:id="@+id/etEmail"
+                    android:id="@+id/etUsername"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:inputType="text"
-                    app:titleEditText="@string/hint_email" />
+                    app:titleEditText="@string/hint_username" />
 
 
                 <com.artevak.kasirpos.widget.CustomEditText
@@ -148,9 +148,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_medium"
         android:layout_marginEnd="@dimen/margin_large"
         android:layout_marginBottom="@dimen/margin_large"
-        android:layout_marginTop="@dimen/margin_medium"
         android:text="@string/action_register" />
 
 

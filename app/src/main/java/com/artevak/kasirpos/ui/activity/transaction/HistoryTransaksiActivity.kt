@@ -7,9 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.ui.adapter.AdapterHistoryTransaksi
 import com.artevak.kasirpos.databinding.ActivityHistoryTransaksiBinding
-import com.artevak.kasirpos.model.HistoryTransaksi
-import com.artevak.kasirpos.model.Transaksi
-import com.artevak.kasirpos.model.UserPreference
+import com.artevak.kasirpos.data.model.HistoryTransaksi
+import com.artevak.kasirpos.data.model.Transaksi
 import kotlinx.android.synthetic.main.fragment_stok.*
 import java.text.DecimalFormat
 import java.text.NumberFormat
@@ -32,9 +31,8 @@ class HistoryTransaksiActivity : BaseActivity() {
         binding = ActivityHistoryTransaksiBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        mUserPref = UserPreference(this)
         i = intent
-        transaksi = i.getParcelableExtra<Transaksi>("transaksi")!!
+        transaksi = i.getParcelableExtra("transaksi")!!
 
         adapter = AdapterHistoryTransaksi(listHistoryTransaksi)
         val layoutManager =

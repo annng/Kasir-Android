@@ -15,7 +15,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog
 import com.artevak.kasirpos.R
 import com.artevak.kasirpos.base.BaseFragment
 import com.artevak.kasirpos.databinding.FragmentTransaksiBinding
-import com.artevak.kasirpos.model.*
+import com.artevak.kasirpos.data.model.*
 import com.artevak.kasirpos.ui.activity.HomeActivity
 import com.artevak.kasirpos.ui.activity.customer.SelectPelangganActivity
 import com.artevak.kasirpos.ui.adapter.AdapterBarang

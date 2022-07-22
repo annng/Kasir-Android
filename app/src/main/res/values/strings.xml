@@ -20,11 +20,13 @@
     <string name="title_total_payment">Total Payment</string>
     <string name="action_add">Add</string>
     <string name="hint_qty">Qty</string>
+    <string name="info_toast_loading">Mohon Tunggu...</string>
     <string name="error_toast_qty_empty">Quantity is still empty. Please set quantity of item</string>
     <string name="error_toast_item_not_selected">You haven\'t seleced item yet</string>
     <string name="error_toast_insufficient_stock">Insufficient stock. Please check your stock`s amount</string>
     <string name="dialog_title_loading">Loading..</string>
     <string name="hint_phone_number">Phone Number</string>
+    <string name="hint_username">Username</string>
     <string name="hint_email">Email</string>
     <string name="hint_owner_name">Owner Name</string>
     <string name="hint_shop_name">Shop Name</string>
@@ -57,6 +59,12 @@
     <string name="title_toolbar_edit_item">Edit Item</string>
     <string name="action_save_changes">Save Changes</string>
     <string name="action_delete">Hapus</string>
+    <string name="action_edit">Edit</string>
+    <string name="title_toolbar_profile">Profile</string>
+    <string name="title_toolbar_profile_edit">Profile Edit</string>
+    <string name="error_toast_username_exist">Username is exist. Please change to other username</string>
+    <string name="error_toast_user_not_found">User not found</string>
+    <string name="alert_toast_success_update_account">Success update account</string>
     <string-array name="satuan">
         <item>Pcs</item>
         <item>Kg</item>

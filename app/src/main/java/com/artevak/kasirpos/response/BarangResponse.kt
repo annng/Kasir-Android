@@ -1,7 +1,7 @@
 package com.artevak.kasirpos.response
 
 import com.google.gson.annotations.SerializedName
-import com.artevak.kasirpos.model.Barang
+import com.artevak.kasirpos.data.model.Barang
 
 data class BarangResponse(
     @SerializedName("current_page")

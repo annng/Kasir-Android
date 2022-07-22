@@ -10,8 +10,7 @@ import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.R
 import com.artevak.kasirpos.databinding.ActivityHomeBinding
 import com.artevak.kasirpos.ui.fragment.*
-import com.artevak.kasirpos.model.SharedVariable
-import com.artevak.kasirpos.model.UserPreference
+import com.artevak.kasirpos.data.model.SharedVariable
 
 
 class HomeActivity : BaseActivity() {
@@ -22,7 +21,6 @@ class HomeActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mUserPref = UserPreference(this)
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)

@@ -8,8 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.artevak.kasirpos.databinding.ItemsBarangBinding
-import com.artevak.kasirpos.model.Barang
-import com.artevak.kasirpos.BuildConfig
+import com.artevak.kasirpos.data.model.Barang
 import com.artevak.kasirpos.ui.activity.item.DetailBarangActivity
 
 class AdapterBarang(private val list:ArrayList<Barang>) : RecyclerView.Adapter<AdapterBarang.MyViewHolder>(){

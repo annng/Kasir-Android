@@ -6,10 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.artevak.kasirpos.BuildConfig
 import com.artevak.kasirpos.databinding.ItemsKeranjangBinding
 import com.artevak.kasirpos.ui.fragment.TransaksiFragment
-import com.artevak.kasirpos.model.Keranjang
+import com.artevak.kasirpos.data.model.Keranjang
 
 
 class AdapterKeranjang(private val list:ArrayList<Keranjang>,private val fragment: TransaksiFragment) : RecyclerView.Adapter<AdapterKeranjang.MyViewHolder>(){

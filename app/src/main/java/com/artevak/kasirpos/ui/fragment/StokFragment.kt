@@ -9,14 +9,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.artevak.kasirpos.R
 import com.artevak.kasirpos.base.BaseFragment
 import com.artevak.kasirpos.databinding.FragmentStokBinding
-import com.artevak.kasirpos.model.Barang
-import com.artevak.kasirpos.model.UserPreference
+import com.artevak.kasirpos.data.model.Barang
 import com.artevak.kasirpos.ui.activity.item.TambahBarangActivity
 import com.artevak.kasirpos.ui.adapter.AdapterBarang
 import com.facebook.shimmer.ShimmerFrameLayout

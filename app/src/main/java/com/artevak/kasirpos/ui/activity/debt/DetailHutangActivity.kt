@@ -6,9 +6,8 @@ import android.view.View
 import android.widget.Toast
 import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.databinding.ActivityDetailHutangBinding
-import com.artevak.kasirpos.model.Hutang
-import com.artevak.kasirpos.model.UserPreference
-import com.artevak.kasirpos.util.ext.parseString
+import com.artevak.kasirpos.data.model.Hutang
+import com.artevak.kasirpos.common.util.ext.parseString
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*
@@ -27,7 +26,6 @@ class DetailHutangActivity : BaseActivity() {
         binding = ActivityDetailHutangBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        mUserPref = UserPreference(this)
 
         i = intent
         hutang = i.getParcelableExtra<Hutang>("hutang")!!

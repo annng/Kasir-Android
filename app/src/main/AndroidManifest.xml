@@ -24,11 +24,18 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".app.MyApplication"
         android:theme="@style/Theme.PenjualanKasir"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon,android:allowBackup" >
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            tools:node="remove" />
+
         <activity
-            android:name=".ProfileEditActivity"
+            android:name=".ui.activity.profile.edit.ProfileEditActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activity.transaction.print.TransactionPrintActivity"
@@ -77,10 +84,10 @@
             android:exported="true"
             android:label="@string/title_activity_home" />
         <activity
-            android:name="com.artevak.kasirpos.ui.activity.auth.RegisterActivity"
+            android:name="com.artevak.kasirpos.ui.activity.auth.register.RegisterActivity"
             android:exported="true" />
         <activity
-            android:name="com.artevak.kasirpos.ui.activity.auth.LoginActivity"
+            android:name="com.artevak.kasirpos.ui.activity.auth.login.LoginActivity"
             android:exported="true" />
     </application>
 

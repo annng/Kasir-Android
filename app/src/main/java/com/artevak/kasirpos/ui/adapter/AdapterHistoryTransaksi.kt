@@ -6,9 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.artevak.kasirpos.BuildConfig
 import com.artevak.kasirpos.databinding.ItemsKeranjangBinding
-import com.artevak.kasirpos.model.HistoryTransaksi
+import com.artevak.kasirpos.data.model.HistoryTransaksi
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*

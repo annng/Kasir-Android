@@ -4,9 +4,8 @@ import android.os.Bundle
 import android.widget.Toast
 import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.databinding.ActivityTambahHutangSayaBinding
-import com.artevak.kasirpos.model.HutangInfo
-import com.artevak.kasirpos.model.SharedVariable
-import com.artevak.kasirpos.model.UserPreference
+import com.artevak.kasirpos.data.model.HutangInfo
+import com.artevak.kasirpos.data.model.SharedVariable
 
 class TambahHutangSayaActivity : BaseActivity() {
 
@@ -20,7 +19,6 @@ class TambahHutangSayaActivity : BaseActivity() {
         binding = ActivityTambahHutangSayaBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        mUserPref = UserPreference(this)
 
         binding.ivBack.setOnClickListener {
             onBackPressed()
