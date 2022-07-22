@@ -43,6 +43,25 @@
     </style>
 
 
+    <style name="Title" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_marginStart">@dimen/margin_medium</item>
+        <item name="fontFamily">@font/cera_black</item>
+        <item name="android:layout_marginTop">@dimen/margin_medium</item>
+        <item name="android:layout_marginBottom">@dimen/margin_small</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/title_medium</item>
+    </style>
+
+    <style name="Text" parent="Widget.AppCompat.TextView">
+        <item name="fontFamily">@font/cera_light</item>
+        <item name="android:layout_marginStart">@dimen/margin_medium</item>
+        <item name="android:layout_marginTop">@dimen/margin_medium</item>
+        <item name="android:lineSpacingExtra">1.5dp</item>
+        <item name="android:layout_marginBottom">@dimen/margin_small</item>
+        <item name="android:textColor">@color/text_gray</item>
+        <item name="android:textSize">@dimen/text_medium</item>
+    </style>
+
     <style name="Hint" parent="Widget.AppCompat.TextView">
         <item name="android:layout_marginStart">@dimen/margin_medium</item>
         <item name="fontFamily">@font/cera_medium</item>

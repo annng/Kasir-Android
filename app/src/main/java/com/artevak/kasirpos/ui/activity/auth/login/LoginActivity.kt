@@ -38,7 +38,7 @@ class LoginActivity : BaseActivity() {
         viewModel.user.observe(this){
             when(it.status){
                 StatusRequest.SUCCESS -> {
-                    it.data?.username?.let { it1 -> viewModel.saveSession(it1) }
+                    it.data?.let { it1 -> viewModel.saveSession(it1.username, it1.password) }
                     gotoSplashScreen()
                 }
                 else -> {

@@ -83,10 +83,10 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="sans-serif"
-                        android:text="G"
+                        android:text="-"
                         android:id="@+id/tvInisial"
                         android:textColor="@color/white"
-                        android:textSize="21.7sp"
+                        android:textSize="@dimen/title_big"
                         android:textStyle="normal" />
 
                     <ImageView
@@ -100,8 +100,9 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="16.7dp"
+                    android:layout_marginStart="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -132,6 +133,7 @@
                         android:layout_marginTop="@dimen/margin_extra_small"
                         android:fontFamily="@font/cera_medium"
                         android:text="-"
+                        android:layout_marginBottom="@dimen/margin_small"
                         android:id="@+id/tvPhone"
                         android:textColor="@color/grey_800"
                         android:textSize="@dimen/text_small"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.artevak.kasirpos" >
+    package="com.artevak.kasirpos">
 
     <uses-feature
         android:name="android.hardware.bluetooth"
@@ -18,16 +18,20 @@
         tools:ignore="ScopedStorage" />
 
     <application
+        android:name=".app.MyApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".app.MyApplication"
         android:theme="@style/Theme.PenjualanKasir"
         android:usesCleartextTraffic="true"
-        tools:replace="android:icon,android:allowBackup" >
+        tools:replace="android:icon,android:allowBackup">
+        <activity
+            android:name=".WebMarkDownActivity"
+            android:exported="false" />
+
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"
@@ -63,7 +67,7 @@
             android:exported="false" />
         <activity
             android:name="com.artevak.kasirpos.ui.activity.splash.SplashActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.common.util.ext.dashIfEmpty
+import com.artevak.kasirpos.data.model.Menu
 import com.artevak.kasirpos.data.model.User
 import com.artevak.kasirpos.ui.activity.auth.login.LoginActivity
 import com.artevak.kasirpos.databinding.ActivityProfileBinding
@@ -11,9 +12,15 @@ import com.artevak.kasirpos.ui.activity.profile.edit.ProfileEditActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileActivity : BaseActivity() {
-    lateinit var binding : ActivityProfileBinding
+    lateinit var binding: ActivityProfileBinding
     var TAG_LOGOUT = "logout"
-    private val viewModel : ProfileViewModel by viewModel()
+    private val viewModel: ProfileViewModel by viewModel()
+    private val menus = ArrayList<Menu>()
+    private val adapter: ProfileMenuAdapter by lazy {
+        ProfileMenuAdapter(menus) {
+
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,22 +41,37 @@ class ProfileActivity : BaseActivity() {
 
         observeData()
         viewModel.getUser()
+        initAdapter()
+        setData()
     }
 
-    private fun observeData(){
+    private fun observeData() {
         viewModel.user.observe(this) {
             updateUI(it)
         }
     }
 
-    private fun updateUI(user: User){
+    private fun setData() {
+        menus.clear()
+        menus.addAll(viewModel.getMenu())
+
+        adapter.notifyDataSetChanged()
+    }
+
+    private fun updateUI(user: User) {
         val firstChara = user.name.take(1)
         binding.tvInisial.text = firstChara
         binding.tvName.text = user.name.dashIfEmpty()
         binding.tvEmail.text = user.shopeName.dashIfEmpty()
+        binding.tvPhone.text = user.phone.dashIfEmpty()
     }
 
-    fun sendLogoutRequest(){
+    override fun initAdapter() {
+        super.initAdapter()
+        binding.rvMenu.adapter = adapter
+    }
+
+    fun sendLogoutRequest() {
         //TODO logout
     }
 }

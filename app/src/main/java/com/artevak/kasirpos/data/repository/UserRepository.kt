@@ -33,6 +33,10 @@ class UserRepository(
         sharedPref.setPassword(password)
     }
 
+    fun saveUsername(username: String) {
+        sharedPref.setUsername(username)
+    }
+
     fun getUsername() = sharedPref.getUsername()
 
     fun savePassword(password: String) {
