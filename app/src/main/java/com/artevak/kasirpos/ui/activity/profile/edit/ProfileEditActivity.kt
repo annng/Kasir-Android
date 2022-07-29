@@ -2,7 +2,6 @@ package com.artevak.kasirpos.ui.activity.profile.edit
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -49,6 +48,7 @@ class ProfileEditActivity : BaseActivity(), View.OnClickListener {
             etUsername.text = user.username
             etPassword.text = user.password
             etShopName.text = user.shopeName.dashIfEmpty()
+            etShopAddress.text = user.address.dashIfEmpty()
             etOwnerName.text = user.name.dashIfEmpty()
             etShopPhone.text = user.phone.dashIfEmpty()
         }
@@ -77,7 +77,7 @@ class ProfileEditActivity : BaseActivity(), View.OnClickListener {
 
                 var password = viewModel.getPassword()
                 if (viewModel.isNeedUpdatePassword(binding.etPassword.text, binding.etCPassword.text)){
-                    val isPasswordConfirmed = binding.etPassword == binding.etCPassword
+                    val isPasswordConfirmed = binding.etPassword.text == binding.etCPassword.text
                     if (!isPasswordConfirmed) {
                         binding.etCPassword.setInfoError(getString(R.string.error_field_password_not_match))
                         return
@@ -91,7 +91,7 @@ class ProfileEditActivity : BaseActivity(), View.OnClickListener {
                     username = binding.etUsername.text,
                     password = password,
                     shopeName = binding.etShopName.text,
-                    alamat = binding.etShopAddress.text,
+                    address = binding.etShopAddress.text,
                     phone = binding.etShopPhone.text
                 ))
 

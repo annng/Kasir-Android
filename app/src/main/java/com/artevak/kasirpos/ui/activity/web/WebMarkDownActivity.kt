@@ -1,18 +1,26 @@
 package com.artevak.kasirpos.ui.activity.web
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.ViewCompositionStrategy
-import com.artevak.kasirpos.R
+import android.view.View
 import com.artevak.kasirpos.base.BaseActivity
+import com.artevak.kasirpos.common.const.Cons
+import com.artevak.kasirpos.common.util.ext.dashIfEmpty
 import com.artevak.kasirpos.databinding.ActivityWebMarkDownBinding
-import com.mukesh.MarkDown
-import java.net.URL
 
-class WebMarkDownActivity : BaseActivity() {
-    val binding : ActivityWebMarkDownBinding by lazy {
+class WebMarkDownActivity : BaseActivity(), View.OnClickListener {
+
+    companion object {
+        fun generateIntent(context: Context, urlMarkdown: String, title : String): Intent {
+            val i = Intent(context, WebMarkDownActivity::class.java)
+            i.putExtra(Cons.EXTRA.KEY_URL, urlMarkdown)
+            i.putExtra(Cons.EXTRA.KEY_TITLE, title)
+            return i
+        }
+    }
+
+    val binding: ActivityWebMarkDownBinding by lazy {
         ActivityWebMarkDownBinding.inflate(layoutInflater)
     }
 
@@ -20,19 +28,23 @@ class WebMarkDownActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        initListener()
 
-        binding.markdown.apply {
-            // Dispose of the Composition when the view's LifecycleOwner is destroyed
-            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-            setContent {
-                // In Compose world
-                MaterialTheme {
-                    MarkDown(
-                        url = URL("https://raw.githubusercontent.com/mukeshsolanki/MarkdownView-Android/main/README.md"),
-                        modifier = Modifier.fillMaxSize()
-                    )
-                }
-            }
+        val urlMarkdown = intent.getStringExtra(Cons.EXTRA.KEY_URL)
+        binding.tvTitle.text = intent.getStringExtra(Cons.EXTRA.KEY_TITLE).dashIfEmpty()
+
+        binding.markdown.loadFromUrl(urlMarkdown)
+
+    }
+
+    override fun initListener() {
+        super.initListener()
+        binding.ivBack.setOnClickListener(this)
+    }
+
+    override fun onClick(p0: View?) {
+        when(p0){
+            binding.ivBack -> onBackPressed()
         }
     }
 }

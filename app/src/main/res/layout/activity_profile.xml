@@ -163,36 +163,37 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:orientation="vertical"
                 tools:itemCount="3"
-                tools:listitem="@layout/item_bluetooth_device"/>
+                tools:listitem="@layout/item_menu"/>
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingBottom="21dp"
+                android:padding="@dimen/margin_medium"
                 android:background="@color/white"
                 android:id="@+id/lineLogout"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_marginTop="11.7dp"
-                android:layout_marginBottom="65.7dp"
-                android:paddingLeft="16.3dp"
-                android:paddingTop="21dp">
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_medium"
+                >
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    app:tint="@color/colorRed"
                     android:src="@drawable/ic_baseline_power_settings_new_24" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="41.3dp"
+                    android:layout_marginLeft="@dimen/margin_medium"
                     android:fontFamily="sans-serif"
-                    android:text="Keluar Akun"
-                    android:textColor="@color/black"
+                    android:text="@string/action_logout"
+                    android:textColor="@color/colorRed"
                     android:textSize="15sp"
                     android:textStyle="normal" />
             </LinearLayout>

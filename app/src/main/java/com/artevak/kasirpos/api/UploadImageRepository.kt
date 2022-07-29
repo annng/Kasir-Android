@@ -15,8 +15,8 @@ class UploadImageRepository(val context: Context) {
         /**
          * Fill in your imgur client id below. Don't have a client id? Get one here: https://api.imgur.com/oauth2/addclient
          */
-        const val PUBLIC = "06a3dbebef332c6220d2"
-        const val SECRET = "c283d1efcd58da45c9b6"
+        const val PUBLIC = "7dfe6d1ac7dfccaaeb20"
+        const val SECRET = "18db6e2462fe11fc31bc"
     }
 
     fun uploading(

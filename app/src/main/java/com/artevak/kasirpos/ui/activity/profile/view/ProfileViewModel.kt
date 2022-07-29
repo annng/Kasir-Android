@@ -24,4 +24,8 @@ class ProfileViewModel(private val context : Context, private val useCase: Profi
             Menu(resIcon = R.drawable.ic_privacy, title = context.getString(R.string.title_menu_privacy_policy))
         )
     }
+
+    fun logout(){
+        useCase.saveUsername("", "")
+    }
 }

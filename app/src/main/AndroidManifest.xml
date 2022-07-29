@@ -29,7 +29,7 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:icon,android:allowBackup">
         <activity
-            android:name=".WebMarkDownActivity"
+            android:name=".ui.activity.web.WebMarkDownActivity"
             android:exported="false" />
 
         <provider
@@ -81,7 +81,7 @@
             android:name="com.artevak.kasirpos.ui.activity.customer.TambahPelangganActivity"
             android:exported="false" />
         <activity
-            android:name="com.artevak.kasirpos.ui.activity.item.TambahBarangActivity"
+            android:name="com.artevak.kasirpos.ui.activity.item.add.TambahBarangActivity"
             android:exported="true" />
         <activity
             android:name="com.artevak.kasirpos.ui.activity.HomeActivity"
