@@ -8,5 +8,4 @@ import com.google.firebase.database.FirebaseDatabase
 open class BaseViewModel: ViewModel() {
     lateinit var db : FirebaseDatabase
     lateinit var sharedPref : SharedPref
-    lateinit var context : Context
 }

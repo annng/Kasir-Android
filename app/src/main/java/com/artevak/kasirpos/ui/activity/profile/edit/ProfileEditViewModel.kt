@@ -35,6 +35,7 @@ class ProfileEditViewModel(private val useCase : ProfileEditUseCase) : BaseViewM
 
     fun updateAccount(user : User){
         useCase.updateAccount(user)
+        useCase.saveAccount(user.username, user.password)
     }
 
 }

@@ -44,7 +44,7 @@ val useCaseModule = module {
 val viewModelModule = module {
     viewModel { BaseViewModel() }
     viewModel { RegisterViewModel(get()) }
-    viewModel { ProfileViewModel(get()) }
+    viewModel { ProfileViewModel(get(), get()) }
     viewModel { ProfileEditViewModel(get()) }
     viewModel { LoginViewModel(get()) }
     viewModel { SplashViewModel(get()) }

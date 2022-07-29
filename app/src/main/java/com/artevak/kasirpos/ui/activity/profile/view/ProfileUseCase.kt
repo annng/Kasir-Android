@@ -7,4 +7,6 @@ import com.artevak.kasirpos.response.firebase.ResponseData
 
 class ProfileUseCase(private val userRepository: UserRepository) {
     fun getMyAccount(response : MutableLiveData<User>) = userRepository.getMyAccount(response)
+
+    fun saveUsername(username : String, password : String) = userRepository.saveUsername(username, password)
 }

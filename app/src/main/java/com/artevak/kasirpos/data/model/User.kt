@@ -9,6 +9,6 @@ data class User(
     var username: String = "",
     var password: String = "",
     var shopeName: String? = "",
-    var alamat: String? = "",
+    var address: String? = "",
     var phone: String? = "",
 ) : Parcelable

@@ -8,4 +8,5 @@ class ProfileEditUseCase(private val userRepository: UserRepository) {
     fun getAccount(user: MutableLiveData<User>) = userRepository.getMyAccount(user)
     fun getPassword() = userRepository.getPassword()
     fun updateAccount(user : User) = userRepository.updateAccount(user)
+    fun saveAccount(username : String, password : String) = userRepository.saveUsername(username, password)
 }

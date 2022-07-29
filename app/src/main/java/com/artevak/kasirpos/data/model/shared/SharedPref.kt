@@ -49,7 +49,7 @@ open class SharedPref constructor(context: Context) {
         // Clearing all data from Shared Preferences
         setIsLogin(false)
         setUsername("")
-
+        setPassword("")
     }
 
 

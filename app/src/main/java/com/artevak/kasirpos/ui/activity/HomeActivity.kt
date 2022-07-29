@@ -26,7 +26,6 @@ class HomeActivity : BaseActivity() {
         setContentView(binding.root)
 
         binding.navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-
         if (SharedVariable.nextFragment.equals("")){
             nextFragment = HomeFragment.newInstance()
         }else if (SharedVariable.nextFragment.equals("stok")){

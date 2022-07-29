@@ -9,22 +9,22 @@
     <item
         android:id="@+id/navigation_stok"
         android:icon="@drawable/ic_baseline_storage_24"
-        android:title="Stok" />
+        android:title="@string/hint_stock" />
 
     <item
         android:id="@+id/navigation_transaksi"
         android:icon="@drawable/ic_baseline_monetization_on_24"
-        android:title="Transaksi" />
+        android:title="@string/title_toolbar_transaction" />
 
     <item
         android:id="@+id/navigation_hutang"
         android:icon="@drawable/hutang"
-        android:title="Hutang" />
+        android:title="@string/toolbar_title_debt" />
 
     <item
         android:id="@+id/navigation_untung"
         android:icon="@drawable/untung"
-        android:title="Untung" />
+        android:title="@string/title_toolbar_profit" />
 
 
 

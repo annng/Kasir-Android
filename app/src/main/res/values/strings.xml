@@ -65,6 +65,10 @@
     <string name="error_toast_username_exist">Username is exist. Please change to other username</string>
     <string name="error_toast_user_not_found">User not found</string>
     <string name="alert_toast_success_update_account">Success update account</string>
+    <string name="title_menu_privacy_policy">Privacy Policy</string>
+    <string name="all_file_cannot_opened">Cannot Open File</string>
+    <string name="label_file_not_found">Cannot select file. Please make sure your file is in internal storage.</string>
+    <string name="action_logout">Logout</string>
     <string-array name="satuan">
         <item>Pcs</item>
         <item>Kg</item>
