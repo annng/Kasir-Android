@@ -31,21 +31,21 @@ class AdapterBarang(private val list:ArrayList<Barang>) : RecyclerView.Adapter<A
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         with(holder){
-            with(list.get(position)){
+            with(list[position]){
 
-                val imageUrl = ""+ list.get(position).picture
+                val imageUrl = picture
                // Log.d("imgbarang",""+imageUrl)
                 Glide.with(binding.rlBarang.context)
                     .load(imageUrl)
                     .into(binding.ivBarang)
 
-                binding.tvNamaBarang.setText(""+ list.get(position).name)
-                binding.tvStok.setText("Sisa Stok "+ list.get(position).stok +" "+ list.get(position).satuan)
-                binding.tvDeskripsi.setText(list.get(position).deskripsi)
+                binding.tvNamaBarang.text = ""+ name
+                binding.tvStok.text = "Remaining Item : "+ stok +" "+ satuan
+                binding.tvDeskripsi.text = deskripsi
 
                 binding.rlBarang.setOnClickListener {
                     val i  = Intent(binding.rlBarang.context, DetailBarangActivity::class.java)
-                    i.putExtra("barang",list?.get(position))
+                    i.putExtra("barang", list[position])
                     binding.rlBarang.context.startActivity(i)
                 }
 

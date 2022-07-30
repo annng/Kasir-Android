@@ -126,6 +126,7 @@
                     android:id="@+id/etHargaBeli"
                     android:layout_width="match_parent"
                     android:inputType="number"
+                    app:decimal_digits="0"
                     style="@style/CustomCurrencyEditText"
                     />
 
@@ -138,6 +139,7 @@
                 <com.blackcat.currencyedittext.CurrencyEditText
                     android:id="@+id/etHargaJual"
                     android:layout_width="match_parent"
+                    app:decimal_digits="0"
                     style="@style/CustomCurrencyEditText"/>
 
 

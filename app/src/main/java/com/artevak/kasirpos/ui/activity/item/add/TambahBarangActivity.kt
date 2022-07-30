@@ -1,9 +1,6 @@
 package com.artevak.kasirpos.ui.activity.item.add
 
 import android.Manifest
-import android.app.Activity
-import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -16,10 +13,12 @@ import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.databinding.ActivityTambahBarangBinding
 import com.artevak.kasirpos.common.util.PermissionHelper
 import com.artevak.kasirpos.common.util.ext.loadImageCenterCrop
-import okhttp3.MultipartBody
-import java.io.ByteArrayOutputStream
+import com.artevak.kasirpos.data.model.Barang
+import com.artevak.kasirpos.response.firebase.StatusRequest
+import kotlinx.android.synthetic.main.activity_ubah_barang.*
 import java.io.File
 import java.util.ArrayList
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TambahBarangActivity : BaseActivity(), PermissionHelper.PermissionListener {
     lateinit var binding: ActivityTambahBarangBinding
@@ -27,10 +26,10 @@ class TambahBarangActivity : BaseActivity(), PermissionHelper.PermissionListener
     private val PICK_IMAGE_REQUEST = 71
     private var filePath: Uri? = null
 
-    var fotoBitmap: Bitmap? = null
-    lateinit var bos: ByteArrayOutputStream
+    val viewModel: TambahBarangViewModel by viewModel()
+
+    var fotoUrl = ""
     private var fileUri: Uri? = null
-    lateinit var imagename: MultipartBody.Part
 
     var TAG_SAVE_BARANG = "saveBarang"
     var TAG_ADD_FOTO = "addFoto"
@@ -54,7 +53,7 @@ class TambahBarangActivity : BaseActivity(), PermissionHelper.PermissionListener
         binding.btnSimpan.setOnClickListener {
             checkValidation()
         }
-        binding.spSatuan.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+        binding.spSatuan.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View,
@@ -69,78 +68,89 @@ class TambahBarangActivity : BaseActivity(), PermissionHelper.PermissionListener
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
-        })
+        }
         selectedSatuan = binding.spSatuan.getItemAtPosition(0).toString()
 
+        observeData()
 
     }
 
-    fun checkValidation() {
+    private fun observeData() {
+        viewModel.obsCompressImage.observe(this) {
+            when (it.status) {
+                StatusRequest.SUCCESS -> {
+                    it.data?.let { it1 -> uploadImage(it1) }
+                }
+                StatusRequest.ERROR, StatusRequest.FAILED -> showErrorMessage(getString(R.string.error_toast_failed_upload))
+                else -> showLoading(this)
+            }
+        }
+
+        viewModel.addItem.observe(this) {
+            when (it.status) {
+                StatusRequest.LOADING -> showLoading(this)
+                StatusRequest.SUCCESS -> {
+                    dismissLoading()
+                    showInfoMessage(getString(R.string.info_toast_success_add_item))
+                    onBackPressed()
+                }
+                else -> {
+                    dismissLoading()
+                    showErrorMessage(getString(R.string.error_toast_failed_upload))
+                }
+            }
+        }
+    }
+
+    private fun checkValidation() {
         val nama_barang = binding.etNamaBarang.text
-        val harga_beli = binding.etHargaBeli.text.toString()
-        val harga_jual = binding.etHargaJual.text.toString()
+        val harga_beli = binding.etHargaBeli.rawValue
+        val harga_jual = binding.etHargaJual.rawValue
         val stok_awal = binding.etStokAwal.text
         val deskripsi = binding.etDeskripsi.text
 
         if (selectedSatuan.equals("")) {
-            showErrorMessage("Anda belum memilih satuan")
+            showErrorMessage("Please select unit type")
         } else if (nama_barang.equals("") || nama_barang.length == 0) {
             showErrorMessage("Nama barang belum diisi")
-        } else if (harga_beli.equals("") || harga_beli.length == 0) {
+        } else if (etHargaBeli.text.isEmpty()) {
             showErrorMessage("Harga beli belum diisi")
-        } else if (harga_jual.equals("") || harga_jual.length == 0) {
+        } else if (etHargaJual.text.isEmpty()) {
             showErrorMessage("harga jual belum diisi")
         } else if (stok_awal.equals("") || stok_awal.length == 0) {
             showErrorMessage("stok awal belum diisi")
         } else if (deskripsi.equals("") || deskripsi.length == 0) {
             showErrorMessage("deskripsi belum diisi")
-        } else if (fotoBitmap == null) {
-            showErrorMessage("Foto barang belum dipilih")
         } else {
-            saveBarang(nama_barang, harga_beli, harga_jual, stok_awal, deskripsi, selectedSatuan)
+            val item = Barang(
+                nama_barang,
+                harga_beli,
+                harga_jual,
+                stok_awal.toInt(),
+                deskripsi,
+                fotoUrl,
+                selectedSatuan
+            )
+            saveBarang(item)
         }
     }
 
     fun saveBarang(
-        name: String,
-        harga_beli: String,
-        harga_jual: String,
-        stok: String,
-        deskripsi: String,
-        satuan: String,
+        item: Barang
     ) {
+        viewModel.addItem(item)
 
-        showLoading(this)
-        Toast.makeText(this, "Tambah barang", Toast.LENGTH_SHORT).show()
-        onBackPressed()
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
-
-            if (data.data == null) {
-                return
-            }
-
-            filePath = data.data
-            fileUri = data.data
-
-            filePath?.let {
-                uploadImage(File(it.toString()))
-            }
-
-        }
     }
 
     private fun uploadImage(file: File) {
+        showLoading(this)
         UploadImageRepository(this).uploading(
             file,
             {
-                showLoading(this)
+
             },
             {
+                dismissLoading()
                 Toast.makeText(
                     this,
                     "Failed uploading file. please try again. $it",
@@ -150,8 +160,8 @@ class TambahBarangActivity : BaseActivity(), PermissionHelper.PermissionListener
             },
             {
                 dismissLoading()
-                val url = it.originalFileUrl
-                binding.ivBarang.loadImageCenterCrop(url.toString())
+                fotoUrl = it.originalFileUrl.toString()
+                binding.ivBarang.loadImageCenterCrop(fotoUrl)
             })
     }
 
@@ -164,10 +174,12 @@ class TambahBarangActivity : BaseActivity(), PermissionHelper.PermissionListener
 
     override fun onPickFile(file: File?) {
         if (file != null)
-            uploadImage(file)
+            viewModel.compressImage(file)
         else
-            Toast.makeText(this, getString(R.string.label_file_not_found), Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.label_file_not_found), Toast.LENGTH_SHORT)
+                .show()
     }
+
     override fun onPermissionCheckDone() {
         pickPhoto()
     }

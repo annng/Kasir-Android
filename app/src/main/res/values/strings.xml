@@ -24,6 +24,7 @@
     <string name="error_toast_qty_empty">Quantity is still empty. Please set quantity of item</string>
     <string name="error_toast_item_not_selected">You haven\'t seleced item yet</string>
     <string name="error_toast_insufficient_stock">Insufficient stock. Please check your stock`s amount</string>
+    <string name="error_toast_load_data_error">Something went wrong. Please try again later</string>
     <string name="dialog_title_loading">Loading..</string>
     <string name="hint_phone_number">Phone Number</string>
     <string name="hint_username">Username</string>
@@ -69,6 +70,8 @@
     <string name="all_file_cannot_opened">Cannot Open File</string>
     <string name="label_file_not_found">Cannot select file. Please make sure your file is in internal storage.</string>
     <string name="action_logout">Logout</string>
+    <string name="error_toast_failed_upload">Failed upload image. Try again or reselect image</string>
+    <string name="info_toast_success_add_item">Add Item successful. You can check on Item Page</string>
     <string-array name="satuan">
         <item>Pcs</item>
         <item>Kg</item>

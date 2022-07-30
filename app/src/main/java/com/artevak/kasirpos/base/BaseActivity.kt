@@ -45,21 +45,19 @@ open class BaseActivity : AppCompatActivity(), ActivityListener {
         super.onCreate(savedInstanceState)
 
         permissionHelper = PermissionHelper(this)
+
+        pDialogLoading = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
+        pDialogLoading.progressHelper.barColor = Color.parseColor("#A5DC86")
+        pDialogLoading.titleText = "Loading.."
+        pDialogLoading.setCancelable(false)
     }
 
     override fun setContentView(view: View?) {
         super.setContentView(view)
 
-        pDialogLoading = SweetAlertDialog(applicationContext, SweetAlertDialog.PROGRESS_TYPE)
-        pDialogLoading.progressHelper.barColor = Color.parseColor("#A5DC86")
-        pDialogLoading.setTitleText("Loading..")
-        pDialogLoading.setCancelable(false)
-
-
     }
 
     open fun showLoading(mcontext: Context) {
-        pDialogLoading = SweetAlertDialog(mcontext, SweetAlertDialog.PROGRESS_TYPE)
         pDialogLoading.progressHelper.barColor = Color.parseColor("#A5DC86")
         pDialogLoading.setTitleText("Loading..")
         pDialogLoading.setCancelable(false)

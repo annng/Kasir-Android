@@ -35,7 +35,7 @@ class DetailBarangActivity : BaseActivity() {
             startActivity(i)
         }
         binding.btnDelete.setOnClickListener {
-            deleteBarang(barang.id!!)
+//            deleteBarang(barang.id!!)
         }
 
         updateUI()

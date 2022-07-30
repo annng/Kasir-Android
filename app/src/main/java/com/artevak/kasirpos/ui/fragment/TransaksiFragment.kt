@@ -49,7 +49,7 @@ class TransaksiFragment : BaseFragment() {
     val nf = NumberFormat.getNumberInstance(Locale.GERMAN)
     val df = nf as DecimalFormat
 
-    var totalBayar = 0
+    var totalBayar : Long = 0
     var TAG_GET_BARANG = "barang"
     var TAG_ORDER = "order"
     var id_pelanggan = "0"
@@ -176,7 +176,7 @@ class TransaksiFragment : BaseFragment() {
             return
         }
 
-        val jumlah = jmlBeli.toInt()
+        val jumlah = jmlBeli.toLong()
         val isQtyMoreThanStock = jumlah > (selectedBarang?.stok ?: 0)
         if (isQtyMoreThanStock) {
             Toasty.error(requireContext(), getString(com.artevak.kasirpos.R.string.error_toast_insufficient_stock), Toast.LENGTH_SHORT, true)
@@ -196,7 +196,7 @@ class TransaksiFragment : BaseFragment() {
             selectedBarang?.picture,
             selectedBarang?.satuan,
             subtotal,
-            selectedBarang?.id,
+            "0",
             untung
         )
 
