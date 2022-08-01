@@ -60,10 +60,10 @@
             android:name="com.artevak.kasirpos.ui.activity.customer.SelectPelangganActivity"
             android:exported="false" />
         <activity
-            android:name="com.artevak.kasirpos.ui.activity.item.UbahBarangActivity"
+            android:name="com.artevak.kasirpos.ui.activity.item.edit.UbahBarangActivity"
             android:exported="true" />
         <activity
-            android:name="com.artevak.kasirpos.ui.activity.item.DetailBarangActivity"
+            android:name="com.artevak.kasirpos.ui.activity.item.detail.DetailBarangActivity"
             android:exported="false" />
         <activity
             android:name="com.artevak.kasirpos.ui.activity.splash.SplashActivity"

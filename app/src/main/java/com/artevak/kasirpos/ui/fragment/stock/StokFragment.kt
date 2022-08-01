@@ -16,6 +16,7 @@ import com.artevak.kasirpos.R
 import com.artevak.kasirpos.base.BaseFragment
 import com.artevak.kasirpos.databinding.FragmentStokBinding
 import com.artevak.kasirpos.data.model.Barang
+import com.artevak.kasirpos.response.firebase.ResponseData
 import com.artevak.kasirpos.response.firebase.StatusRequest
 import com.artevak.kasirpos.ui.activity.item.add.TambahBarangActivity
 import com.artevak.kasirpos.ui.adapter.AdapterBarang
@@ -32,7 +33,7 @@ class StokFragment : BaseFragment() {
     lateinit var shimmerFrameLayout: ShimmerFrameLayout
     lateinit var adapter: AdapterBarang
     lateinit var i: Intent
-    var listBarang = ArrayList<Barang>()
+    var listBarang = ArrayList<ResponseData<Barang>>()
 
     var CURRENT_PAGE = 1
     var NEXT_PAGE = CURRENT_PAGE + 1

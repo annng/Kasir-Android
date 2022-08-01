@@ -40,6 +40,7 @@
         <item name="android:textSize">@dimen/text_medium</item>
         <item name="android:background">@drawable/bg_corner_rounded_fill_field</item>
         <item name="android:textColor">@color/text_gray</item>
+        <item name="decimal_digits">0</item>
     </style>
 
 

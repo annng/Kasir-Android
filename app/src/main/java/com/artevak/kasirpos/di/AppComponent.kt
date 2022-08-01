@@ -13,6 +13,10 @@ import com.artevak.kasirpos.ui.activity.auth.register.RegisterUseCase
 import com.artevak.kasirpos.ui.activity.auth.register.RegisterViewModel
 import com.artevak.kasirpos.ui.activity.item.add.TambahBarangUseCase
 import com.artevak.kasirpos.ui.activity.item.add.TambahBarangViewModel
+import com.artevak.kasirpos.ui.activity.item.detail.DetailBarangUseCase
+import com.artevak.kasirpos.ui.activity.item.detail.DetailBarangViewModel
+import com.artevak.kasirpos.ui.activity.item.edit.UbahBarangUseCase
+import com.artevak.kasirpos.ui.activity.item.edit.UbahBarangViewModel
 import com.artevak.kasirpos.ui.activity.profile.edit.ProfileEditUseCase
 import com.artevak.kasirpos.ui.activity.profile.edit.ProfileEditViewModel
 import com.artevak.kasirpos.ui.activity.profile.view.ProfileUseCase
@@ -32,13 +36,13 @@ val singleton = module {
 }
 
 val networkModule = module {
-    single { AuthService(get(), get()) }
-    single { ItemService(get(), get()) }
+    single { AuthService(get(), get(), get()) }
+    single { ItemService(get(), get(), get()) }
 }
 
 val dataSourceModule = module {
-    single { UserRepository(get(), get()) }
-    single { ItemRepository(get(), get()) }
+    single { UserRepository(get()) }
+    single { ItemRepository(get()) }
 }
 
 val useCaseModule = module {
@@ -47,7 +51,9 @@ val useCaseModule = module {
     single { ProfileEditUseCase(get()) }
     single { LoginUseCase(get()) }
     single { SplashUseCase(get()) }
+    single { DetailBarangUseCase(get()) }
     single { TambahBarangUseCase(get()) }
+    single { UbahBarangUseCase(get()) }
     single { StokUseCase(get()) }
 }
 
@@ -58,7 +64,9 @@ val viewModelModule = module {
     viewModel { ProfileEditViewModel(get()) }
     viewModel { LoginViewModel(get()) }
     viewModel { SplashViewModel(get()) }
+    viewModel { DetailBarangViewModel(get()) }
     viewModel { TambahBarangViewModel(get()) }
+    viewModel { UbahBarangViewModel(get()) }
     viewModel { StokViewModel(get()) }
 }
 
