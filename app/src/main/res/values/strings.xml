@@ -21,6 +21,7 @@
     <string name="action_add">Add</string>
     <string name="hint_qty">Qty</string>
     <string name="info_toast_loading">Mohon Tunggu...</string>
+    <string name="info_toast_success_delete">Delete %1$s Successful</string>
     <string name="error_toast_qty_empty">Quantity is still empty. Please set quantity of item</string>
     <string name="error_toast_item_not_selected">You haven\'t seleced item yet</string>
     <string name="error_toast_insufficient_stock">Insufficient stock. Please check your stock`s amount</string>

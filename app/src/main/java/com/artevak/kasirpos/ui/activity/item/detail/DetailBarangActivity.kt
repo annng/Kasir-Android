@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import com.artevak.kasirpos.R
 import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.common.const.Cons
 import com.artevak.kasirpos.data.model.Barang
@@ -78,9 +79,9 @@ class DetailBarangActivity : BaseActivity() {
             "${df.format(barang.data.harga_jual)} ${Currency.getInstance(Locale.getDefault())}"
     }
 
-    fun deleteBarang() {
+    private fun deleteBarang() {
         viewModel.deleteItem(barang.keys)
-        Toast.makeText(this, "Delete Barang", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, getString(R.string.info_toast_success_delete, barang.data.name), Toast.LENGTH_SHORT).show()
         onBackPressed()
     }
 }
