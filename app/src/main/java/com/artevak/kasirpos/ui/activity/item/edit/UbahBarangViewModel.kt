@@ -1,4 +1,4 @@
-package com.artevak.kasirpos.ui.activity.item.add
+package com.artevak.kasirpos.ui.activity.item.edit
 
 import android.graphics.Bitmap
 import android.os.Environment
@@ -10,13 +10,9 @@ import com.artevak.kasirpos.response.firebase.ResponseProcess
 import com.artevak.kasirpos.response.firebase.StatusRequest
 import me.shaohui.advancedluban.Luban
 import me.shaohui.advancedluban.OnCompressListener
-import retrofit2.Response
 import java.io.File
 
-class TambahBarangViewModel(private val useCase : TambahBarangUseCase) : BaseViewModel() {
-
-    val _addItem = MutableLiveData<ResponseProcess<String>>()
-    val addItem = _addItem
+class UbahBarangViewModel(private val useCase : UbahBarangUseCase) : BaseViewModel() {
 
     var obsCompressImage = MutableLiveData<ResponseProcess<File?>>()
     fun compressImage(file: File) {
@@ -62,7 +58,5 @@ class TambahBarangViewModel(private val useCase : TambahBarangUseCase) : BaseVie
             })
     }
 
-    fun addItem(item : Barang){
-        useCase.addItem(item, _addItem)
-    }
+    fun updateItem(key : String, value : Barang) = useCase.updateItem(key, value)
 }

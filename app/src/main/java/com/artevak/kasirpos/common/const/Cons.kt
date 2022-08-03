@@ -7,7 +7,9 @@ class Cons {
     }
 
     object EXTRA{
+        const val KEY = "key"
         const val KEY_URL = "url"
+        const val KEY_ITEM = "item"
         const val KEY_TITLE = "title"
     }
 

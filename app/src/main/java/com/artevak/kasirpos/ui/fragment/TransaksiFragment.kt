@@ -16,6 +16,7 @@ import com.artevak.kasirpos.R
 import com.artevak.kasirpos.base.BaseFragment
 import com.artevak.kasirpos.databinding.FragmentTransaksiBinding
 import com.artevak.kasirpos.data.model.*
+import com.artevak.kasirpos.response.firebase.ResponseData
 import com.artevak.kasirpos.ui.activity.HomeActivity
 import com.artevak.kasirpos.ui.activity.customer.SelectPelangganActivity
 import com.artevak.kasirpos.ui.adapter.AdapterBarang
@@ -34,12 +35,12 @@ class TransaksiFragment : BaseFragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    var listBarang = ArrayList<Barang>()
+    var listBarang = ArrayList<ResponseData<Barang>>()
     var listPelanggan = ArrayList<Pelanggan>()
     var listNamaBarang = ArrayList<String>()
     var listKeranjang = ArrayList<Keranjang>()
 
-    var selectedBarang: Barang? = null
+    var selectedBarang: ResponseData<Barang>? = null
     lateinit var adapter: AdapterBarang
     lateinit var adapterKeranjang: AdapterKeranjang
     lateinit var adapterPelanggan: AdapterPelanggan
@@ -49,7 +50,7 @@ class TransaksiFragment : BaseFragment() {
     val nf = NumberFormat.getNumberInstance(Locale.GERMAN)
     val df = nf as DecimalFormat
 
-    var totalBayar = 0
+    var totalBayar: Long = 0
     var TAG_GET_BARANG = "barang"
     var TAG_ORDER = "order"
     var id_pelanggan = "0"
@@ -87,7 +88,7 @@ class TransaksiFragment : BaseFragment() {
             Log.d(TAG_TEXT_AUTOCOMPLETE, "item position : " + pos)
 
             selectedBarang = listBarang.get(pos)
-            showSelectedBarangInfo(listBarang.get(pos))
+            showSelectedBarangInfo(listBarang.get(pos).data)
         }
         binding.ivRefresh.setOnClickListener {
             //get fresh data of barang
@@ -171,32 +172,42 @@ class TransaksiFragment : BaseFragment() {
             return
         }
         if (isSelectedItemEmpty) {
-            Toasty.error(requireContext(), getString(com.artevak.kasirpos.R.string.error_toast_item_not_selected), Toast.LENGTH_SHORT, true)
+            Toasty.error(
+                requireContext(),
+                getString(com.artevak.kasirpos.R.string.error_toast_item_not_selected),
+                Toast.LENGTH_SHORT,
+                true
+            )
                 .show()
             return
         }
 
-        val jumlah = jmlBeli.toInt()
-        val isQtyMoreThanStock = jumlah > (selectedBarang?.stok ?: 0)
+        val jumlah = jmlBeli.toLong()
+        val isQtyMoreThanStock = jumlah > (selectedBarang?.data?.stok ?: 0)
         if (isQtyMoreThanStock) {
-            Toasty.error(requireContext(), getString(com.artevak.kasirpos.R.string.error_toast_insufficient_stock), Toast.LENGTH_SHORT, true)
+            Toasty.error(
+                requireContext(),
+                getString(com.artevak.kasirpos.R.string.error_toast_insufficient_stock),
+                Toast.LENGTH_SHORT,
+                true
+            )
                 .show()
             return
         }
 
-        val subtotal = jumlah * selectedBarang?.harga_jual!!
-        val subtotal_harga_beli = jumlah * selectedBarang?.harga_beli!!
+        val subtotal = jumlah * selectedBarang?.data?.harga_jual!!
+        val subtotal_harga_beli = jumlah * selectedBarang?.data?.harga_beli!!
         val untung = subtotal - subtotal_harga_beli
 
         val keranjang = Keranjang(
-            selectedBarang?.name,
+            selectedBarang?.data?.name,
             jumlah,
-            selectedBarang?.harga_jual,
-            selectedBarang?.deskripsi,
-            selectedBarang?.picture,
-            selectedBarang?.satuan,
+            selectedBarang?.data?.harga_jual,
+            selectedBarang?.data?.deskripsi,
+            selectedBarang?.data?.picture,
+            selectedBarang?.data?.satuan,
             subtotal,
-            selectedBarang?.id,
+            "0",
             untung
         )
 
@@ -261,11 +272,13 @@ class TransaksiFragment : BaseFragment() {
         showLoading()
 
         listBarang.add(
-            Barang(
-                name = "Macbook Pro 2020",
-                harga_beli = 210000,
-                harga_jual = 2500000,
-                deskripsi = "Mahal boss"
+            ResponseData(
+                Barang(
+                    name = "Macbook Pro 2020",
+                    harga_beli = 210000,
+                    harga_jual = 2500000,
+                    deskripsi = "Mahal boss"
+                ), ""
             )
         )
         adapter.notifyDataSetChanged()
@@ -281,7 +294,8 @@ class TransaksiFragment : BaseFragment() {
 
     fun showLoading() {
         pDialogLoading = SweetAlertDialog(requireContext(), SweetAlertDialog.PROGRESS_TYPE)
-        pDialogLoading.progressHelper.barColor = ContextCompat.getColor(requireContext(), R.color.colorPrimary)
+        pDialogLoading.progressHelper.barColor =
+            ContextCompat.getColor(requireContext(), R.color.colorPrimary)
         pDialogLoading.titleText = getString(R.string.dialog_title_loading)
         pDialogLoading.setCancelable(false)
 

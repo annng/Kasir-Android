@@ -15,6 +15,7 @@ import com.artevak.kasirpos.databinding.FragmentHomeBinding
 import com.artevak.kasirpos.data.model.Barang
 import com.artevak.kasirpos.data.model.DataChartPenjualan
 import com.artevak.kasirpos.data.model.Pelanggan
+import com.artevak.kasirpos.response.firebase.ResponseData
 import com.artevak.kasirpos.ui.activity.customer.TambahPelangganActivity
 import com.artevak.kasirpos.ui.activity.profile.view.ProfileActivity
 import com.artevak.kasirpos.ui.adapter.AdapterBarang
@@ -39,7 +40,7 @@ class HomeFragment : BaseFragment() {
     lateinit var adapter: AdapterPelanggan
     lateinit var adapterBarang: AdapterBarang
     var listPelanggan = ArrayList<Pelanggan>()
-    var listBarang = ArrayList<Barang>()
+    var listBarang = ArrayList<ResponseData<Barang>>()
     var listDataChart = ArrayList<DataChartPenjualan>()
     //lateinit var chart : LineChart
 
@@ -191,19 +192,23 @@ class HomeFragment : BaseFragment() {
 
         listBarang.clear()
         listBarang.add(
-            Barang(
-                name = "Samsung S21",
-                harga_beli = 180000,
-                harga_jual = 200000,
-                deskripsi = "Ram 8/256"
+            ResponseData(
+                Barang(
+                    name = "Samsung S21",
+                    harga_beli = 180000,
+                    harga_jual = 200000,
+                    deskripsi = "Ram 8/256"
+                ), ""
             )
         )
         listBarang.add(
-            Barang(
-                name = "Macbook Pro 2020",
-                harga_beli = 210000,
-                harga_jual = 2500000,
-                deskripsi = "Mahal boss"
+            ResponseData(
+                Barang(
+                    name = "Macbook Pro 2020",
+                    harga_beli = 210000,
+                    harga_jual = 2500000,
+                    deskripsi = "Mahal boss"
+                ), ""
             )
         )
 

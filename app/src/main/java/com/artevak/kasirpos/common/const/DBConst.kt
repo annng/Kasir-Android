@@ -9,8 +9,8 @@ class DBConst {
     object TABLE {
         const val DEMO = "demo"
         const val FAMILY = "family"
-        const val MEMBERS = "members"
         const val USER = "user"
+        const val ITEM = "item"
     }
 
     object WEB_TYPE{

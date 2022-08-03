@@ -9,6 +9,7 @@ import com.artevak.kasirpos.common.const.DBConst
 import com.artevak.kasirpos.common.util.ext.*
 import com.artevak.kasirpos.data.model.User
 import com.artevak.kasirpos.data.model.param.LoginParam
+import com.artevak.kasirpos.data.model.shared.SharedPref
 import com.artevak.kasirpos.response.firebase.ResponseData
 import com.artevak.kasirpos.response.firebase.ResponseProcess
 import com.artevak.kasirpos.response.firebase.StatusRequest
@@ -17,7 +18,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class AuthService(val context: Context, val db: FirebaseDatabase) {
+class AuthService(val context: Context, val db: FirebaseDatabase, val sharedPref : SharedPref) {
     val userRef = db.getReference(DBConst.TABLE.USER)
 
     fun getUsers(response: MutableLiveData<ResponseProcess<Any?>>) {
@@ -66,13 +67,13 @@ class AuthService(val context: Context, val db: FirebaseDatabase) {
         })
     }
 
-    fun getUser(username: String, response: MutableLiveData<User>) {
+    fun getUser(response: MutableLiveData<User>) {
         userRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children.map { dataSnapshot ->
                     val user = dataSnapshot.getValue(User::class.java)
                     user?.let {
-                        if (it.username == username) {
+                        if (it.username == sharedPref.getUsername()) {
                             response.postValue(it)
                         }
                     }
@@ -127,5 +128,22 @@ class AuthService(val context: Context, val db: FirebaseDatabase) {
     fun updateUser(user: User) {
         db.updateData(DBConst.TABLE.USER, user.username, user)
     }
+
+    fun saveUsername(username: String, password: String) {
+        sharedPref.setUsername(username)
+        sharedPref.setPassword(password)
+    }
+
+    fun saveUsername(username: String) {
+        sharedPref.setUsername(username)
+    }
+
+    fun getUsername() = sharedPref.getUsername()
+
+    fun savePassword(password: String) {
+        sharedPref.setPassword(password)
+    }
+
+    fun getPassword() = sharedPref.getPassword()
 
 }

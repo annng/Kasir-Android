@@ -1,4 +1,4 @@
-package com.artevak.kasirpos.ui.fragment
+package com.artevak.kasirpos.ui.fragment.stock
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -8,6 +8,7 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,9 +16,12 @@ import com.artevak.kasirpos.R
 import com.artevak.kasirpos.base.BaseFragment
 import com.artevak.kasirpos.databinding.FragmentStokBinding
 import com.artevak.kasirpos.data.model.Barang
+import com.artevak.kasirpos.response.firebase.ResponseData
+import com.artevak.kasirpos.response.firebase.StatusRequest
 import com.artevak.kasirpos.ui.activity.item.add.TambahBarangActivity
 import com.artevak.kasirpos.ui.adapter.AdapterBarang
 import com.facebook.shimmer.ShimmerFrameLayout
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class StokFragment : BaseFragment() {
 
@@ -29,7 +33,7 @@ class StokFragment : BaseFragment() {
     lateinit var shimmerFrameLayout: ShimmerFrameLayout
     lateinit var adapter: AdapterBarang
     lateinit var i: Intent
-    var listBarang = ArrayList<Barang>()
+    var listBarang = ArrayList<ResponseData<Barang>>()
 
     var CURRENT_PAGE = 1
     var NEXT_PAGE = CURRENT_PAGE + 1
@@ -38,6 +42,8 @@ class StokFragment : BaseFragment() {
     var KATA_KUNCI = ""
     var isSearching = false
     var isFilterStokMenipis = false
+
+    val viewModel: StokViewModel by viewModel()
 
 
     @SuppressLint("ResourceAsColor")
@@ -48,16 +54,50 @@ class StokFragment : BaseFragment() {
     ): View? {
 
         _binding = FragmentStokBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        shimmerFrameLayout = root.findViewById(R.id.sflMain)
-        adapter = AdapterBarang(listBarang)
+        shimmerFrameLayout = binding.root.findViewById(R.id.sflMain)
 
-        val layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.rvBarang.setHasFixedSize(true)
-        binding.rvBarang.layoutManager = layoutManager
-        binding.rvBarang.adapter = adapter
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initListener()
+        initAdapter()
+
+        observeData()
+
+        getDataBarang()
+    }
+
+    private fun observeData() {
+        viewModel.items.observe(viewLifecycleOwner) {
+            when (it.status) {
+                StatusRequest.LOADING -> {
+                    showLoadingShimmer()
+                }
+                StatusRequest.SUCCESS -> {
+                    hideLoadingShimmer()
+                    listBarang.clear()
+                    it.data?.let { it1 -> listBarang.addAll(it1) }
+                    adapter.notifyDataSetChanged()
+
+                    if (listBarang.size == 0) {
+                        binding.tvInfoEmpty.visibility = View.VISIBLE
+                    }
+                }
+                else -> {
+                    hideLoadingShimmer()
+                    Toast.makeText(requireContext(), "${it.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun initListener() {
+
 
         binding.btnTambahBarang.setOnClickListener {
             val i = Intent(requireActivity(), TambahBarangActivity::class.java)
@@ -67,24 +107,9 @@ class StokFragment : BaseFragment() {
 
             binding.btnStokTipis.setTextColor(R.color.black)
             isFilterStokMenipis = true
-            getDataBarangStokMenipis()
+
         }
-        binding.rvBarang.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
 
-                if (!recyclerView.canScrollVertically(1)) {
-                    Log.d("rvBarang", " ini terakir")
-                    //next page
-                    if (isFilterStokMenipis) {
-                        getMoreDataBarangStokMenipis()
-                    } else {
-                        getMoreDataBarang()
-                    }
-
-                }
-            }
-        })
         binding.etSearch.setOnKeyListener { view, i, keyEvent ->
 
             if (keyEvent.action == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
@@ -102,10 +127,17 @@ class StokFragment : BaseFragment() {
 
             return@setOnKeyListener false
         }
+    }
 
+    private fun initAdapter() {
+        adapter = AdapterBarang(listBarang)
 
-        getDataBarang()
-        return root
+        val layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.rvBarang.setHasFixedSize(true)
+        binding.rvBarang.layoutManager = layoutManager
+        binding.rvBarang.adapter = adapter
+
     }
 
     fun resetPagination() {
@@ -114,80 +146,10 @@ class StokFragment : BaseFragment() {
     }
 
     fun getDataBarang() {
-        showLoadingShimmer()
         isFilterStokMenipis = false
         resetPagination()
 
-        listBarang.clear()
-        listBarang.add(
-            Barang(
-                name = "Macbook Pro 2020",
-                harga_beli = 210000,
-                harga_jual = 2500000,
-                deskripsi = "Mahal boss"
-            )
-        )
-        adapter.notifyDataSetChanged()
-
-        hideLoadingShimmer()
-
-        if (listBarang.size == 0) {
-            binding.tvInfoEmpty.visibility = View.VISIBLE
-        }
-    }
-
-    fun getMoreDataBarang() {
-        binding.progressBar.visibility = View.VISIBLE
-
-        binding.progressBar.visibility = View.GONE
-
-        listBarang.add(
-            Barang(
-                name = "Macbook Pro 2020",
-                harga_beli = 210000,
-                harga_jual = 2500000,
-                deskripsi = "Mahal boss"
-            )
-        )
-        adapter.notifyDataSetChanged()
-
-
-    }
-
-    fun getDataBarangStokMenipis() {
-        showLoadingShimmer()
-        resetPagination()
-
-        binding.progressBar.visibility = View.VISIBLE
-        binding.progressBar.visibility = View.GONE
-
-        listBarang.add(
-            Barang(
-                name = "Macbook Pro 2020",
-                harga_beli = 210000,
-                harga_jual = 2500000,
-                deskripsi = "Mahal boss"
-            )
-        )
-        adapter.notifyDataSetChanged()
-
-        hideLoadingShimmer()
-    }
-
-    fun getMoreDataBarangStokMenipis() {
-        binding.progressBar.visibility = View.VISIBLE
-
-        binding.progressBar.visibility = View.GONE
-
-        listBarang.add(
-            Barang(
-                name = "Macbook Pro 2020",
-                harga_beli = 210000,
-                harga_jual = 2500000,
-                deskripsi = "Mahal boss"
-            )
-        )
-        adapter.notifyDataSetChanged()
+        viewModel.getItems()
     }
 
 

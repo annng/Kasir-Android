@@ -1,18 +1,13 @@
 package com.artevak.kasirpos.data.repository
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.artevak.kasirpos.common.util.ext.isExist
 import com.artevak.kasirpos.data.model.User
 import com.artevak.kasirpos.data.model.param.LoginParam
-import com.artevak.kasirpos.data.model.shared.SharedPref
 import com.artevak.kasirpos.data.service.AuthService
-import com.artevak.kasirpos.response.firebase.ResponseData
 import com.artevak.kasirpos.response.firebase.ResponseProcess
 
 class UserRepository(
-    var authService: AuthService,
-    var sharedPref: SharedPref
+    var authService: AuthService
 ) {
     fun getUsers(response: MutableLiveData<ResponseProcess<Any?>>) = authService.getUsers(response)
 
@@ -22,27 +17,20 @@ class UserRepository(
 
 
     fun getMyAccount(response: MutableLiveData<User>) {
-        authService.getUser(sharedPref.getUsername(), response)
+        authService.getUser(response)
     }
 
     fun addUser(user: User, response: MutableLiveData<ResponseProcess<String>>) =
         authService.addUser(user, response)
 
-    fun saveUsername(username: String, password: String) {
-        sharedPref.setUsername(username)
-        sharedPref.setPassword(password)
-    }
+    fun saveUsername(username: String, password: String) = authService.saveUsername(username, password)
 
-    fun saveUsername(username: String) {
-        sharedPref.setUsername(username)
-    }
+    fun saveUsername(username: String) = authService.saveUsername(username)
 
-    fun getUsername() = sharedPref.getUsername()
+    fun getUsername() = authService.getUsername()
 
-    fun savePassword(password: String) {
-        sharedPref.setPassword(password)
-    }
+    fun savePassword(password: String) = authService.savePassword(password)
 
-    fun getPassword() = sharedPref.getPassword()
+    fun getPassword() = authService.getPassword()
     fun updateAccount(user : User) = authService.updateUser(user)
 }
