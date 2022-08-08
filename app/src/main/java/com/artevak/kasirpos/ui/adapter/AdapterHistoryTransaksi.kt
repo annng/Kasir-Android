@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.artevak.kasirpos.databinding.ItemsKeranjangBinding
-import com.artevak.kasirpos.data.model.HistoryTransaksi
+import com.artevak.kasirpos.data.model.Transaction
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
 
-class AdapterHistoryTransaksi(private val list:ArrayList<HistoryTransaksi>) : RecyclerView.Adapter<AdapterHistoryTransaksi.MyViewHolder>(){
+class AdapterHistoryTransaksi(private val list:ArrayList<Transaction>) : RecyclerView.Adapter<AdapterHistoryTransaksi.MyViewHolder>(){
 
 
 
@@ -44,7 +44,7 @@ class AdapterHistoryTransaksi(private val list:ArrayList<HistoryTransaksi>) : Re
                     .load(imageUrl)
                     .into(binding.ivBarang)
 
-                binding.tvNamaBarang.setText(""+ list[position].nama_barang)
+                binding.tvNamaBarang.setText(""+ list[position].item_name)
                 binding.tvJumlahBeli.setText("Subtotal Rp. "+df.format(list[position].subtotal))
 
                 binding.btnDeleteKeranjang.visibility = View.GONE

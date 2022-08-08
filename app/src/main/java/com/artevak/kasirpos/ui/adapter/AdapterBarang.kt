@@ -34,7 +34,6 @@ class AdapterBarang(private val list: ArrayList<ResponseData<Barang>>) :
             with(list[position].data) {
 
                 val imageUrl = picture
-                // Log.d("imgbarang",""+imageUrl)
                 Glide.with(binding.rlBarang.context)
                     .load(imageUrl)
                     .into(binding.ivBarang)

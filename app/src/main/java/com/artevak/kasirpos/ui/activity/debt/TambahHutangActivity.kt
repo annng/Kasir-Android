@@ -3,7 +3,7 @@ package com.artevak.kasirpos.ui.activity.debt
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import com.artevak.kasirpos.ui.activity.customer.SelectPelangganActivity
+import com.artevak.kasirpos.ui.activity.customer.select.SelectPelangganActivity
 import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.databinding.ActivityTambahHutangBinding
 import com.artevak.kasirpos.data.model.HutangInfo

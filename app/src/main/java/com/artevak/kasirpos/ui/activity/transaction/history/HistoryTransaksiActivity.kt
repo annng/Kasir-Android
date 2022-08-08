@@ -1,4 +1,4 @@
-package com.artevak.kasirpos.ui.activity.transaction
+package com.artevak.kasirpos.ui.activity.transaction.history
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.ui.adapter.AdapterHistoryTransaksi
 import com.artevak.kasirpos.databinding.ActivityHistoryTransaksiBinding
-import com.artevak.kasirpos.data.model.HistoryTransaksi
+import com.artevak.kasirpos.data.model.Transaction
 import com.artevak.kasirpos.data.model.Transaksi
 import kotlinx.android.synthetic.main.fragment_stok.*
 import java.text.DecimalFormat
@@ -20,7 +20,7 @@ class HistoryTransaksiActivity : BaseActivity() {
     lateinit var i : Intent
     lateinit var adapter: AdapterHistoryTransaksi
 
-    var listHistoryTransaksi = ArrayList<HistoryTransaksi>()
+    var listTransaction = ArrayList<Transaction>()
     val nf = NumberFormat.getNumberInstance(Locale.GERMAN)
     val df = nf as DecimalFormat
 
@@ -34,7 +34,7 @@ class HistoryTransaksiActivity : BaseActivity() {
         i = intent
         transaksi = i.getParcelableExtra("transaksi")!!
 
-        adapter = AdapterHistoryTransaksi(listHistoryTransaksi)
+        adapter = AdapterHistoryTransaksi(listTransaction)
         val layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rvTransaksi.setHasFixedSize(true)

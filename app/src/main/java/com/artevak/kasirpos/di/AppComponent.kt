@@ -4,9 +4,11 @@ import com.artevak.kasirpos.base.BaseViewModel
 import com.artevak.kasirpos.common.const.DBConst
 import com.artevak.kasirpos.data.model.shared.SharedPref
 import com.artevak.kasirpos.data.repository.ItemRepository
+import com.artevak.kasirpos.data.repository.TransactionRepository
 import com.artevak.kasirpos.data.repository.UserRepository
 import com.artevak.kasirpos.data.service.AuthService
 import com.artevak.kasirpos.data.service.ItemService
+import com.artevak.kasirpos.data.service.TransactionService
 import com.artevak.kasirpos.ui.activity.auth.login.LoginUseCase
 import com.artevak.kasirpos.ui.activity.auth.login.LoginViewModel
 import com.artevak.kasirpos.ui.activity.auth.register.RegisterUseCase
@@ -23,8 +25,12 @@ import com.artevak.kasirpos.ui.activity.profile.view.ProfileUseCase
 import com.artevak.kasirpos.ui.activity.profile.view.ProfileViewModel
 import com.artevak.kasirpos.ui.activity.splash.SplashUseCase
 import com.artevak.kasirpos.ui.activity.splash.SplashViewModel
+import com.artevak.kasirpos.ui.activity.transaction.history.HistoryTransactionUseCase
+import com.artevak.kasirpos.ui.activity.transaction.history.HistoryTransactionViewModel
 import com.artevak.kasirpos.ui.fragment.stock.StokUseCase
 import com.artevak.kasirpos.ui.fragment.stock.StokViewModel
+import com.artevak.kasirpos.ui.fragment.transaction.TransactionUseCase
+import com.artevak.kasirpos.ui.fragment.transaction.TransactionViewModel
 import com.google.firebase.database.FirebaseDatabase
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
@@ -38,11 +44,13 @@ val singleton = module {
 val networkModule = module {
     single { AuthService(get(), get(), get()) }
     single { ItemService(get(), get(), get()) }
+    single { TransactionService(get(), get(), get()) }
 }
 
 val dataSourceModule = module {
     single { UserRepository(get()) }
     single { ItemRepository(get()) }
+    single { TransactionRepository(get()) }
 }
 
 val useCaseModule = module {
@@ -55,6 +63,8 @@ val useCaseModule = module {
     single { TambahBarangUseCase(get()) }
     single { UbahBarangUseCase(get()) }
     single { StokUseCase(get()) }
+    single { TransactionUseCase(get(), get()) }
+    single { HistoryTransactionUseCase(get()) }
 }
 
 val viewModelModule = module {
@@ -68,6 +78,8 @@ val viewModelModule = module {
     viewModel { TambahBarangViewModel(get()) }
     viewModel { UbahBarangViewModel(get()) }
     viewModel { StokViewModel(get()) }
+    viewModel { TransactionViewModel(get()) }
+    viewModel { HistoryTransactionViewModel(get()) }
 }
 
 

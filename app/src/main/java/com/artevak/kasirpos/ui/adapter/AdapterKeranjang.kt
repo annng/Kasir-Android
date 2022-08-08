@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.artevak.kasirpos.databinding.ItemsKeranjangBinding
-import com.artevak.kasirpos.ui.fragment.TransaksiFragment
+import com.artevak.kasirpos.ui.fragment.transaction.TransaksiFragment
 import com.artevak.kasirpos.data.model.Keranjang
 
 

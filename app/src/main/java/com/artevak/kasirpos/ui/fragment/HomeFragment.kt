@@ -16,7 +16,7 @@ import com.artevak.kasirpos.data.model.Barang
 import com.artevak.kasirpos.data.model.DataChartPenjualan
 import com.artevak.kasirpos.data.model.Pelanggan
 import com.artevak.kasirpos.response.firebase.ResponseData
-import com.artevak.kasirpos.ui.activity.customer.TambahPelangganActivity
+import com.artevak.kasirpos.ui.activity.customer.add.TambahPelangganActivity
 import com.artevak.kasirpos.ui.activity.profile.view.ProfileActivity
 import com.artevak.kasirpos.ui.adapter.AdapterBarang
 import com.artevak.kasirpos.ui.adapter.AdapterPelanggan

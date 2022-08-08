@@ -1,4 +1,4 @@
-package com.artevak.kasirpos.ui.activity.customer
+package com.artevak.kasirpos.ui.activity.customer.add
 
 import android.os.Bundle
 import android.widget.Toast

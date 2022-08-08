@@ -1,9 +1,8 @@
-package com.artevak.kasirpos.ui.fragment
+package com.artevak.kasirpos.ui.fragment.transaction
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,15 +13,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.artevak.kasirpos.R
 import com.artevak.kasirpos.base.BaseFragment
+import com.artevak.kasirpos.common.util.ext.toPriceFormat
 import com.artevak.kasirpos.databinding.FragmentTransaksiBinding
 import com.artevak.kasirpos.data.model.*
 import com.artevak.kasirpos.response.firebase.ResponseData
+import com.artevak.kasirpos.response.firebase.StatusRequest
 import com.artevak.kasirpos.ui.activity.HomeActivity
-import com.artevak.kasirpos.ui.activity.customer.SelectPelangganActivity
+import com.artevak.kasirpos.ui.activity.customer.select.SelectPelangganActivity
 import com.artevak.kasirpos.ui.adapter.AdapterBarang
 import com.artevak.kasirpos.ui.adapter.AdapterKeranjang
 import com.artevak.kasirpos.ui.adapter.AdapterPelanggan
 import es.dmoral.toasty.Toasty
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*
@@ -37,7 +39,6 @@ class TransaksiFragment : BaseFragment() {
 
     var listBarang = ArrayList<ResponseData<Barang>>()
     var listPelanggan = ArrayList<Pelanggan>()
-    var listNamaBarang = ArrayList<String>()
     var listKeranjang = ArrayList<Keranjang>()
 
     var selectedBarang: ResponseData<Barang>? = null
@@ -47,7 +48,7 @@ class TransaksiFragment : BaseFragment() {
     lateinit var pDialogLoading: SweetAlertDialog
     lateinit var orderInfo: OrderInfo
 
-    val nf = NumberFormat.getNumberInstance(Locale.GERMAN)
+    val nf = NumberFormat.getNumberInstance(Locale.getDefault())
     val df = nf as DecimalFormat
 
     var totalBayar: Long = 0
@@ -56,6 +57,7 @@ class TransaksiFragment : BaseFragment() {
     var id_pelanggan = "0"
     var TAG_TEXT_AUTOCOMPLETE = "autocomplete"
 
+    val viewModel: TransactionViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -77,18 +79,31 @@ class TransaksiFragment : BaseFragment() {
 
         val adapterAutcomplete = ArrayAdapter(
             requireContext(),
-            android.R.layout.simple_list_item_1, listNamaBarang
+            android.R.layout.simple_list_item_1, listBarang
         )
         binding.edSearchBarang.setAdapter(adapterAutcomplete)
+
+
+        return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initListener()
+        observeData()
+
+        viewModel.getItems()
+    }
+
+    private fun initListener() {
         binding.edSearchBarang.setOnItemClickListener { adapterView, view, i, l ->
 
-            val selected = adapterView.getItemAtPosition(i) as String
-            val pos: Int = listNamaBarang.indexOf(selected)
-            Log.d(TAG_TEXT_AUTOCOMPLETE, "item selected : " + selected)
-            Log.d(TAG_TEXT_AUTOCOMPLETE, "item position : " + pos)
+            val selected = adapterView.getItemAtPosition(i) as ResponseData<Barang>
+            val pos: Int = listBarang.indexOf(selected)
 
-            selectedBarang = listBarang.get(pos)
-            showSelectedBarangInfo(listBarang.get(pos).data)
+            selectedBarang = listBarang[pos]
+            showSelectedBarangInfo(listBarang[pos].data)
         }
         binding.ivRefresh.setOnClickListener {
             //get fresh data of barang
@@ -105,8 +120,26 @@ class TransaksiFragment : BaseFragment() {
             checkValidationTambah()
         }
 
+    }
 
-        return root
+    private fun observeData() {
+        viewModel.items.observe(viewLifecycleOwner) {
+            when (it.status) {
+                StatusRequest.LOADING -> {
+
+                }
+                StatusRequest.SUCCESS -> {
+
+                    listBarang.clear()
+                    it.data?.let { it1 -> listBarang.addAll(it1) }
+                    adapter.notifyDataSetChanged()
+
+                }
+                else -> {
+                    viewModel.getItems()
+                }
+            }
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -165,7 +198,7 @@ class TransaksiFragment : BaseFragment() {
         if (isTotalEmpty) {
             Toasty.error(
                 requireContext(),
-                getString(com.artevak.kasirpos.R.string.error_toast_qty_empty),
+                getString(R.string.error_toast_qty_empty),
                 Toast.LENGTH_SHORT,
                 true
             ).show()
@@ -174,7 +207,7 @@ class TransaksiFragment : BaseFragment() {
         if (isSelectedItemEmpty) {
             Toasty.error(
                 requireContext(),
-                getString(com.artevak.kasirpos.R.string.error_toast_item_not_selected),
+                getString(R.string.error_toast_item_not_selected),
                 Toast.LENGTH_SHORT,
                 true
             )
@@ -187,7 +220,7 @@ class TransaksiFragment : BaseFragment() {
         if (isQtyMoreThanStock) {
             Toasty.error(
                 requireContext(),
-                getString(com.artevak.kasirpos.R.string.error_toast_insufficient_stock),
+                getString(R.string.error_toast_insufficient_stock),
                 Toast.LENGTH_SHORT,
                 true
             )
@@ -207,7 +240,6 @@ class TransaksiFragment : BaseFragment() {
             selectedBarang?.data?.picture,
             selectedBarang?.data?.satuan,
             subtotal,
-            "0",
             untung
         )
 
@@ -255,7 +287,7 @@ class TransaksiFragment : BaseFragment() {
 
     fun showSelectedBarangInfo(barang: Barang) {
         binding.tvNamaBarang.text = barang.name
-        binding.tvHargaBarang.text = "Rp. " + df.format(barang.harga_jual)
+        binding.tvHargaBarang.text = barang.harga_jual?.toPriceFormat()
     }
 
     fun resetSelectedBarangInfo() {

@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.artevak.kasirpos.ui.activity.customer.SelectPelangganActivity
+import com.artevak.kasirpos.ui.activity.customer.select.SelectPelangganActivity
 import com.artevak.kasirpos.databinding.ItemsPelangganBinding
 import com.artevak.kasirpos.data.model.Pelanggan
 

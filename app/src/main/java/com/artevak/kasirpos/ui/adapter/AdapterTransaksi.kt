@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.artevak.kasirpos.ui.activity.transaction.HistoryTransaksiActivity
+import com.artevak.kasirpos.ui.activity.transaction.history.HistoryTransaksiActivity
 import com.artevak.kasirpos.databinding.ItemsTransaksiBinding
 import com.artevak.kasirpos.data.model.Transaksi
 import java.text.DecimalFormat

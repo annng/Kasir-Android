@@ -7,6 +7,7 @@ import android.widget.Toast
 import com.artevak.kasirpos.R
 import com.artevak.kasirpos.base.BaseActivity
 import com.artevak.kasirpos.common.const.Cons
+import com.artevak.kasirpos.common.util.ext.toPriceFormat
 import com.artevak.kasirpos.data.model.Barang
 import com.artevak.kasirpos.databinding.ActivityDetailBarangBinding
 import com.artevak.kasirpos.response.firebase.ResponseData
@@ -60,8 +61,6 @@ class DetailBarangActivity : BaseActivity() {
     }
 
     fun updateUI() {
-        val nf = NumberFormat.getNumberInstance(Locale.getDefault())
-        val df = nf as DecimalFormat
 
 
         val imageURl = barang.data.picture
@@ -73,10 +72,8 @@ class DetailBarangActivity : BaseActivity() {
         binding.tvStok.text = "" + barang.data.stok
         binding.tvDeskripsi.text = barang.data.deskripsi
         binding.tvSatuan.text = barang.data.satuan
-        binding.tvHargaBeli.text =
-             "${df.format(barang.data.harga_beli)} ${Currency.getInstance(Locale.getDefault())}"
-        binding.tvHargaJual.text =
-            "${df.format(barang.data.harga_jual)} ${Currency.getInstance(Locale.getDefault())}"
+        binding.tvHargaBeli.text = barang.data.harga_beli?.toPriceFormat()
+        binding.tvHargaJual.text = barang.data.harga_jual?.toPriceFormat()
     }
 
     private fun deleteBarang() {

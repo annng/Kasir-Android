@@ -48,7 +48,7 @@
             android:name="com.artevak.kasirpos.ui.activity.debt.DetailHutangActivity"
             android:exported="false" />
         <activity
-            android:name="com.artevak.kasirpos.ui.activity.transaction.HistoryTransaksiActivity"
+            android:name="com.artevak.kasirpos.ui.activity.transaction.history.HistoryTransaksiActivity"
             android:exported="true" />
         <activity
             android:name="com.artevak.kasirpos.ui.activity.debt.TambahHutangSayaActivity"
@@ -57,7 +57,7 @@
             android:name="com.artevak.kasirpos.ui.activity.debt.TambahHutangActivity"
             android:exported="false" />
         <activity
-            android:name="com.artevak.kasirpos.ui.activity.customer.SelectPelangganActivity"
+            android:name="com.artevak.kasirpos.ui.activity.customer.select.SelectPelangganActivity"
             android:exported="false" />
         <activity
             android:name="com.artevak.kasirpos.ui.activity.item.edit.UbahBarangActivity"
@@ -78,7 +78,7 @@
             android:name="com.artevak.kasirpos.ui.activity.profile.view.ProfileActivity"
             android:exported="true" />
         <activity
-            android:name="com.artevak.kasirpos.ui.activity.customer.TambahPelangganActivity"
+            android:name="com.artevak.kasirpos.ui.activity.customer.add.TambahPelangganActivity"
             android:exported="false" />
         <activity
             android:name="com.artevak.kasirpos.ui.activity.item.add.TambahBarangActivity"
