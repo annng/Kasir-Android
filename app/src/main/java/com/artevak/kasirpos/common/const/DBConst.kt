@@ -11,6 +11,7 @@ class DBConst {
         const val FAMILY = "family"
         const val USER = "user"
         const val ITEM = "item"
+        const val CUSTOMER = "customer"
         const val TRANSACTION = "transaction"
     }
 

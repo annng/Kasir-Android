@@ -73,6 +73,7 @@
     <string name="action_logout">Logout</string>
     <string name="error_toast_failed_upload">Failed upload image. Try again or reselect image</string>
     <string name="info_toast_success_add_item">Add Item successful. You can check on Item Page</string>
+    <string name="info_toast_success_add_customer">Add Customer successful.</string>
     <string-array name="satuan">
         <item>Pcs</item>
         <item>Kg</item>

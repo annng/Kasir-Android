@@ -38,7 +38,7 @@ class TransaksiFragment : BaseFragment() {
     private val binding get() = _binding!!
 
     var listBarang = ArrayList<ResponseData<Barang>>()
-    var listPelanggan = ArrayList<Pelanggan>()
+    var listCustomer = ArrayList<ResponseData<Customer>>()
     var listKeranjang = ArrayList<Keranjang>()
 
     var selectedBarang: ResponseData<Barang>? = null
@@ -69,7 +69,7 @@ class TransaksiFragment : BaseFragment() {
         val root: View = binding.root
         adapter = AdapterBarang(listBarang)
         adapterKeranjang = AdapterKeranjang(listKeranjang, this)
-        adapterPelanggan = AdapterPelanggan(listPelanggan)
+        adapterPelanggan = AdapterPelanggan(listCustomer)
 
         val layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -184,8 +184,9 @@ class TransaksiFragment : BaseFragment() {
         if (SharedVariable.pelangganType.equals("guest")) {
             binding.tvNamaPelanggan.text = "Pelanggan Guest"
         } else {
-            id_pelanggan = SharedVariable.selectedPelanggan?.id!!
-            binding.tvNamaPelanggan.text = SharedVariable.selectedPelanggan?.name
+//            id_pelanggan = SharedVariable.selectedCustomer?.id!!
+            //todo set id pelanggan to firebase key record
+            binding.tvNamaPelanggan.text = SharedVariable.selectedCustomer?.name
         }
     }
 
@@ -275,7 +276,7 @@ class TransaksiFragment : BaseFragment() {
         adapterKeranjang.notifyDataSetChanged()
 
         selectedBarang = null
-        SharedVariable.selectedPelanggan = null
+        SharedVariable.selectedCustomer = null
         SharedVariable.pelangganType = "guest"
 
         totalBayar = 0

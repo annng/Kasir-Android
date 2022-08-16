@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.artevak.kasirpos.ui.activity.customer.select.SelectPelangganActivity
 import com.artevak.kasirpos.databinding.ItemsPelangganBinding
-import com.artevak.kasirpos.data.model.Pelanggan
+import com.artevak.kasirpos.data.model.Customer
+import com.artevak.kasirpos.response.firebase.ResponseData
 
-class AdapterPelanggan(private val list:ArrayList<Pelanggan>) : RecyclerView.Adapter<AdapterPelanggan.MyViewHolder>(){
+class AdapterPelanggan(private val list:ArrayList<ResponseData<Customer>>) : RecyclerView.Adapter<AdapterPelanggan.MyViewHolder>(){
 
 
 
@@ -29,17 +30,17 @@ class AdapterPelanggan(private val list:ArrayList<Pelanggan>) : RecyclerView.Ada
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         with(holder){
-            with(list.get(position)){
+            with(list.get(position).data){
 
-                binding.tvNamaPelanggan.text = ""+ list[position].name
-                binding.tvPhone.text = ""+ list[position].phone
-                binding.tvAlamat.text = list[position].alamat
+                binding.tvNamaPelanggan.text = ""+ name
+                binding.tvPhone.text = ""+ phone
+                binding.tvAlamat.text = alamat
 
                 binding.rlPelanggan.setOnClickListener {
 
                     if (binding.rlPelanggan.context is SelectPelangganActivity) {
                         (binding.rlPelanggan.context as SelectPelangganActivity).setSelectedPelanggan(
-                            list[position]
+                            list[position].data
                         )
                     }
 

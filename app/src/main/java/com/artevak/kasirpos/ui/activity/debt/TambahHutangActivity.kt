@@ -43,11 +43,12 @@ class TambahHutangActivity : BaseActivity() {
 
         if (nominal.equals("") || nominal.length == 0){
             showErrorMessage("Hutang belum diisi")
-        }else if (SharedVariable.pelangganType.equals("registered") && SharedVariable.selectedPelanggan == null){
+        }else if (SharedVariable.pelangganType.equals("registered") && SharedVariable.selectedCustomer == null){
             showErrorMessage("pelanggan belum dipilih")
         }else{
             if (SharedVariable.pelangganType.equals("registered")){
-                id_pelanggan = SharedVariable.selectedPelanggan?.id!!
+//                id_pelanggan = SharedVariable.selectedCustomer?.id!!
+                //todo set id pelanggan key firebase
             }
             val nominal_hutang = nominal.toInt()
             val hutang_type = "pelanggan"
@@ -73,8 +74,9 @@ class TambahHutangActivity : BaseActivity() {
         if (SharedVariable.pelangganType.equals("guest")){
             binding.tvNamaPelanggan.setText("Pelanggan Guest")
         }else{
-            id_pelanggan = SharedVariable.selectedPelanggan?.id!!
-            binding.tvNamaPelanggan.setText(SharedVariable.selectedPelanggan?.name)
+//            id_pelanggan = SharedVariable.selectedCustomer?.id!!
+            //todo set id pelanggan key firebase
+            binding.tvNamaPelanggan.setText(SharedVariable.selectedCustomer?.name)
         }
     }
 

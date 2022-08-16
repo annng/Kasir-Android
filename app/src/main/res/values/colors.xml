@@ -11,7 +11,7 @@
     <color name="yellow">#ECB390</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey_400">#959494</color>
-    <color name="grey_200">#EFEDED</color>
+    <color name="grey_200">#F4F4f4</color>
     <color name="grey_800">#555353</color>
     <color name="text_gray">@color/grey_800</color>
     <color name="divider">@color/grey_200</color>

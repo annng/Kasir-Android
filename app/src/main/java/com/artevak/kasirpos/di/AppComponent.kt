@@ -3,16 +3,22 @@ package com.artevak.kasirpos.di
 import com.artevak.kasirpos.base.BaseViewModel
 import com.artevak.kasirpos.common.const.DBConst
 import com.artevak.kasirpos.data.model.shared.SharedPref
+import com.artevak.kasirpos.data.repository.CustomerRepository
 import com.artevak.kasirpos.data.repository.ItemRepository
 import com.artevak.kasirpos.data.repository.TransactionRepository
 import com.artevak.kasirpos.data.repository.UserRepository
 import com.artevak.kasirpos.data.service.AuthService
+import com.artevak.kasirpos.data.service.CustomerService
 import com.artevak.kasirpos.data.service.ItemService
 import com.artevak.kasirpos.data.service.TransactionService
 import com.artevak.kasirpos.ui.activity.auth.login.LoginUseCase
 import com.artevak.kasirpos.ui.activity.auth.login.LoginViewModel
 import com.artevak.kasirpos.ui.activity.auth.register.RegisterUseCase
 import com.artevak.kasirpos.ui.activity.auth.register.RegisterViewModel
+import com.artevak.kasirpos.ui.activity.customer.add.TambahPelangganUseCase
+import com.artevak.kasirpos.ui.activity.customer.add.TambahPelangganViewModel
+import com.artevak.kasirpos.ui.activity.customer.select.SelectPelangganUseCase
+import com.artevak.kasirpos.ui.activity.customer.select.SelectPelangganViewModel
 import com.artevak.kasirpos.ui.activity.item.add.TambahBarangUseCase
 import com.artevak.kasirpos.ui.activity.item.add.TambahBarangViewModel
 import com.artevak.kasirpos.ui.activity.item.detail.DetailBarangUseCase
@@ -27,6 +33,8 @@ import com.artevak.kasirpos.ui.activity.splash.SplashUseCase
 import com.artevak.kasirpos.ui.activity.splash.SplashViewModel
 import com.artevak.kasirpos.ui.activity.transaction.history.HistoryTransactionUseCase
 import com.artevak.kasirpos.ui.activity.transaction.history.HistoryTransactionViewModel
+import com.artevak.kasirpos.ui.fragment.home.HomeUseCase
+import com.artevak.kasirpos.ui.fragment.home.HomeViewModel
 import com.artevak.kasirpos.ui.fragment.stock.StokUseCase
 import com.artevak.kasirpos.ui.fragment.stock.StokViewModel
 import com.artevak.kasirpos.ui.fragment.transaction.TransactionUseCase
@@ -45,12 +53,14 @@ val networkModule = module {
     single { AuthService(get(), get(), get()) }
     single { ItemService(get(), get(), get()) }
     single { TransactionService(get(), get(), get()) }
+    single { CustomerService(get(), get(), get()) }
 }
 
 val dataSourceModule = module {
     single { UserRepository(get()) }
     single { ItemRepository(get()) }
     single { TransactionRepository(get()) }
+    single { CustomerRepository(get()) }
 }
 
 val useCaseModule = module {
@@ -65,6 +75,9 @@ val useCaseModule = module {
     single { StokUseCase(get()) }
     single { TransactionUseCase(get(), get()) }
     single { HistoryTransactionUseCase(get()) }
+    single { TambahPelangganUseCase(get()) }
+    single { SelectPelangganUseCase(get()) }
+    single { HomeUseCase(get(), get()) }
 }
 
 val viewModelModule = module {
@@ -80,6 +93,9 @@ val viewModelModule = module {
     viewModel { StokViewModel(get()) }
     viewModel { TransactionViewModel(get()) }
     viewModel { HistoryTransactionViewModel(get()) }
+    viewModel { TambahPelangganViewModel(get()) }
+    viewModel { SelectPelangganViewModel(get()) }
+    viewModel { HomeViewModel(get()) }
 }
 
 

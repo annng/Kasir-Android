@@ -1,4 +1,4 @@
-package com.artevak.kasirpos.ui.fragment
+package com.artevak.kasirpos.ui.fragment.home
 
 import android.content.Intent
 import android.graphics.Color
@@ -14,7 +14,7 @@ import com.artevak.kasirpos.base.BaseFragment
 import com.artevak.kasirpos.databinding.FragmentHomeBinding
 import com.artevak.kasirpos.data.model.Barang
 import com.artevak.kasirpos.data.model.DataChartPenjualan
-import com.artevak.kasirpos.data.model.Pelanggan
+import com.artevak.kasirpos.data.model.Customer
 import com.artevak.kasirpos.response.firebase.ResponseData
 import com.artevak.kasirpos.ui.activity.customer.add.TambahPelangganActivity
 import com.artevak.kasirpos.ui.activity.profile.view.ProfileActivity
@@ -39,7 +39,7 @@ class HomeFragment : BaseFragment() {
     lateinit var sflBarang: ShimmerFrameLayout
     lateinit var adapter: AdapterPelanggan
     lateinit var adapterBarang: AdapterBarang
-    var listPelanggan = ArrayList<Pelanggan>()
+    var listCustomer = ArrayList<ResponseData<Customer>>()
     var listBarang = ArrayList<ResponseData<Barang>>()
     var listDataChart = ArrayList<DataChartPenjualan>()
     //lateinit var chart : LineChart
@@ -68,7 +68,7 @@ class HomeFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         shimmerFrameLayout = binding.shimmerHorizontal.sflHorizontal
         sflBarang = binding.shimmerHorizontal.sflHorizontal
-        adapter = AdapterPelanggan(listPelanggan)
+        adapter = AdapterPelanggan(listCustomer)
         adapterBarang = AdapterBarang(listBarang)
 
         val layoutManager =
@@ -152,28 +152,28 @@ class HomeFragment : BaseFragment() {
 //        showLoadingShimmerPelanggan()
 //        resetPagination()
 
-        listPelanggan.clear()
-        listPelanggan.add(
-            Pelanggan(
-                name = "Anang",
-                phone = "+6285747325450",
-                alamat = "Soka, Lerep"
-            )
-        )
-        listPelanggan.add(
-            Pelanggan(
-                name = "Ardhea",
-                phone = "+6285747123456",
-                alamat = "Banyumanik"
-            )
-        )
+        listCustomer.clear()
+//        listCustomer.add(
+//            Customer(
+//                name = "Anang",
+//                phone = "+6285747325450",
+//                alamat = "Soka, Lerep"
+//            )
+//        )
+//        listCustomer.add(
+//            Customer(
+//                name = "Ardhea",
+//                phone = "+6285747123456",
+//                alamat = "Banyumanik"
+//            )
+//        )
         adapter.notifyDataSetChanged()
 
         hideLoadingShimmerPelanggan()
 
 
 
-        if (listPelanggan.size == 0) {
+        if (listCustomer.size == 0) {
             binding.tvInfoEmpty.visibility = View.VISIBLE
         }
 
